@@ -1,0 +1,16 @@
+# Optional training stack. The scripts under examples/ use the standard
+# library only and do not need this file.
+#
+# Pin loosely: this is a personal research snapshot, not a locked prod env.
+
+torch>=2.0
+transformers>=4.30
+datasets>=2.14
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+tqdm>=4.65
+
+# Only if you regenerate CSVs from MATLAB or the headerless SST dump:
+# scipy>=1.10
+# nltk>=3.8
