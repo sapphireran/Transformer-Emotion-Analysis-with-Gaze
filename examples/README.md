@@ -5,11 +5,14 @@ model and they do not import `pandas` or `torch`. Run them from the
 **repository root** so the CSV paths resolve.
 
 ```bash
-python examples/inspect_datasets.py
-python examples/walk_sentence_gaze.py
-python examples/walk_sentence_gaze.py --sentence-id 4
-python examples/fusion_sketch.py
+python3 examples/inspect_datasets.py
+python3 examples/walk_sentence_gaze.py
+python3 examples/walk_sentence_gaze.py --sentence-id 4
+python3 examples/walk_sentence_gaze.py --sentence-id 80
+python3 examples/fusion_sketch.py
 ```
+
+Use `python3` if `python` is not on `PATH`.
 
 | Script | What it shows |
 | --- | --- |

@@ -8,7 +8,7 @@ network.
 
 Nothing here is generated from a paper template. Numbers were counted from
 the CSVs in this clone (September 2026) using the stdlib scripts under
-`examples/`. If you regenerate a file, re-run `python examples/inspect_datasets.py`
+`examples/`. If you regenerate a file, re-run `python3 examples/inspect_datasets.py`
 and treat *that* printout as source of truth.
 
 ## Suggested path through the notes

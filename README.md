@@ -179,11 +179,15 @@ inspect data without MATLAB.
 No third-party packages. From the repo root:
 
 ```bash
-python examples/inspect_datasets.py
-python examples/walk_sentence_gaze.py
-python examples/walk_sentence_gaze.py --sentence-id 4
-python examples/fusion_sketch.py
+python3 examples/inspect_datasets.py
+python3 examples/walk_sentence_gaze.py
+python3 examples/walk_sentence_gaze.py --sentence-id 4
+python3 examples/walk_sentence_gaze.py --sentence-id 80
+python3 examples/fusion_sketch.py
 ```
+
+(`python3` is the interpreter on this machine; `python` is not
+installed.)
 
 `inspect_datasets.py` reprints the split sizes and label counts used
 throughout the docs so the numbers stay honest if a CSV is regenerated.

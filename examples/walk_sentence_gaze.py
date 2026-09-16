@@ -2,8 +2,9 @@
 """Walk one ZuCo sentence at word level and comment on gaze peaks.
 
 Default sentence is id 0 — the mixed review used throughout docs/06.
-Other useful ids from that page: 4 (max GPT), 80 (max nFix), 135
-(three-word negative).
+Other useful ids from that page: 4 (max GPT; word table has the
+`emp11111ty` IA label), 80 (max nFix; `murderoncampus` after hyphen
+stripping), 135 (three-word negative).
 
     python examples/walk_sentence_gaze.py
     python examples/walk_sentence_gaze.py --sentence-id 4

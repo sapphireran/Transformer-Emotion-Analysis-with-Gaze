@@ -65,7 +65,23 @@ Harmless. Move it next to the optimizer if I touch that loop.
 `datasets` only to tokenize. Not worth a cleanup commit by
 itself.
 
-### 10. `convert_full_SST.py` vs `save_SST_data.py`
+### 10. Word-level token `emp11111ty` on sentence 4 (**trap**)
+
+Every per-subject `word/*_SR.csv` stores the second content word of
+sentence 4 as `emp11111ty` (length 10), not `empty`. The sentence-level
+text is correct. 12-reader mean nFix on that IA is 7.25 — the hottest
+cell in that sentence, and some of that heat may be a bad label, not
+a long look at the adjective. Do not interpret it in a paper figure
+until the MATLAB `word.content` for that IA is checked.
+
+### 11. Hyphens and ellipses disappear at word level
+
+`DataTransformer` strips non-word characters, so `murder-on-campus`
+becomes `murderoncampus` and `...` becomes an empty token later
+filled as `unknown`. Sentence 80's six-sigma nFixations is mostly
+that glued compound. Quote the word table, not just the z-score.
+
+### 12. `convert_full_SST.py` vs `save_SST_data.py`
 
 Two scripts, one idea. The former writes `ssts_ZuCo.csv` with an
 integer `sentence_id`; the latter writes `output.csv` with the
@@ -120,7 +136,9 @@ filename stem as a string. I use `ssts_ZuCo.csv`.
 - Repo: `github.com/sapphireran/Transformer-Emotion-Analysis-with-Gaze`
 - Original commit: `7983303` ("first commit"), January 2024
 - This environment: Python 3.12, no `pandas` / `torch` /
-  `transformers`. Example scripts are stdlib-only on purpose.
+  `transformers`, and no `python` shim (`python3` only). Example
+  scripts are stdlib-only on purpose and were run here after the
+  first PR revision.
 - No `.mat` files, no checkpoints, no `all/*.txt` folders.
 - Plots in `result/` opened and used as qualitative checks, not
   re-rendered.

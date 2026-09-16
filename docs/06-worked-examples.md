@@ -105,15 +105,37 @@ This is the **maximum GPT** in the 400-row standardized file and the
 second-highest nFixations (after sentence 80). Raw GPT on the average
 table is **587 ms** (the raw max).
 
-Why this sentence, personally: the simile is unpredictable
-("Communion wafer without the wine"), the sentiment is front-loaded
-("empty and unsatisfying"), and then the reader has to *map* the
-simile back onto the movie. That is go-past time's job. A text-only
-model already has strong lexical cues (`empty`, `unsatisfying`). Gaze
-is piling on the same direction — extra evidence, not a contradiction.
-Fusion helping here would not surprise me. Fusion helping on a
-*positive* sentence with the same GPT would be more interesting, and
-I have not checked whether that exists.
+Word-level table (`python3 examples/walk_sentence_gaze.py --sentence-id 4`)
+is doing more work than the sentence text suggests:
+
+| Word (as stored) | nFix | TRT | GPT | notes |
+| --- | --- | --- | --- | --- |
+| ultimately | 3.75 | 488 | 198 | long opener |
+| feels | 3.25 | 388 | 264 | |
+| **emp11111ty** | **7.25** | **920** | 617 | *not* the string `empty` — see below |
+| unsatisfying | 3.83 | 503 | 593 | real adjective, heavy |
+| Communion | 3.00 | 312 | **1154** | mid-sentence go-past peak |
+| without | 1.92 | 194 | 998 | second GPT spike |
+| wine | 1.08 | 120 | 707 | wrap-up, GPT > TRT |
+| a | 0.00 | 0 | 0 | omitted by every reader in the mean |
+
+The token `emp11111ty` (WordLen 10) is already in every
+`ZuCo_et_csv_data/word/{1-12}_SR.csv` for `Sent_ID=4_NR`. The
+sentence-level text still says `empty`. So the 12-reader mean is
+averaging a **mangled interest-area label**, not the word `empty`.
+Subject 12 even has 13 fixations on that area. I am leaving the CSV
+alone in this documentation pass; I will not use "readers stared at
+*empty*" as a finding until I know whether the tracker IA was
+`empty` and the export inserted `11111`, or the IA really was that
+string on screen.
+
+The *usable* word-level story is still the simile: GPT peaks on
+`Communion` (1154 ms) and `without` (998 ms) while `a` is skipped.
+A text-only model already has `empty` / `unsatisfying`. Gaze is
+piling on the same negative direction plus a long integration of the
+wafer/wine clause. Fusion helping here would not surprise me. Fusion
+helping on a *positive* sentence with the same GPT would be more
+interesting.
 
 ---
 
@@ -144,18 +166,32 @@ text-only on this subset without looking at residuals.
 
 **Sentence 80.** `... a bland murder-on-campus yawner.`
 
-**Label.** `0`. **nFixations z = +6.12** (the maximum).
+**Label.** `0`. **nFixations z = +6.12** (the maximum). Raw SentLen = 5.
 
-The leading ellipsis is in the string. Tokenizers will treat `...` as
-punctuation / extra tokens; the gaze pipeline stripped punctuation
-at word level, so the *readers* saw a short insult and parked on
-`bland` / `yawner`. Extreme nFix here is partly "short sentence
-artifact" (see Example 3) and partly "odd words." I would not use
-sentence 80 as the slide that says "gaze detects negativity." I would
-use it as the slide that says "always plot SentLen next to nFix."
+Word-level (`walk_sentence_gaze.py --sentence-id 80`):
 
-Raw `SentLen` for this row is 5 on `average_data.csv` (id 80). Five
-words, six-sigma fixations per fixated word.
+| Word (as stored) | nFix | TRT | GPT |
+| --- | --- | --- | --- |
+| unknown | 0.00 | 0 | 0 |
+| a | 0.08 | 9 | 9 |
+| bland | 1.17 | 167 | 109 |
+| **murderoncampus** | **6.67** | **796** | **588** |
+| yawner | 1.42 | 158 | 466 |
+
+Two pipeline fingerprints in one row:
+
+1. The leading `...` was stripped to an empty token and stored as
+   `unknown` (see `word/get_average.py`).
+2. Hyphens were stripped (`re.sub('[^\w\s]', '', ...)`), so the
+   compound became the 14-letter blob `murderoncampus`. That blob
+   soaks almost all of the sentence's fixations.
+
+Extreme nFix is therefore *not* "readers hated `yawner`." It is a
+five-word sentence whose one content compound was glued together
+and then used as the denominator-heavy IA. I would not use sentence
+80 as the slide that says "gaze detects negativity." I would use it
+as the slide that says "always look at the word table before you
+quote a sentence-level z-score."
 
 ---
 
@@ -233,11 +269,11 @@ as publication figures. They are lab scratch.
 ## How to reprint these
 
 ```bash
-python examples/walk_sentence_gaze.py                # sentence 0
-python examples/walk_sentence_gaze.py --sentence-id 4
-python examples/walk_sentence_gaze.py --sentence-id 80
-python examples/walk_sentence_gaze.py --sentence-id 135
-python examples/inspect_datasets.py                  # counts + ranges
+python3 examples/walk_sentence_gaze.py                # sentence 0
+python3 examples/walk_sentence_gaze.py --sentence-id 4
+python3 examples/walk_sentence_gaze.py --sentence-id 80
+python3 examples/walk_sentence_gaze.py --sentence-id 135
+python3 examples/inspect_datasets.py                  # counts + ranges
 ```
 
 If a CSV is regenerated and these numbers move, believe the script
