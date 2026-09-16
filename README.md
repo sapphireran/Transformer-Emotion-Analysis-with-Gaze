@@ -137,6 +137,8 @@ Training the transformer models needs PyTorch, Hugging Face `transformers` / `da
 - [Examples](examples/README.md) — CPU walkthroughs
 - [Examples walkthrough](docs/examples-walkthrough.md) — how to read the printed tables
 - [Baseline notes](docs/baseline-notes.md) — numbers from this checkout
+- [Citations](docs/citations.md) — ZuCo, SST, PROVO, checkpoints
+- [Known issues](docs/known-issues.md) — training-script and data pitfalls
 
 ## Status of this personal repo
 
