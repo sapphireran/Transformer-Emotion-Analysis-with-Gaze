@@ -69,7 +69,7 @@ def main() -> int:
                 "ok": ok,
             }
         )
-        print(f"exit {proc.returncode} in {elapsed:.2f}s")
+        print(f"exit {proc.returncode} in {elapsed:.2f}s", flush=True)
         if args.fail_fast and not ok:
             break
 

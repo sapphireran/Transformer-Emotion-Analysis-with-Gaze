@@ -9,7 +9,7 @@ import pandas as pd
 
 def banner(title: str) -> None:
     line = "=" * len(title)
-    print(f"\n{line}\n{title}\n{line}")
+    print(f"\n{line}\n{title}\n{line}", flush=True)
 
 
 def print_frame(df: pd.DataFrame, *, max_rows: int = 30, floatfmt: str = ".4f") -> None:
