@@ -1,0 +1,7 @@
+# Lightweight dependencies for the personal docs/examples in this repo.
+# These cover dataset inspection, gaze-feature analysis, and the fusion walkthrough.
+# They do not pull in PyTorch or Hugging Face transformers.
+
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
