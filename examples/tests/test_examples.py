@@ -17,6 +17,7 @@ if str(EXAMPLES) not in sys.path:
 import fusion_forward  # noqa: E402
 import gaze_by_sentiment  # noqa: E402
 import inspect_datasets  # noqa: E402
+import join_check  # noqa: E402
 import scaling_check  # noqa: E402
 import split_integrity  # noqa: E402
 import word_to_sentence  # noqa: E402
@@ -54,6 +55,11 @@ class SplitIntegrityTests(unittest.TestCase):
 class ScalingCheckTests(unittest.TestCase):
     def test_minmax_and_zscore(self) -> None:
         self.assertEqual(scaling_check.main(["--quiet"]), 0)
+
+
+class JoinCheckTests(unittest.TestCase):
+    def test_zuco_combined_is_label_plus_average(self) -> None:
+        self.assertEqual(join_check.main(["--quiet"]), 0)
 
 
 class FusionForwardTests(unittest.TestCase):

@@ -61,6 +61,7 @@ Individual demos:
 python3 examples/inspect_datasets.py
 python3 examples/split_integrity.py
 python3 examples/scaling_check.py
+python3 examples/join_check.py
 python3 examples/fusion_forward.py
 python3 examples/gaze_by_sentiment.py
 python3 examples/word_to_sentence.py
@@ -122,4 +123,5 @@ Full schemas, label counts, and feature definitions are in
 - [Reproduction notes](docs/reproduction.md)
 - [Known issues](docs/known-issues.md)
 - [References](docs/references.md)
+- [Worked example](docs/worked-example.md)
 - [Examples](examples/README.md)

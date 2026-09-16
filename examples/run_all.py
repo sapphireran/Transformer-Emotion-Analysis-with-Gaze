@@ -12,6 +12,7 @@ SCRIPTS = [
     "inspect_datasets.py",
     "split_integrity.py",
     "scaling_check.py",
+    "join_check.py",
     "fusion_forward.py",
     "gaze_by_sentiment.py",
     "word_to_sentence.py",
@@ -22,7 +23,7 @@ def main() -> int:
     failures = []
     for name in SCRIPTS:
         command = [sys.executable, str(EXAMPLES / name)]
-        print(f"\n>>> {name}")
+        print(f"\n>>> {name}", flush=True)
         result = subprocess.run(command, check=False)
         if result.returncode != 0:
             failures.append(name)

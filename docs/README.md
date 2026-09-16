@@ -11,6 +11,7 @@ if you are coming back to the project after a while:
 6. [reproduction.md](reproduction.md) — how to rerun data and training
 7. [known-issues.md](known-issues.md) — bugs and path mismatches to watch
 8. [references.md](references.md) — ZuCo, SST, and related reading
+9. [worked-example.md](worked-example.md) — one ZuCo row through scaling, join, and fusion
 
 Runnable checks that do not download pretrained models live in
 [`../examples`](../examples/README.md).

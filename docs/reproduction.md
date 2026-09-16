@@ -95,6 +95,7 @@ These do not need torch or network access:
 | `python3 examples/inspect_datasets.py` | Schemas and row counts match [datasets.md](datasets.md) |
 | `python3 examples/split_integrity.py` | Train/valid/test are a disjoint cover of combined |
 | `python3 examples/scaling_check.py` | Scaled averages match numpy min-max / z-score |
+| `python3 examples/join_check.py` | Combined ZuCo tables = labels ⨝ scaled averages |
 | `python3 examples/word_to_sentence.py` | Subject-1 word means reconstruct sentence `nFixations` |
 | `python3 examples/fusion_forward.py` | Fusion shapes are `(B, 3)` |
 | `python3 examples/gaze_by_sentiment.py` | Class-conditional gaze means reprint |
