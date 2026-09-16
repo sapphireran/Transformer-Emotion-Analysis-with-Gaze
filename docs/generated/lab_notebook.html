@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Personal gaze lab notebook</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --ink: #241c15;
+      --accent: #8b3d2f;
+      --card: #fffdf8;
+      --line: #d8cfc0;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 880px;
+      padding: 2.2rem 1.4rem 3rem;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+    }
+    h1, h2, h3 { font-weight: 650; letter-spacing: -0.02em; }
+    h1 { font-size: 2rem; margin-bottom: 0.2rem; }
+    .sub { color: #5c5146; margin-top: 0; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: var(--card);
+      margin: 0.8rem 0 1.4rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 0.4rem 0.55rem;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th { background: #efe6d6; }
+    code, pre {
+      font-family: "IBM Plex Mono", "Source Code Pro", Consolas, monospace;
+      font-size: 0.86rem;
+    }
+    pre {
+      background: #2b241c;
+      color: #f4ead8;
+      padding: 0.9rem 1rem;
+      overflow-x: auto;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 0.9rem 1rem;
+      margin: 1rem 0;
+    }
+    .warn { border-left: 4px solid var(--accent); }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1>Personal gaze lab notebook</h1>
+  <p class="sub">Generated from the stdlib examples. Training scripts are unchanged.</p>
+<div class="card warn"><strong>Read this first.</strong> Reader 3’s sentence ids are compacted after 149, and <code>model_full_SST.py</code> reports test metrics on the last batch only.</div>
+<h2>Repository inventory</h2>
+<p>Personal checklist of tables this clone can consume without MATLAB.</p>
+<h3>Experiment tracks</h3>
+<table><thead><tr><th>track</th><th>sentences</th><th>script</th><th>gaze</th></tr></thead><tbody><tr><td>ZuCo–SST overlap</td><td>400</td><td>model_ZuCo_SST.py</td><td>Human eye-tracking, 12 readers, sentence-averaged then z-scored</td></tr><tr><td>Full SST with projected gaze</td><td>11853</td><td>model_full_SST.py</td><td>Projected / predicted features, not a 12-reader recording of the full SST</td></tr></tbody></table>
+<h3>Consumer tables</h3>
+<table><thead><tr><th>path</th><th>rows</th><th>schema</th><th>note</th></tr></thead><tbody><tr><td>ZuCo_SST_data/combined_sst_et_standard.csv</td><td>400</td><td>yes</td><td>5-fold training table</td></tr><tr><td>ZuCo_SST_data/combined_sst_et_min_max.csv</td><td>400</td><td>yes</td><td>same 400 sentences, min-max gaze</td></tr><tr><td>ZuCo_SST_data/ssts_ZuCo.csv</td><td>400</td><td>yes</td><td>text + label only</td></tr><tr><td>ZuCo_SST_data/train.csv</td><td>320</td><td>yes</td><td>320-row leftover split</td></tr><tr><td>ZuCo_SST_data/valid.csv</td><td>40</td><td>yes</td><td>40-row leftover split</td></tr><tr><td>ZuCo_SST_data/test.csv</td><td>40</td><td>yes</td><td>40-row leftover split</td></tr><tr><td>SST_data/combined_full_sst_et.csv</td><td>11853</td><td>yes</td><td>projected-gaze SST</td></tr><tr><td>SST_data/train_full_sst.csv</td><td>9482</td><td>yes</td><td>80%</td></tr><tr><td>SST_data/valid_full_sst.csv</td><td>1185</td><td>yes</td><td>10%</td></tr><tr><td>SST_data/test_full_sst.csv</td><td>1186</td><td>yes</td><td>10%</td></tr><tr><td>ZuCo_et_csv_data/average_data.csv</td><td>400</td><td>yes</td><td>index-mean of 12 readers</td></tr><tr><td>ZuCo_et_csv_data/standard_scaled_average_data.csv</td><td>400</td><td>yes</td><td>z-scored average_data</td></tr><tr><td>ZuCo_et_csv_data/word/word_averages_v2.csv</td><td>7129</td><td>yes</td><td>word-level means</td></tr><tr><td>gaze_prediction/data/provo.csv</td><td>2659</td><td>yes</td><td>PROVO, fixProp not GD</td></tr><tr><td>gaze_prediction/data/prediction_test.csv</td><td>1751</td><td>yes</td><td>predicted word gaze</td></tr></tbody></table>
+<h3>Twelve readers</h3>
+<table><thead><tr><th>path</th><th>rows</th><th>schema</th><th>note</th></tr></thead><tbody><tr><td>ZuCo_et_csv_data/1_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/2_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/3_SR.csv</td><td>299</td><td>yes</td><td>299 rows and remapped ids</td></tr><tr><td>ZuCo_et_csv_data/4_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/5_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/6_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/7_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/8_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/9_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/10_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/11_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr><tr><td>ZuCo_et_csv_data/12_SR.csv</td><td>400</td><td>yes</td><td>400 raw-ish sentence rows</td></tr></tbody></table>
+<h3>File notes</h3>
+<table><thead><tr><th>path</th><th>kind</th><th>rows</th><th>note</th></tr></thead><tbody><tr><td>ZuCo_SST_data/combined_sst_et_standard.csv</td><td>train table</td><td>400</td><td>Z-scored gaze + labels. model_ZuCo_SST.py reads this.</td></tr><tr><td>ZuCo_SST_data/combined_sst_et_min_max.csv</td><td>train table</td><td>400</td><td>Same sentences, min-max gaze. Not used by the training scripts.</td></tr><tr><td>ZuCo_SST_data/ssts_ZuCo.csv</td><td>text + label</td><td>400</td><td>No gaze columns. Producer leftover from convert_full_SST.py.</td></tr><tr><td>ZuCo_SST_data/train.csv</td><td>split</td><td>320</td><td>Random 80% split. Valid is not stratified (7/14/19).</td></tr><tr><td>ZuCo_SST_data/valid.csv</td><td>split</td><td>40</td><td>Too small for a stable accuracy number.</td></tr><tr><td>ZuCo_SST_data/test.csv</td><td>split</td><td>40</td><td>Disjoint from train/valid; unused by 5-fold script.</td></tr><tr><td>ZuCo_et_csv_data/{1-12}_SR.csv</td><td>per reader</td><td>400 (299 for #3)</td><td>Closer to raw ms / pupil. Subject 3 is remapped after id 149.</td></tr><tr><td>ZuCo_et_csv_data/average_data.csv</td><td>mean over readers</td><td>400</td><td>Index-averaged; contaminated for ids 150–398 by subject 3.</td></tr><tr><td>ZuCo_et_csv_data/word/word_averages_v2.csv</td><td>word means</td><td>7129</td><td>400 sentences, Sent_ID like 0_NR. Same index-average issue.</td></tr><tr><td>SST_data/combined_full_sst_et.csv</td><td>train table</td><td>11853</td><td>Z-scored projected gaze. model_full_SST.py uses the split files.</td></tr><tr><td>SST_data/stts_all_sentence_level.csv</td><td>raw SST</td><td>11853</td><td>sentence,POS/NEG/NEU — no header.</td></tr><tr><td>gaze_prediction/data/provo.csv</td><td>external ET</td><td>2659</td><td>PROVO word table with fixProp instead of GD.</td></tr><tr><td>gaze_prediction/data/prediction_test.csv</td><td>predicted ET</td><td>1751</td><td>100 sentences of model-predicted word gaze.</td></tr></tbody></table>
+<h2>Subject-3 alignment audit</h2>
+<p>``utils_ZuCo.DataTransformer`` skips original sentences 150–249 and 399 for task-1 subject index 2 (file ``3_SR.csv``), then writes the remaining 299 rows with compacted ids 0..298. ``get_average_sentence_level.py`` averages the twelve CSVs by row index.</p>
+<h3>Sanity checks</h3>
+<table><thead><tr><th>check</th><th>value</th></tr></thead><tbody><tr><td>first SentLen mismatch vs reader 1</td><td>150</td></tr><tr><td>remapped SentLen matches reader 1</td><td>yes</td></tr><tr><td>compact 150 maps to original</td><td>250</td></tr><tr><td>sentences with nFixations contamination</td><td>246</td></tr></tbody></table>
+<h3>Compact id → original id</h3>
+<table><thead><tr><th>compact id in 3_SR.csv</th><th>original sentence id</th></tr></thead><tbody><tr><td>0</td><td>0</td></tr><tr><td>149</td><td>149</td></tr><tr><td>150</td><td>250</td></tr><tr><td>298</td><td>398</td></tr></tbody></table>
+<h3>nFixations contamination by region</h3>
+<table><thead><tr><th>region</th><th>ids</th><th>n</th><th>mean abs delta</th><th>max abs delta</th></tr></thead><tbody><tr><td>aligned_all_12</td><td>0–149</td><td>150</td><td>0.0000</td><td>0.0000</td></tr><tr><td>contaminated_wrong_sentence</td><td>150–249</td><td>100</td><td>0.0297</td><td>0.2111</td></tr><tr><td>contaminated_and_shifted</td><td>250–298</td><td>49</td><td>0.0381</td><td>0.1429</td></tr><tr><td>reader3_missing_from_index</td><td>299–398</td><td>100</td><td>0.0276</td><td>0.1717</td></tr><tr><td>reader3_skipped</td><td>399–399</td><td>1</td><td>0.0000</td><td>0.0000</td></tr></tbody></table>
+<h3>Worked ids</h3>
+<table><thead><tr><th>id</th><th>SentLen index-mean</th><th>SentLen aligned</th><th>nFix index-mean</th><th>nFix aligned</th></tr></thead><tbody><tr><td>0</td><td>22.0000</td><td>22.0000</td><td>2.1585</td><td>2.1585</td></tr><tr><td>149</td><td>25.0000</td><td>25.0000</td><td>1.5834</td><td>1.5834</td></tr><tr><td>150</td><td>9.5000</td><td>9.0000</td><td>1.6050</td><td>1.6236</td></tr><tr><td>250</td><td>14.3333</td><td>15.0000</td><td>1.6479</td><td>1.6812</td></tr><tr><td>298</td><td>14.1667</td><td>14.0000</td><td>1.6734</td><td>1.7859</td></tr><tr><td>398</td><td>16.0000</td><td>16.0000</td><td>2.2768</td><td>2.2037</td></tr><tr><td>399</td><td>9.0000</td><td>9.0000</td><td>1.4838</td><td>1.4838</td></tr></tbody></table>
+<h3>How to read this</h3>
+<p>Ids 0–149 are safe: all twelve readers still share the same sentence. From 150 onward, reader 3's compact id is a later sentence. The published ``average_data.csv`` follows the index mean, so it is slightly wrong on 246 sentences. The shift is small on nFixations (mean |delta| ≈ 0.03) because one reader out of twelve cannot move the mean far, but it is a real alignment bug, not noise.</p>
+<h2>Twelve-reader agreement (ids 0–149)</h2>
+<p>Only the first 150 sentences are used. After that, reader 3's ids are compacted and pairwise correlations would mix different texts.</p>
+<table><thead><tr><th>feature</th><th>mean CV</th><th>mean pairwise r</th><th>min r</th><th>max r</th><th>pairs</th></tr></thead><tbody><tr><td>omissionRate</td><td>0.4426</td><td>0.2840</td><td>-0.0031</td><td>0.5065</td><td>66</td></tr><tr><td>nFixations</td><td>0.2683</td><td>0.3619</td><td>0.1015</td><td>0.6017</td><td>66</td></tr><tr><td>meanPupilSize</td><td>0.3241</td><td>0.2274</td><td>-0.2737</td><td>0.7396</td><td>66</td></tr><tr><td>GD</td><td>0.2106</td><td>0.3553</td><td>-0.0686</td><td>0.6493</td><td>66</td></tr><tr><td>TRT</td><td>0.3021</td><td>0.4371</td><td>0.2232</td><td>0.7044</td><td>66</td></tr><tr><td>FFD</td><td>0.1504</td><td>0.1022</td><td>-0.2020</td><td>0.4400</td><td>66</td></tr><tr><td>SFD</td><td>0.4260</td><td>0.1021</td><td>-0.1286</td><td>0.4111</td><td>66</td></tr><tr><td>GPT</td><td>0.3462</td><td>0.3318</td><td>0.0752</td><td>0.5600</td><td>66</td></tr></tbody></table>
+<h3>Notes</h3>
+<p>SentLen is omitted because it is a property of the text, not the reader: every aligned file has the same length, so correlation is undefined or trivial. Duration measures (GD, TRT, GPT) usually agree more than pupil size. A mean pairwise r around 0.3–0.5 means the readers are not interchangeable, which is why averaging them is a modelling choice rather than a free lunch.</p>
+<h2>Label-conditioned gaze (ZuCo standard table)</h2>
+<p>400 z-scored sentences. A mean of 0 is the corpus centre. Negative nFixations on the negative class means those sentences were, on average, fixated slightly less than the corpus mean — not that people closed their eyes.</p>
+<table><thead><tr><th>label</th><th>n</th><th>nFixations</th><th>FFD</th><th>GPT</th><th>TRT</th><th>GD</th><th>omissionRate</th></tr></thead><tbody><tr><td>0 negative</td><td>123</td><td>-0.0892</td><td>-0.0784</td><td>-0.0639</td><td>-0.0960</td><td>0.0304</td><td>0.0351</td></tr><tr><td>1 neutral</td><td>137</td><td>0.0831</td><td>-0.0284</td><td>0.0429</td><td>0.0520</td><td>-0.1387</td><td>-0.1292</td></tr><tr><td>2 positive</td><td>140</td><td>-0.0029</td><td>0.0966</td><td>0.0141</td><td>0.0334</td><td>0.1090</td><td>0.0957</td></tr></tbody></table>
+<h3>Pearson r with integer label 0/1/2</h3>
+<table><thead><tr><th>feature</th><th>r</th></tr></thead><tbody><tr><td>nFixations</td><td>0.0326</td></tr><tr><td>FFD</td><td>0.0715</td></tr><tr><td>GPT</td><td>0.0304</td></tr><tr><td>TRT</td><td>0.0509</td></tr><tr><td>GD</td><td>0.0356</td></tr><tr><td>omissionRate</td><td>0.0280</td></tr></tbody></table>
+<h3>Collinearity among fusion features</h3>
+<table><thead><tr><th>a</th><th>b</th><th>r</th></tr></thead><tbody><tr><td>nFixations</td><td>TRT</td><td>0.9581</td></tr><tr><td>GPT</td><td>TRT</td><td>0.9419</td></tr><tr><td>nFixations</td><td>GPT</td><td>0.9125</td></tr><tr><td>TRT</td><td>GD</td><td>0.7893</td></tr><tr><td>nFixations</td><td>GD</td><td>0.6973</td></tr><tr><td>FFD</td><td>GD</td><td>0.6794</td></tr><tr><td>GPT</td><td>GD</td><td>0.6746</td></tr><tr><td>FFD</td><td>TRT</td><td>0.6167</td></tr><tr><td>FFD</td><td>GPT</td><td>0.5470</td></tr><tr><td>nFixations</td><td>FFD</td><td>0.4213</td></tr></tbody></table>
+<h3>Why this matters for EyeTrackingModel</h3>
+<p>The fusion head sees nFixations, FFD, GPT, TRT, GD through one Linear(5 → 16). If TRT and GPT are highly correlated, that layer is not getting five independent cues. Label correlations here are small; gaze-only linear baselines in example 09 are the better floor for 'does gaze separate sentiment on its own?'.</p>
+<h2>Word → sentence walkthrough (id 0)</h2>
+<p>**Text:** Presents a good case while failing to provide a reason for us to care beyond the very basic dictums of human decency.</p>
+<p>**Label:** 1</p>
+<p>Word-average tokens: 22 (zeros in nFixations: 0). Mean word nFixations=1.610, TRT=196.515.</p>
+<h3>First twelve word-average rows</h3>
+<table><thead><tr><th>word_id</th><th>word</th><th>nFixations</th><th>FFD</th><th>TRT</th><th>WordLen</th></tr></thead><tbody><tr><td>0</td><td>presents</td><td>2.6667</td><td>134.58</td><td>381.17</td><td>8.0000</td></tr><tr><td>1</td><td>a</td><td>0.9167</td><td>62.9167</td><td>88.9167</td><td>1.0000</td></tr><tr><td>2</td><td>good</td><td>2.5833</td><td>96.9167</td><td>301.92</td><td>4.0000</td></tr><tr><td>3</td><td>case</td><td>1.7500</td><td>105.33</td><td>241.00</td><td>4.0000</td></tr><tr><td>4</td><td>while</td><td>2.5000</td><td>121.42</td><td>296.25</td><td>5.0000</td></tr><tr><td>5</td><td>failing</td><td>3.0833</td><td>104.25</td><td>386.83</td><td>7.0000</td></tr><tr><td>6</td><td>to</td><td>0.6667</td><td>50.1667</td><td>69.5833</td><td>2.0000</td></tr><tr><td>7</td><td>provide</td><td>2.8333</td><td>144.50</td><td>345.08</td><td>7.0000</td></tr><tr><td>8</td><td>a</td><td>0.5000</td><td>31.5000</td><td>54.3333</td><td>1.0000</td></tr><tr><td>9</td><td>reason</td><td>2.9167</td><td>124.75</td><td>340.33</td><td>6.0000</td></tr><tr><td>10</td><td>for</td><td>0.4167</td><td>35.0000</td><td>41.2500</td><td>3.0000</td></tr><tr><td>11</td><td>us</td><td>0.0833</td><td>11.8333</td><td>11.8333</td><td>2.0000</td></tr></tbody></table>
+<h3>Sentence-level published numbers</h3>
+<table><thead><tr><th>table</th><th>nFixations</th><th>TRT</th><th>FFD</th><th>GPT</th></tr></thead><tbody><tr><td>average_data.csv (raw-ish mean)</td><td>2.1585</td><td>262.41</td><td>116.25</td><td>331.68</td></tr><tr><td>standard_scaled_average_data.csv</td><td>1.5209</td><td>1.2480</td><td>-0.0784</td><td>1.5875</td></tr><tr><td>combined_sst_et_standard.csv (train)</td><td>1.5209</td><td>1.2480</td><td>-0.0784</td><td>1.5875</td></tr></tbody></table>
+<h3>Reader 1 vs remapped reader 3, same sentence</h3>
+<p>Reader 1 words on 0_NR: 22. Reader 3 words whose remapped Sent_ID is 0_NR: 22. First tokens: reader1=presents, reader3=presents.</p>
+<h3>Do not expect word-means to equal sentence-means</h3>
+<p>``DataTransformer`` builds sentence features by summing word measures and dividing by the number of *fixated* words, not by ``SentLen``. Omitted words (nFixations=0) therefore drop out of the sentence average. The word table keeps those zeros. That is why ``mean word nFixations`` above is not a copy of ``average_data``.</p>
+<h2>Split and schema audit</h2>
+<h3>ZuCo–SST (400)</h3>
+<table><thead><tr><th>check</th><th>value</th></tr></thead><tbody><tr><td>train / valid / test</td><td>320 / 40 / 40</td></tr><tr><td>combined</td><td>400</td></tr><tr><td>train∩valid</td><td>0</td></tr><tr><td>train∩test</td><td>0</td></tr><tr><td>valid∩test</td><td>0</td></tr><tr><td>missing from splits</td><td>0</td></tr><tr><td>extra in splits</td><td>0</td></tr><tr><td>combined labels 0/1/2</td><td>123 / 137 / 140</td></tr><tr><td>train labels 0/1/2</td><td>103 / 107 / 110</td></tr><tr><td>valid labels 0/1/2</td><td>7 / 14 / 19</td></tr><tr><td>test labels 0/1/2</td><td>13 / 16 / 11</td></tr></tbody></table>
+<p>``model_ZuCo_SST.py`` ignores these 320/40/40 files and runs stratified 5-fold on the combined table. The 40-row valid split is not stratified (7 / 14 / 19). A 5-point accuracy swing there is two sentences.</p>
+<h3>Full SST (11,853)</h3>
+<table><thead><tr><th>check</th><th>value</th></tr></thead><tbody><tr><td>train / valid / test</td><td>9482 / 1185 / 1186</td></tr><tr><td>combined</td><td>11853</td></tr><tr><td>train∩valid</td><td>0</td></tr><tr><td>train∩test</td><td>0</td></tr><tr><td>valid∩test</td><td>0</td></tr><tr><td>missing from splits</td><td>0</td></tr><tr><td>extra in splits</td><td>0</td></tr><tr><td>combined labels 0/1/2</td><td>4649 / 2241 / 4963</td></tr><tr><td>train labels 0/1/2</td><td>3710 / 1833 / 3939</td></tr><tr><td>valid labels 0/1/2</td><td>476 / 209 / 500</td></tr><tr><td>test labels 0/1/2</td><td>463 / 199 / 524</td></tr></tbody></table>
+<p>These files *are* what ``model_full_SST.py`` trains on. Neutral is under-represented. See example 07 before quoting the printed test score.</p>
+<h3>Normalized text overlap between tracks</h3>
+<table><thead><tr><th>sentence</th><th>ZuCo label</th><th>SST label</th><th>agree</th></tr></thead><tbody><tr><td>... a roller-coaster ride of a movie</td><td>2</td><td>2</td><td>yes</td></tr><tr><td>girls gone wild and gone civil again</td><td>1</td><td>1</td><td>yes</td></tr><tr><td>under-rehearsed and lifeless</td><td>0</td><td>0</td><td>yes</td></tr></tbody></table>
+<p>Only three strings match after light normalization. The 400-row ZuCo overlap is not a subset of ``combined_full_sst_et.csv`` in any useful sense — different tokenization and a different SST cut.</p>
+<h2>Full-SST test-loop overwrite</h2>
+<p>In ``model_full_SST.py`` the validation loop extends prediction lists. The test loop assigns ``all_preds = preds.cpu().numpy()``, so only the last batch survives. Default ``batch_size=256`` and 1186 test rows → last batch is 162 examples.</p>
+<h3>Simulated numbers</h3>
+<table><thead><tr><th>quantity</th><th>value</th></tr></thead><tbody><tr><td>items</td><td>1186</td></tr><tr><td>batch size</td><td>256</td></tr><tr><td>batches</td><td>5</td></tr><tr><td>overwrite coverage</td><td>162</td></tr><tr><td>full-set accuracy (extend)</td><td>0.8642</td></tr><tr><td>printed-style accuracy (overwrite)</td><td>0.0062</td></tr></tbody></table>
+<p>overwrite_accuracy is computed on the last batch only, which is what the current test loop prints. extend_accuracy is the full-set number.</p>
+<p>The dummy model is correct everywhere except the last batch, so the two aggregation rules disagree on purpose. The real network will not look like this; the point is coverage, not the dummy accuracy values.</p>
+<h3>Other known issues (not patched here)</h3>
+<table><thead><tr><th>id</th><th>file</th><th>severity</th><th>summary</th></tr></thead><tbody><tr><td>full-sst-test-overwrite</td><td>model_full_SST.py</td><td>high</td><td>Test loop assigns all_preds = batch instead of extend.</td></tr><tr><td>checkpoint-comment-f1</td><td>model_full_SST.py</td><td>low</td><td>Comment and save log say F1; the predicate uses validation accuracy.</td></tr><tr><td>hardcoded-three-classes</td><td>model_ZuCo_SST.py / model_full_SST.py</td><td>low</td><td>Fusion loss uses logits.view(-1, 3) even though num_labels exists.</td></tr><tr><td>subject3-reindex</td><td>utils_ZuCo.py + get_average_sentence_level.py</td><td>high</td><td>Subject 3 drops sentences 150–249 and 399, then reindexes 0..298.</td></tr><tr><td>path-leftovers</td><td>read_ZuCo_mat.py, convert_full_SST.py, utils_ZuCo.py</td><td>medium</td><td>Producers point at folders that are not in this clone.</td></tr><tr><td>spilt-typo</td><td>ZuCo_SST_data/spilt.py, SST_data/spilt.py</td><td>low</td><td>Filename is spilt, not split.</td></tr></tbody></table>
+<h2>CPU late-fusion wiring demo</h2>
+<pre>text tokens ─► hash bag-of-words (32) ─► Linear(32→32) ─┐
+                                                       ├─► concat (48) ─► Linear(48→3) ─► softmax
+gaze (5) ─► Linear(5→16) ──────────────────────────────┘
+
+Training scripts use the same concat, with 768-d pooler + 16-d gaze → 784.</pre>
+<p>Weights are seeded and tiny. Predictions are not an accuracy claim. This only shows that a 5-d gaze vector and a hashed sentence can share a concatenated classifier, the same way ``EyeTrackingModel`` concatenates ``pooler_output`` with ``Linear(5 → 16)``.</p>
+<h3>First 6 ZuCo rows, seed=7</h3>
+<table><thead><tr><th>id</th><th>gold</th><th>pred</th><th>p_neg</th><th>p_neu</th><th>p_pos</th><th>text</th></tr></thead><tbody><tr><td>0</td><td>1</td><td>1</td><td>0.2768</td><td>0.3663</td><td>0.3569</td><td>Presents a good case while failing to provide a reason for us to…</td></tr><tr><td>1</td><td>2</td><td>2</td><td>0.3157</td><td>0.2978</td><td>0.3865</td><td>Beautifully crafted, engaging filmmaking that should attract ups…</td></tr><tr><td>2</td><td>0</td><td>2</td><td>0.3188</td><td>0.3292</td><td>0.3520</td><td>Bread, My Sweet has so many flaws it would be easy for critics t…</td></tr><tr><td>3</td><td>1</td><td>2</td><td>0.2187</td><td>0.2021</td><td>0.5792</td><td>Slow, silly and unintentionally hilarious.</td></tr><tr><td>4</td><td>0</td><td>2</td><td>0.1670</td><td>0.3941</td><td>0.4390</td><td>Ultimately feels empty and unsatisfying, like swallowing a Commu…</td></tr><tr><td>5</td><td>2</td><td>2</td><td>0.2860</td><td>0.3181</td><td>0.3959</td><td>Exudes the fizz of a Busby Berkeley musical and the visceral exc…</td></tr></tbody></table>
+<h2>Gaze-only baselines (ZuCo 400)</h2>
+<p>If the five fusion features already separated sentiment, a linear readout would show it. They do not, at least not on this z-scored table. That is useful: it means any gain from ``roberta_eye_tracking`` has to come from *interaction* with the text encoder, not from gaze as a standalone classifier.</p>
+<table><thead><tr><th>model</th><th>n</th><th>accuracy</th><th>weighted F1</th></tr></thead><tbody><tr><td>majority(2)</td><td>400</td><td>0.3500</td><td>0.1815</td></tr><tr><td>gaze_linear_ovr (stratified 20% holdout)</td><td>80</td><td>0.4625</td><td>0.4391</td></tr><tr><td>gaze_linear_ovr (in-sample, optimistic)</td><td>400</td><td>0.4175</td><td>0.4051</td></tr></tbody></table>
+<h3>Protocol</h3>
+<p>Features: nFixations, FFD, GPT, TRT, GD. Holdout is stratified on the integer label with seed 42. The linear model is one-vs-rest least squares with a bias term, implemented in stdlib (no sklearn).</p>
+<h2>PROVO vs predicted word gaze</h2>
+<p>These tables live under ``gaze_prediction/data/`` and are not read by the two training scripts. They are the leftover of a word-level prediction experiment (PROVO as a public ET corpus, plus a predicted file whose sentence ids start at 300).</p>
+<h3>Coverage</h3>
+<table><thead><tr><th>table</th><th>rows</th><th>sentences</th><th>first sentence_id</th><th>last sentence_id</th><th>extra column</th></tr></thead><tbody><tr><td>provo.csv</td><td>2659</td><td>134</td><td>0</td><td>133</td><td>fixProp</td></tr><tr><td>prediction_test.csv</td><td>1751</td><td>100</td><td>300</td><td>399</td><td>GD</td></tr></tbody></table>
+<h3>PROVO feature ranges</h3>
+<table><thead><tr><th>feature</th><th>mean</th><th>std</th><th>min</th><th>max</th></tr></thead><tbody><tr><td>nFix</td><td>15.1000</td><td>9.4182</td><td>-1.6525</td><td>65.7674</td></tr><tr><td>FFD</td><td>3.1900</td><td>1.4197</td><td>0.0079</td><td>6.9687</td></tr><tr><td>GPT</td><td>6.3500</td><td>5.9089</td><td>-2.9288</td><td>45.0799</td></tr><tr><td>TRT</td><td>5.3100</td><td>3.6393</td><td>-0.7607</td><td>23.7844</td></tr><tr><td>fixProp</td><td>67.0600</td><td>26.0551</td><td>3.4041</td><td>106.12</td></tr></tbody></table>
+<h3>Predicted-test feature ranges</h3>
+<table><thead><tr><th>feature</th><th>mean</th><th>std</th><th>min</th><th>max</th></tr></thead><tbody><tr><td>nFix</td><td>21.4945</td><td>6.3761</td><td>0.0000</td><td>50.9221</td></tr><tr><td>FFD</td><td>4.3715</td><td>0.5644</td><td>0.0000</td><td>6.1613</td></tr><tr><td>GPT</td><td>8.2804</td><td>5.4227</td><td>0.0000</td><td>40.5412</td></tr><tr><td>TRT</td><td>6.9224</td><td>2.3848</td><td>0.0000</td><td>18.5499</td></tr><tr><td>GD</td><td>5.1594</td><td>1.2165</td><td>0.0000</td><td>11.4924</td></tr></tbody></table>
+<h3>Do not mix these scales with ZuCo z-scores</h3>
+<p>PROVO nFix sits near 15.1 with a percent-like fixProp (mean 67.1). Predicted nFix is also a large unstandardized count. The ZuCo training table is z-scored around 0. Feeding PROVO columns into ``EyeTrackingModel`` without a scaler would let nFix dominate the Linear(5 → 16) layer.</p>
+<p>Word-id histograms are just a sanity check that neither file is a single sentence: PROVO unique word_ids=53, predicted unique word_ids=42.</p>
+</body>
+</html>

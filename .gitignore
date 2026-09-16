@@ -1,0 +1,28 @@
+# Bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments
+.venv/
+venv/
+env/
+
+# Training artifacts (not part of the personal docs layer)
+models/
+*.pth
+*.pt
+*.bin
+*.onnx
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Example scratch (committed snapshots live in docs/generated and examples/outputs)
+examples/scratch/
+*.tmp

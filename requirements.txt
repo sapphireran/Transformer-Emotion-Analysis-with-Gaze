@@ -1,0 +1,12 @@
+# Optional training stack for model_ZuCo_SST.py and model_full_SST.py.
+# The personal docs/examples layer (zuco_lab + examples/) is stdlib-only.
+
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+torch>=2.0
+transformers>=4.30
+datasets>=2.14
+tqdm>=4.65
+scipy>=1.10
+nltk>=3.8
