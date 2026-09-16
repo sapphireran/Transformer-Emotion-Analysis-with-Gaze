@@ -1,0 +1,11 @@
+# Core utilities used by the documented examples and unit tests.
+# The original training scripts also need torch, transformers, datasets, and tqdm.
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+
+# Optional: full transformer training stack (large downloads).
+# torch>=2.0
+# transformers>=4.30
+# datasets>=2.14
+# tqdm>=4.65

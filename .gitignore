@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Local experiment artifacts (trained weights, caches)
+models/
+*.pth
+.cache/
+.pytest_cache/
+.ipynb_checkpoints/
+huggingface/
+.huggingface/
+
+# Example run output that should stay local unless committed on purpose
+examples/output/
