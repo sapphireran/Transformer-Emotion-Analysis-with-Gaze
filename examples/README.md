@@ -14,7 +14,7 @@ python3 -m pip install -r requirements-examples.txt
 python3 examples/run_all.py
 ```
 
-Reports land in `examples/output/` (gitignored except `.gitkeep`).
+Markdown/text reports in `examples/output/` are checked in as a snapshot. Regenerated CSVs in that folder are gitignored.
 
 ## Scripts
 
