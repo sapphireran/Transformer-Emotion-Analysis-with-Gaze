@@ -37,5 +37,5 @@ lightning_logs/
 Thumbs.db
 
 # Example script output (committed figures live under docs/assets/)
-examples/output/
+examples/output/*
 !examples/output/.gitkeep
