@@ -26,20 +26,24 @@ def main() -> int:
     here = os.path.dirname(os.path.abspath(__file__))
     repo = os.path.abspath(os.path.join(here, os.pardir))
     python = sys.executable
-    print(f"Running {len(SCRIPTS)} example scripts with {python}")
-    print(f"cwd = {repo}")
-    print()
+
+    def log(msg: str = "") -> None:
+        print(msg, flush=True)
+
+    log(f"Running {len(SCRIPTS)} example scripts with {python}")
+    log(f"cwd = {repo}")
+    log()
     for name in SCRIPTS:
         path = os.path.join(here, name)
-        print("=" * 72)
-        print(name)
-        print("=" * 72)
+        log("=" * 72)
+        log(name)
+        log("=" * 72)
         proc = subprocess.run([python, path], cwd=repo)
         if proc.returncode != 0:
-            print(f"\n{name} exited {proc.returncode}", file=sys.stderr)
+            print(f"\n{name} exited {proc.returncode}", file=sys.stderr, flush=True)
             return proc.returncode
-        print()
-    print("All example scripts exited 0.")
+        log()
+    log("All example scripts exited 0.")
     return 0
 
 

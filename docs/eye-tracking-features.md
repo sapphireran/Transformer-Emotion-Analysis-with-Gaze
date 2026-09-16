@@ -1,6 +1,8 @@
 # Eye-tracking feature glossary
 
-Definitions below follow the usual reading-research sense (Rayner; ZuCo documentation). Units in the *raw* subject CSVs are milliseconds for time measures and counts for fixations. After `get_average_sentence_level.py`, the joined ZuCo tables are either min-max in `[0, 1]` or z-scored. Full-SST columns are on whatever scale the gaze predictor emitted (often a 0–100 style min-max; see `gaze_prediction/data/convert_zuco_data.py`).
+Definitions below follow the usual reading-research sense (Rayner; ZuCo documentation). Units in the *raw* subject CSVs are milliseconds for time measures and counts for fixations. After `get_average_sentence_level.py`, the joined ZuCo tables are either min-max in `[0, 1]` or z-scored.
+
+Sentence-level **full SST** columns (`SST_data/*_full_sst.csv`) are also z-scored in this snapshot: `examples/feature_stats.py` measures train-set means ≈ 0 and stds ≈ 1, not the 0–100 min-max used by `gaze_prediction/data/convert_zuco_data.py`. Word-level `prediction_test*.csv` files still look like that 0–100-ish predictor output. Do not mix the two scales in one tensor.
 
 ## Features the classifiers actually use
 

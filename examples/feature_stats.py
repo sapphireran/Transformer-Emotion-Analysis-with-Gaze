@@ -81,13 +81,17 @@ def correlation_block() -> str:
     names = list(ZUCO_GAZE_COLS) + ["sentiment_label"]
     series = {name: [float(row[name]) for row in rows] for name in names}
     width = 12
-    header = " " * 14 + "".join(f"{n[:10]:>{width}}" for n in names)
+    short = {
+        "nFixations": "nFix",
+        "sentiment_label": "label",
+    }
+    header = " " * 10 + "".join(f"{short.get(n, n):>{width}}" for n in names)
     lines = ["Pairwise Pearson on ZuCo combined (standard), including the label", header]
     for a in names:
         cells = []
         for b in names:
             cells.append(f"{pearson(series[a], series[b]):{width}.3f}")
-        lines.append(f"{a[:14]:<14}" + "".join(cells))
+        lines.append(f"{short.get(a, a):<10}" + "".join(cells))
     lines.append(
         "A large |r| between a gaze column and sentiment_label would be "
         "surprising but useful. Large |r| among TRT/GD/GPT is expected."

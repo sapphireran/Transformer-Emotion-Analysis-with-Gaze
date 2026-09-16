@@ -46,7 +46,7 @@ python3 examples/sample_rows.py
 python3 examples/gaze_fusion_demo.py
 ```
 
-Expected: all seven exit 0. `schema_validate.py` fails non-zero if a required column is missing or a gaze cell is non-finite.
+Expected: all eight exit 0 (`run_all.py` wraps them). `schema_validate.py` fails non-zero if a required column is missing or a gaze cell is non-finite. This clone’s `python3 examples/run_all.py` completed with exit 0 after the example scripts were added.
 
 ## 4. Training Setting A (ZuCo CV)
 

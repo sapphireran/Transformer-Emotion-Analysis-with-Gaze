@@ -27,6 +27,7 @@ Compare **paired** folds (same `random_state`, same indices) so a 1-point gap is
 ### Risks
 
 - **Memorization.** 320 train sentences, 110M parameters, 20 epochs, no weight decay, no early stopping.
+- **Gaze is only weakly related to the label.** On `combined_sst_et_standard.csv`, Pearson r between each of the five fusion features and `sentiment_label` is in roughly 0.03–0.07 (`examples/feature_stats.py`). TRT/nFixations/GPT are highly collinear with each other (r > 0.9). Fusion is asking the classifier to use a small residual, not a second copy of the label.
 - **Leak via length.** Even without gaze, sentence length correlates weakly with the ZuCo review set. Gaze features also correlate with length. A linear probe on `{nFixations, TRT}` alone is a useful personal baseline (`examples/feature_stats.py` prints the raw moments; a sklearn probe can be added later).
 - **Subject 3 hole.** If you regenerate averages from the CSVs in this clone with the current `get_average_sentence_level.py`, positional mean + a 299-row file will corrupt the last 101 rows. Prefer the checked-in averaged tables unless you re-align on `id`.
 

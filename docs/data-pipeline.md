@@ -135,7 +135,7 @@ train, rest = train_test_split(df, test_size=0.2, random_state=42)
 valid, test = train_test_split(rest, test_size=0.5, random_state=42)
 ```
 
-No `stratify=` argument, so class balance can drift in the 40-row ZuCo valid/test files. The 5-fold script avoids that by using `StratifiedKFold`.
+No `stratify=` argument, so class balance can drift in the 40-row ZuCo valid/test files. `examples/label_distribution.py` measures valid as 7 / 14 / 19 (neg / neu / pos) — 17.5% negative vs 30.8% in the full 400. The 5-fold script avoids that by using `StratifiedKFold`.
 
 ## Stage 6 — Full SST word placeholders
 

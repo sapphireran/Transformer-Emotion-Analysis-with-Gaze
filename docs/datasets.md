@@ -139,7 +139,7 @@ Word columns:
 sentence_id, word_id, word, nFix, FFD, GPT, TRT, GD
 ```
 
-The sentence-level `nFix, GD, TRT, FFD, GPT` on the full SST tables are aggregations of these word predictions (mean or model-specific pooling done offline). This snapshot does not include that aggregation script.
+The sentence-level `nFix, GD, TRT, FFD, GPT` on the full SST tables are aggregations of these word predictions (mean or model-specific pooling done offline), then **standard-scaled**. `examples/feature_stats.py` reports train means ≈ 0 and stds ≈ 1; the word-level predicted files are still on the predictor’s 0–100-ish scale. This snapshot does not include that aggregation / scaling script.
 
 ---
 
