@@ -1,0 +1,20 @@
+# Schema check
+
+OK  SST_data/stts_all_sentence_level.csv: 11853 headerless rows
+OK  ZuCo_SST_data/ssts_ZuCo.csv: 400 rows, header ok
+OK  ZuCo_SST_data/combined_sst_et_standard.csv: 400 rows, header ok
+OK  ZuCo_SST_data/combined_sst_et_min_max.csv: 400 rows, header ok
+OK  ZuCo_SST_data/train.csv: 320 rows, header ok
+OK  ZuCo_SST_data/valid.csv: 40 rows, header ok
+OK  ZuCo_SST_data/test.csv: 40 rows, header ok
+OK  SST_data/combined_full_sst_et.csv: 11853 rows, header ok
+OK  SST_data/train_full_sst.csv: 9482 rows, header ok
+OK  SST_data/valid_full_sst.csv: 1185 rows, header ok
+OK  SST_data/test_full_sst.csv: 1186 rows, header ok
+OK  ZuCo_et_csv_data/1_SR.csv: 400 rows, header ok
+OK  ZuCo_et_csv_data/3_SR.csv: 299 rows, header ok
+OK  ZuCo_et_csv_data/word/word_averages_v2.csv: 7129 rows, header ok
+OK  gaze_prediction/data/prediction_test.csv: 1751 rows, header ok
+OK  gaze_prediction/data/provo.csv: 2659 rows, header ok
+
+ALL CONTRACTS PASSED

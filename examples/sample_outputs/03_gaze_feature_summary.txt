@@ -1,0 +1,77 @@
+# Gaze feature summary
+
+Standard-scaled ZuCo numbers are z-scores, so means sit near 0.
+Full-SST numbers are transferred / mapped — treat them as a different
+feature space even when the column names look familiar.
+
+## Measured gaze — ZuCo ∩ SST (standard)
+path: ZuCo_SST_data/combined_sst_et_standard.csv
+rows: 400  labels: 0 negative=123, 1 neutral=137, 2 positive=140
+
+### fusion columns (order used by EyeTrackingModel)
+feature     mean     std     min      q25      median   q75     max     n_zero
+----------  -------  ------  -------  -------  -------  ------  ------  ------
+nFixations  -0.0000  1.0000  -1.5560  -0.6402  -0.2038  0.3606  6.1161  0     
+FFD         -0.0000  1.0000  -1.9220  -0.6305  -0.1215  0.4275  6.1366  0     
+GPT         0.0000   1.0000  -1.5645  -0.6244  -0.2316  0.4303  6.0930  0     
+TRT         0.0000   1.0000  -1.4943  -0.6421  -0.2407  0.3574  4.6852  0     
+GD          -0.0000  1.0000  -1.5755  -0.6059  -0.2032  0.2866  6.1181  0     
+
+### Pearson correlation (fusion columns)
+feature     nFixations  FFD    GPT    TRT    GD   
+----------  ----------  -----  -----  -----  -----
+nFixations  1.000       0.421  0.912  0.958  0.697
+FFD         0.421       1.000  0.547  0.617  0.679
+GPT         0.912       0.547  1.000  0.942  0.675
+TRT         0.958       0.617  0.942  1.000  0.789
+GD          0.697       0.679  0.675  0.789  1.000
+
+### mean by sentiment class
+class               nFixations  FFD      GPT      TRT      GD     
+------------------  ----------  -------  -------  -------  -------
+0 negative (n=123)  -0.0892     -0.0784  -0.0639  -0.0960  0.0304 
+1 neutral (n=137)   0.0831      -0.0284  0.0429   0.0520   -0.1387
+2 positive (n=140)  -0.0029     0.0966   0.0141   0.0334   0.1090 
+
+### extra ZuCo columns (not fed to the fusion head)
+feature        mean     std     min      q25      median   q75     max     n_zero
+-------------  -------  ------  -------  -------  -------  ------  ------  ------
+omissionRate   -0.0000  1.0000  -2.4484  -0.6751  -0.0248  0.6327  4.2446  0     
+meanPupilSize  0.0000   1.0000  -1.9281  -0.9145  0.0710   0.8063  2.8368  0     
+SFD            0.0000   1.0000  -2.9769  -0.5263  0.0227   0.5811  4.6299  0     
+
+### mean by class (extra columns)
+class               omissionRate  meanPupilSize  SFD    
+------------------  ------------  -------------  -------
+0 negative (n=123)  0.0351        -0.0021        0.0463 
+1 neutral (n=137)   -0.1292       0.1012         -0.1878
+2 positive (n=140)  0.0957        -0.0972        0.1430 
+
+## Transferred gaze — full SST train split
+path: SST_data/train_full_sst.csv
+rows: 9482  labels: 0 negative=3710, 1 neutral=1833, 2 positive=3939
+
+### fusion columns (order used by EyeTrackingModel)
+feature  mean    std     min      q25      median   q75     max     n_zero
+-------  ------  ------  -------  -------  -------  ------  ------  ------
+nFix     0.0049  0.9895  -4.0566  -0.6209  -0.0676  0.5220  3.4548  0     
+FFD      0.0045  0.9910  -3.9310  -0.6258  -0.0907  0.4930  3.8601  0     
+GPT      0.0049  0.9900  -3.8283  -0.6270  -0.0801  0.5062  3.7902  0     
+TRT      0.0043  0.9922  -3.6060  -0.6374  -0.0960  0.4967  4.0093  0     
+GD       0.0066  0.9820  -7.7222  -0.4977  0.0842   0.6576  1.5258  0     
+
+### Pearson correlation (fusion columns)
+feature  nFix   FFD    GPT    TRT    GD   
+-------  -----  -----  -----  -----  -----
+nFix     1.000  0.995  0.998  0.986  0.780
+FFD      0.995  1.000  0.999  0.995  0.737
+GPT      0.998  0.999  1.000  0.995  0.740
+TRT      0.986  0.995  0.995  1.000  0.676
+GD       0.780  0.737  0.740  0.676  1.000
+
+### mean by sentiment class
+class                nFix     FFD      GPT      TRT      GD     
+-------------------  -------  -------  -------  -------  -------
+0 negative (n=3710)  0.0571   0.0559   0.0555   0.0533   0.0597 
+1 neutral (n=1833)   0.0982   0.0963   0.0968   0.0913   0.1110 
+2 positive (n=3939)  -0.0876  -0.0867  -0.0856  -0.0823  -0.0921

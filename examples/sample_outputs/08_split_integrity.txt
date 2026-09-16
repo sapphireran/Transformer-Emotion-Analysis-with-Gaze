@@ -1,0 +1,40 @@
+# Split integrity
+
+## ZuCo leftover 80/10/10 (NOT used by model_ZuCo_SST.py)
+combined: ZuCo_SST_data/combined_sst_et_standard.csv
+split  path                     n    internal dups  not in combined
+-----  -----------------------  ---  -------------  ---------------
+train  ZuCo_SST_data/train.csv  320  0              0              
+valid  ZuCo_SST_data/valid.csv  40   0              0              
+test   ZuCo_SST_data/test.csv   40   0              0              
+union of splits: 400 unique / 400 rows
+combined unique: 400 / 400 rows
+no cross-split sentence_id overlap
+no split ids outside combined
+every combined id appears in exactly one split (by set)
+
+## Full SST 80/10/10 (used by model_full_SST.py)
+combined: SST_data/combined_full_sst_et.csv
+split  path                         n     internal dups  not in combined
+-----  ---------------------------  ----  -------------  ---------------
+train  SST_data/train_full_sst.csv  9482  0              0              
+valid  SST_data/valid_full_sst.csv  1185  0              0              
+test   SST_data/test_full_sst.csv   1186  0              0              
+union of splits: 11853 unique / 11853 rows
+combined unique: 11853 / 11853 rows
+no cross-split sentence_id overlap
+no split ids outside combined
+every combined id appears in exactly one split (by set)
+
+## label table vs combined ZuCo
+ssts_ZuCo.csv unique ids: 400
+combined_sst_et_standard.csv unique ids: 400
+same sentence_id set
+
+## standard vs min-max combined
+identical sentence_id order and values
+
+## reminder
+model_ZuCo_SST.py ignores train.csv/valid.csv/test.csv and runs StratifiedKFold on the 400-row combined table.
+
+ALL SPLIT CHECKS PASSED
