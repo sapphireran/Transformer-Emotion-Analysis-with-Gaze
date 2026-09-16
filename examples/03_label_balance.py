@@ -33,7 +33,7 @@ def main() -> None:
     plot_dir = repo_root() / "examples" / "output"
     plot_dir.mkdir(parents=True, exist_ok=True)
     summary_rows = []
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4), sharey=False)
     for ax, key, title in (
         (axes[0], "zuco_sst_standard", "ZuCo ∩ SST (n=400)"),
         (axes[1], "sst_full", "Full SST (n=11,853)"),
