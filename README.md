@@ -116,6 +116,8 @@ The example scripts are CPU-only and operate on the CSVs already in the repo. Th
 ```bash
 python3 -m pip install -r requirements.txt
 python3 examples/inspect_datasets.py
+python3 examples/join_zuco_sst.py
+python3 examples/subject_agreement.py
 python3 examples/gaze_feature_stats.py
 python3 examples/sentiment_baselines.py
 python3 examples/fusion_toy.py
@@ -133,6 +135,7 @@ Training the transformer models needs PyTorch, Hugging Face `transformers` / `da
 - [Reproduction](docs/reproduction.md) — environment and run commands
 - [Dataset inventory](docs/dataset-inventory.md) — every CSV and its schema
 - [Examples](examples/README.md) — CPU walkthroughs
+- [Examples walkthrough](docs/examples-walkthrough.md) — how to read the printed tables
 
 ## Status of this personal repo
 
