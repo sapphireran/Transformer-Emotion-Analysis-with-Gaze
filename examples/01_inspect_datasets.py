@@ -122,6 +122,11 @@ def main() -> int:
         if has_header and "sentiment_label" in header:
             idx = header.index("sentiment_label")
             labels = format_counts(label_counts(int(float(r[idx])) for r in rows))
+        elif not has_header and rows:
+            mapping = {"NEGATIVE": 0, "NEUTRAL": 1, "POSITIVE": 2}
+            mapped = [mapping[r[-1].strip().strip('"')] for r in rows if r[-1].strip().strip('"') in mapping]
+            if mapped:
+                labels = format_counts(label_counts(mapped))
         summary_rows.append((title, relative, str(len(rows)), str(n_cols), labels))
 
     summary = table(

@@ -113,12 +113,7 @@ The scripts under `examples/` only need the Python standard library and
 `numpy` (already present in this environment):
 
 ```bash
-python3 examples/01_inspect_datasets.py
-python3 examples/02_schema_check.py
-python3 examples/03_gaze_feature_summary.py
-python3 examples/04_label_and_length.py
-python3 examples/05_word_level_gaze.py
-python3 examples/06_toy_late_fusion.py
+python3 examples/run_all.py
 ```
 
 They print tables, write `examples/sample_outputs/`, and include a tiny
@@ -157,6 +152,7 @@ what the rest of the repo uses.
 - [Training loops](docs/06-training-loops.md) — optimizers, metrics, a test-set bug
 - [Running experiments](docs/07-running-experiments.md) — knobs and expected artifacts
 - [Known quirks](docs/08-known-quirks.md) — path separators, overwrites, missing files
+- [Example baselines](docs/09-example-baselines.md) — numbers from `examples/run_all.py`
 - [Glossary](docs/glossary.md)
 
 ## Sources (external)

@@ -17,6 +17,8 @@ SCRIPTS = [
     "04_label_and_length.py",
     "05_word_level_gaze.py",
     "06_toy_late_fusion.py",
+    "07_subject_variance.py",
+    "08_split_integrity.py",
 ]
 
 

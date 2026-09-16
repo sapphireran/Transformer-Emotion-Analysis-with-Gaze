@@ -8,6 +8,11 @@ do not replace `model_ZuCo_SST.py` or `model_full_SST.py`.
 Need: Python 3.10+ and `numpy` (already installed in most scientific
 environments; `requirements.txt` lists it too).
 
+Checked-in copies of the last local run live in `sample_outputs/`.
+They are snapshots for reading on GitHub; re-run the scripts to
+refresh them. Numbers are interpreted in
+[docs/09-example-baselines.md](../docs/09-example-baselines.md).
+
 Run from the repository root or from `examples/` — helpers resolve
 paths from this file’s location.
 
@@ -18,13 +23,16 @@ python3 examples/03_gaze_feature_summary.py
 python3 examples/04_label_and_length.py
 python3 examples/05_word_level_gaze.py
 python3 examples/06_toy_late_fusion.py
+python3 examples/07_subject_variance.py
+python3 examples/08_split_integrity.py
 
 # or
 python3 examples/run_all.py
 ```
 
-`02_schema_check.py` is the one that should stay green. It exits `1`
-if a header, row count, or label alphabet drifts.
+`02_schema_check.py` and `08_split_integrity.py` should stay green.
+They exit `1` if a header, row count, label alphabet, or split
+partition drifts.
 
 ## What each script is for
 
@@ -36,6 +44,8 @@ if a header, row count, or label alphabet drifts.
 | `04_label_and_length.py` | ZuCo 400 + SST train | `04_label_and_length.txt` | Is “sentiment” just “sentence length”? |
 | `05_word_level_gaze.py` | word averages v2 | `05_word_level_gaze.txt` | What does a single sentence look like token-by-token? |
 | `06_toy_late_fusion.py` | ZuCo 400 | `06_toy_late_fusion.txt` | Does 5-d gaze beat majority in a linear model? |
+| `07_subject_variance.py` | 12 `*_SR.csv` | `07_subject_variance.txt` | How much do readers disagree before averaging? |
+| `08_split_integrity.py` | combined + splits | `08_split_integrity.txt` | Are the committed splits a clean partition? |
 
 Shared parsing / metrics live in `common.py` so the six scripts stay
 short and the KFold + weighted F1 match the story in
