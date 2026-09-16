@@ -106,6 +106,26 @@ def skip_rate_by_word_length(words: pd.DataFrame) -> pd.DataFrame:
     return out.sort_values("WordLen").reset_index(drop=True)
 
 
+def length_feature_correlation(
+    df: pd.DataFrame,
+    feature_columns: Iterable[str],
+    length: pd.Series,
+) -> pd.DataFrame:
+    """Pearson r of each gaze feature with a length proxy (tokens or SentLen)."""
+    rows = []
+    length = pd.Series(length, dtype=float)
+    for col in feature_columns:
+        r = float(pd.Series(df[col], dtype=float).corr(length))
+        rows.append({"feature": col, "r_with_length": r})
+    return pd.DataFrame(rows)
+
+
+def words_for_sentence(words: pd.DataFrame, sentence_id: int) -> pd.DataFrame:
+    """Word-level rows whose ``Sent_ID`` prefix matches ``sentence_id``."""
+    prefixes = words["Sent_ID"].astype(str).str.split("_").str[0].astype(int)
+    return words.loc[prefixes == int(sentence_id)].copy()
+
+
 def sentence_skip_rate(words: pd.DataFrame) -> pd.DataFrame:
     """Skip rate per ZuCo sentence, keyed by the integer prefix of ``Sent_ID``."""
     frame = words.copy()

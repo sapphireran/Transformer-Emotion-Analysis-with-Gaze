@@ -27,7 +27,11 @@ there if you cannot.
 | `08_gaze_prediction_compare.py` | Schema and distribution notes: PROVO vs predicted SST tokens. |
 | `09_export_analysis_tables.py` | Writes the tables above as CSV/JSON under `--output-dir`. |
 | `10_zuco_index_alignment.py` | Proves subject 3 is reindexed; row-wise averages drift after id 149. |
-| `run_all.py` | Runs 01–10 in order and writes `summary.json`. |
+| `11_gaze_only_baseline.py` | Logistic regression on gaze only (ZuCo 5-fold, full-SST holdout). |
+| `12_length_confound.py` | Residualize ET on token count; rerun ANOVA. |
+| `13_shuffle_gaze_control.py` | Permutation p-values for gaze vs shuffled labels. |
+| `14_sentence_walkthrough.py` | Word-level gaze for a few ZuCo sentences. |
+| `run_all.py` | Runs 01–14 in order and writes `summary.json`. |
 
 ```bash
 python3 examples/01_inspect_datasets.py
@@ -46,6 +50,7 @@ entry points:
 - `gaze.per_class_means` / `feature_label_anova` / `inter_subject_cv`
 - `fusion.FusionWalkthrough`
 - `metrics.majority_baseline`
+- `baselines.stratified_cv_scores` / `permute_anova` / `residualize_on_length`
 
 If you add a new checked-in CSV, register it in
 `documented_datasets()` so `01` and the tests pick it up.

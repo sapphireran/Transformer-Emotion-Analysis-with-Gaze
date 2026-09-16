@@ -28,6 +28,10 @@ SCRIPTS = (
     "08_gaze_prediction_compare.py",
     "09_export_analysis_tables.py",
     "10_zuco_index_alignment.py",
+    "11_gaze_only_baseline.py",
+    "12_length_confound.py",
+    "13_shuffle_gaze_control.py",
+    "14_sentence_walkthrough.py",
 )
 
 
@@ -53,7 +57,12 @@ def main() -> int:
     for name in SCRIPTS:
         script = Path(__file__).resolve().parent / name
         cmd = [python, str(script), "--root", str(root)]
-        if name in {"09_export_analysis_tables.py", "10_zuco_index_alignment.py"}:
+        if name in {
+            "09_export_analysis_tables.py",
+            "10_zuco_index_alignment.py",
+            "11_gaze_only_baseline.py",
+            "13_shuffle_gaze_control.py",
+        }:
             cmd.extend(["--output-dir", str(out)])
         banner(f"RUN {name}")
         started = time.time()
