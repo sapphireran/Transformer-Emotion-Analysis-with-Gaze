@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import numpy as np
 
 from gazebook.baselines import cv_majority, cv_ridge, hash_bow
+from gazebook.stats import zscore
 from gazebook.csvio import float_col, read_dicts, table_to_array
 from gazebook.paths import repo_root
 from gazebook.remap import (
@@ -61,10 +62,13 @@ def main() -> int:
     s_cond = condition_number_corr(sX)
 
     y = float_col(zuco, "sentiment_label").astype(int)
+    texts = [r["sentence"] for r in zuco]
+    text_X = hash_bow(texts)
     maj = cv_majority(y)
     gaze = cv_ridge(zX, y)
-    text = cv_ridge(hash_bow([r["sentence"] for r in zuco]), y)
-    fused = cv_ridge(np.concatenate([hash_bow([r["sentence"] for r in zuco]), zX], axis=1), y)
+    text = cv_ridge(text_X, y)
+    # Same concat as examples/08_cpu_baselines.py (z-scored hash + raw gaze).
+    fused = cv_ridge(np.concatenate([zscore(text_X), zX], axis=1), y)
 
     inv_rows = [
         [item["path"], item["expected_rows"], item.get("rows", "—"), item.get("notes", "")]
