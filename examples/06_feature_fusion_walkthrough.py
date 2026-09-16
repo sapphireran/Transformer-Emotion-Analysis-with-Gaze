@@ -18,6 +18,11 @@ from examples.lib.reporting import banner
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--root",
+        default=None,
+        help="Ignored; accepted so run_all.py can pass a uniform --root.",
+    )
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--num-gaze-features", type=int, default=5)
     parser.add_argument("--encoder-hidden", type=int, default=768)
