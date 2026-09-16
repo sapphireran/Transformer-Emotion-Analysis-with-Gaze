@@ -1,0 +1,4 @@
+# Lightweight extras for examples/ and examples/tests.
+# inspect/split/scaling/fusion demos run on the stdlib + numpy.
+
+numpy>=1.24
