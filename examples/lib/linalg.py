@@ -125,3 +125,15 @@ def argmax(values: Sequence[float]) -> int:
             best_i = i
             best_v = value
     return best_i
+
+
+def clip_vec(vector: Sequence[float], max_abs: float = 5.0) -> Vector:
+    return [max(-max_abs, min(max_abs, float(x))) for x in vector]
+
+
+def clip_matrix(matrix: Matrix, max_abs: float = 5.0) -> Matrix:
+    return [clip_vec(row, max_abs=max_abs) for row in matrix]
+
+
+def finite(values: Iterable[float]) -> bool:
+    return all(math.isfinite(float(x)) for x in values)

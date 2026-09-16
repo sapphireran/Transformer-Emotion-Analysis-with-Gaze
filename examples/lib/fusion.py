@@ -79,11 +79,13 @@ class SoftmaxHead:
 
     def train_step(self, vector: Sequence[float], label: int) -> float:
         logits = self.logits(vector)
+        if not linalg.finite(logits):
+            return float("nan")
         probs = linalg.softmax(logits)
         loss = _nll(probs, label)
         error = linalg.sub_vec(probs, linalg.one_hot(label, len(probs)))
         grad_w = [[error[i] * vector[j] for j in range(len(vector))] for i in range(len(error))]
-        self.layer.step(grad_w, list(error), self.lr)
+        self.layer.step(linalg.clip_matrix(grad_w), linalg.clip_vec(error), self.lr)
         return loss
 
 
@@ -130,19 +132,31 @@ class FusionHead:
         gaze_h = self.gaze_layer.forward(gaze)
         hidden = linalg.concat_vec((text, gaze_h))
         logits = self.classifier.forward(hidden)
+        if not linalg.finite(logits):
+            return float("nan")
         probs = linalg.softmax(logits)
         loss = _nll(probs, label)
         d_logits = linalg.sub_vec(probs, linalg.one_hot(label, len(probs)))
 
-        grad_cw = [[d_logits[i] * hidden[j] for j in range(len(hidden))] for i in range(len(d_logits))]
-        self.classifier.step(grad_cw, list(d_logits), self.lr)
-
-        # d_hidden = W_c^T * d_logits
+        # Backprop through the current classifier weights, then step both layers.
         w_t = linalg.transpose(self.classifier.weight)
         d_hidden = linalg.matvec(w_t, d_logits)
         d_gaze_h = d_hidden[len(text) :]
-        grad_gw = [[d_gaze_h[i] * gaze[j] for j in range(len(gaze))] for i in range(len(d_gaze_h))]
-        self.gaze_layer.step(grad_gw, list(d_gaze_h), self.lr)
+
+        grad_cw = [
+            [d_logits[i] * hidden[j] for j in range(len(hidden))]
+            for i in range(len(d_logits))
+        ]
+        grad_gw = [
+            [d_gaze_h[i] * gaze[j] for j in range(len(gaze))]
+            for i in range(len(d_gaze_h))
+        ]
+        self.classifier.step(
+            linalg.clip_matrix(grad_cw), linalg.clip_vec(d_logits), self.lr
+        )
+        self.gaze_layer.step(
+            linalg.clip_matrix(grad_gw), linalg.clip_vec(d_gaze_h), self.lr
+        )
         return loss
 
 

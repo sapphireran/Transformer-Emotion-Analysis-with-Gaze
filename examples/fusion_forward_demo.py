@@ -26,7 +26,7 @@ from examples.lib import cli, features, fusion, io_csv, metrics, paths, report, 
 
 
 TEXT_DIM = 32
-EPOCHS = 45
+EPOCHS = 35
 HOLDOUT = 0.25
 SEED = 42
 
@@ -72,7 +72,7 @@ def main() -> int:
         train_idx,
         test_idx,
         epochs=EPOCHS,
-        lr=0.18,
+        lr=0.12,
         seed=1,
     )
     text_only = fusion.train_softmax_head(
@@ -82,36 +82,47 @@ def main() -> int:
         train_idx,
         test_idx,
         epochs=EPOCHS,
-        lr=0.22,
+        lr=0.12,
         seed=2,
     )
+    concat_features = [t + g for t, g in zip(text, gaze)]
+    concat_linear = fusion.train_softmax_head(
+        "concat-linear (hash ⊕ gaze)",
+        concat_features,
+        labels,
+        train_idx,
+        test_idx,
+        epochs=EPOCHS,
+        lr=0.10,
+        seed=4,
+    )
     fused = fusion.train_fusion_head(
-        "fused (hash ⊕ gaze)",
+        "fused two-layer (hash ⊕ Linear(gaze))",
         text,
         gaze,
         labels,
         train_idx,
         test_idx,
         epochs=EPOCHS,
-        lr=0.14,
-        gaze_out=16,
+        lr=0.05,
+        gaze_out=8,
         seed=3,
     )
     shuffled = fusion.shuffle_rows(gaze, seed=99)
     fused_shuffled = fusion.train_fusion_head(
-        "fused + shuffled gaze",
+        "fused two-layer + shuffled gaze",
         text,
         shuffled,
         labels,
         train_idx,
         test_idx,
         epochs=EPOCHS,
-        lr=0.14,
-        gaze_out=16,
+        lr=0.05,
+        gaze_out=8,
         seed=3,
     )
 
-    results = [majority, gaze_only, text_only, fused, fused_shuffled]
+    results = [majority, gaze_only, text_only, concat_linear, fused, fused_shuffled]
     table = report.ascii_table(
         ("model", "train acc", "holdout acc", "holdout macro F1", "final loss"),
         [
@@ -134,6 +145,8 @@ def main() -> int:
         f"({HOLDOUT:.0%}), seed={SEED}, epochs={EPOCHS}.",
         "Text vector is a 32-d hashed bag of words, not RoBERTa.",
         "Gaze input is the z-scored 5-d set (nFixations, FFD, GPT, TRT, GD).",
+        "concat-linear is one softmax on [text; gaze]. The two-layer fused "
+        "head matches EyeTrackingModel: Linear(gaze) then concat then Linear.",
         "If shuffled-gaze ≈ fused, the gaze branch is not carrying signal "
         "in this tiny head. If it is worse, the real gaze values were used.",
         "Do not paste these accuracies next to GPU transformer runs.",
@@ -142,7 +155,7 @@ def main() -> int:
         [
             "# Late-fusion CPU demo (ZuCo)",
             table,
-            "Confusion matrix for fused (hash ⊕ gaze) on the holdout:",
+            "Confusion matrix for the two-layer fused head on the holdout:",
             conf,
             report.bullet(notes),
         ]

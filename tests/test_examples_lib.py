@@ -139,6 +139,37 @@ class FusionTests(unittest.TestCase):
         hidden = head.hidden(text, gaze)
         self.assertEqual(len(hidden), 24)
 
+    def test_fusion_head_fits_separable_data(self) -> None:
+        text, gaze, labels = [], [], []
+        rng = random.Random(1)
+        for i in range(72):
+            label = i % 3
+            t = [rng.uniform(-0.05, 0.05) for _ in range(6)]
+            g = [rng.uniform(-0.05, 0.05) for _ in range(5)]
+            t[label] = 1.0
+            g[label] = 1.0
+            text.append(t)
+            gaze.append(g)
+            labels.append(label)
+        idx = list(range(72))
+        result = fusion.train_fusion_head(
+            "sep-fusion",
+            text,
+            gaze,
+            labels,
+            idx[:54],
+            idx[54:],
+            epochs=20,
+            lr=0.08,
+            gaze_out=6,
+            seed=0,
+        )
+        self.assertTrue(all(math.isfinite(x) for x in result.losses), result.losses[-1:])
+        self.assertGreaterEqual(result.holdout_acc, 0.85)
+
+    def test_clip_vec(self) -> None:
+        self.assertEqual(linalg.clip_vec([10.0, -3.0, 1.0], max_abs=2.0), [2.0, -2.0, 1.0])
+
 
 class SchemaAndIoTests(unittest.TestCase):
     def test_zuco_standard_schema(self) -> None:

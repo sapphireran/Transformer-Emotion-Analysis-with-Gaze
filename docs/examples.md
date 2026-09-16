@@ -9,6 +9,7 @@ python3 examples/label_balance.py
 python3 examples/split_audit.py
 python3 examples/gaze_feature_report.py
 python3 examples/fusion_forward_demo.py
+python3 examples/word_level_preview.py
 python3 examples/generate_markdown_tables.py
 ```
 
@@ -61,13 +62,20 @@ For `zuco5`, `zuco_full`, and `sst5`, prints per-class means and a one-dimension
 
 ### `fusion_forward_demo.py`
 
-Trains three tiny softmax classifiers on ZuCo:
+Trains tiny softmax classifiers on ZuCo:
 
+- majority class
 - gaze-only (5 z-scored features)
 - text-only (32-d hashed bag of words)
-- fused (concat of both, matching the late-fusion idea in `docs/architecture.md`)
+- concat-linear (hash ⊕ raw 5-d gaze)
+- two-layer fused head (`Linear(gaze)` then concat then `Linear`), matching `docs/architecture.md`
+- the same two-layer head with row-shuffled gaze (ablation)
 
 Reports accuracy and macro F1 on a stratified holdout. This is the example to run when you want a number without a GPU.
+
+### `word_level_preview.py`
+
+Joins the 400 labeled ZuCo sentences to `word_averages_v2.csv` and prints per-token `nFixations` / `FFD` / `GD` / `TRT` / `GPT` for a few reviews, plus the words with the longest total reading time.
 
 ### `generate_markdown_tables.py`
 

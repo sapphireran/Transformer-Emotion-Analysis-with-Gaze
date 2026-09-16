@@ -46,6 +46,7 @@ python3 examples/label_balance.py
 python3 examples/split_audit.py
 python3 examples/gaze_feature_report.py
 python3 examples/fusion_forward_demo.py
+python3 examples/word_level_preview.py
 python3 -m unittest discover -s tests -v
 ```
 
