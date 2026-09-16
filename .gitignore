@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Training artifacts (weights are not in this personal checkout)
+models/*.pth
+models/*.pt
+*.ckpt
+
+# Notebooks / OS
+.ipynb_checkpoints/
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
