@@ -1,3 +1,12 @@
+"""Alternate txt-folder → CSV converter (relative `all/`, writes output.csv).
+
+Prefer `convert_full_SST.py` at the repo root, which writes
+`ZuCo_SST_data/ssts_ZuCo.csv` with an integer sentence_id. This copy
+keeps `sentence_id` as the filename stem (string) and is the version
+I used when the working directory was already `ZuCo_SST_data/`.
+Same label map: NEGATIVE=0, NEUTRAL=1, POSITIVE=2.
+"""
+
 import os
 import pandas as pd
 

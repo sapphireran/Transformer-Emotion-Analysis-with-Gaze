@@ -1,3 +1,21 @@
+"""Rescale a ZuCo-like word table into the predicted-gaze CSV layout.
+
+Two independent min/max passes:
+
+- nFixations uses its own min/max, then ×100
+- FFD, GPT, TRT, GD share *one* min/max across all four, then ×100
+
+That shared range is why predicted FFD and GPT live in the same
+numeric ballpark even though raw FFD is ~100 ms and raw GPT is ~200+
+ms. Do not treat the output as milliseconds.
+
+Defaults (`training_data/word_averages_v2.csv` →
+`sst_et_train_and_vaild_v2.csv`) are relative to this folder and are
+not the files checked in next to this script. The idea is what
+matters: this is the unit-system break between Track A (z-scores of
+ms) and the predicted-gaze files under `gaze_prediction/data/`.
+"""
+
 import csv
 
 def scale_value(value, min_val, max_val):

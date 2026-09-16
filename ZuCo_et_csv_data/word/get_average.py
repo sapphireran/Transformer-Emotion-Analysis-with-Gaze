@@ -1,3 +1,15 @@
+"""12-reader mean of the word-level `*_SR.csv` files in this folder.
+
+Averages the seven numeric gaze columns by row index, then pastes
+`id, Sent_ID, Word_ID, Word, WordLen` from `1_SR.csv`. Empty `Word`
+cells become `unknown`; remaining numeric NaNs become 0.
+
+The 0→NaN replace is commented out on purpose in the original (see
+the line below). That is a *different* missing-data policy than
+`get_average_sentence_level.py`, which does treat 0 as missing.
+`word_averages_v2.csv` is the output this clone treats as canonical.
+"""
+
 import pandas as pd
 import numpy as np
 import os

@@ -1,9 +1,34 @@
+"""Average 12 per-subject sentence CSVs, then min-max and z-score.
+
+Reads `et_csv_data/{1-12}_SR.csv` (note: git has `ZuCo_et_csv_data/`).
+Zeros on non-id columns are treated as missing before the mean, so a
+subject who skipped a region does not drag that region's average to 0.
+
+Averaging is `groupby(level=0).mean()` — i.e. by *row position*, not
+by sentence id. That is only safe if every subject file has the same
+400 rows in the same order. Task-1 subject 2 does not (see
+`DataTransformer` skips). The checked-in `average_data.csv` has 400
+rows; do not blindly re-run this against the checked-in `*_SR.csv`
+files and assume you will reproduce it.
+
+Outputs (written next to the inputs):
+
+    min_max_scaled_average_data.csv
+    standard_scaled_average_data.csv
+
+`standard` is what `model_ZuCo_SST.py` trains on after the labels are
+joined. This script does not write `average_data.csv` itself — that
+raw mean is an intermediate you keep if you add a `to_csv` for
+`average_df`.
+"""
+
 import pandas as pd
 import os
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 # 文件夹路径
+# Trap: checked-in folder is ZuCo_et_csv_data/.
 folder_path = 'et_csv_data'
 
 # 读取所有 CSV 文件
