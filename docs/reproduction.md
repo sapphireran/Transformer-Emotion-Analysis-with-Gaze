@@ -32,6 +32,8 @@ python3 examples/aggregate_subjects.py
 python3 examples/feature_correlations.py
 python3 examples/split_sanity_check.py
 python3 examples/word_level_preview.py
+python3 examples/realign_subject3.py
+python3 examples/reduce_predicted_gaze.py
 python3 examples/fusion_architecture_demo.py
 python3 examples/dummy_baseline.py
 ```

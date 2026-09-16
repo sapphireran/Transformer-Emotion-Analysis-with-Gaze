@@ -16,9 +16,8 @@ runs/
 wandb/
 .cache/
 
-# Example reports
-examples/output/*
-!examples/output/.gitkeep
+# Example reports: keep the markdown/text snapshots, ignore generated CSVs
+examples/output/*.csv
 
 # Editor / OS
 .DS_Store

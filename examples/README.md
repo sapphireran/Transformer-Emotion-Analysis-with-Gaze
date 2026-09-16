@@ -28,6 +28,8 @@ Reports land in `examples/output/` (gitignored except `.gitkeep`).
 | `feature_correlations.py` | Pearson r on ZuCo / SST / predicted word gaze | `feature_correlations.md`, three corr CSVs |
 | `split_sanity_check.py` | Disjoint holdouts, no label drift vs combined | `split_sanity_check.md` |
 | `word_level_preview.py` | One ZuCo sentence's tokens; placeholder vs predicted SST | `word_level_preview.md` |
+| `realign_subject3.py` | Remap compacted subject-3 ids and re-average | `realign_subject3.md`, corrected mean CSV |
+| `reduce_predicted_gaze.py` | Mean-pool predicted word gaze vs SST sentence rows | `reduce_predicted_gaze.md` |
 | `fusion_architecture_demo.py` | NumPy late-fusion head with 768+16→3 shapes | `fusion_architecture_demo.md` |
 | `dummy_baseline.py` | Majority + gaze-only logreg (ZuCo 5-fold, SST holdout) | `dummy_baseline.md` |
 | `run_all.py` | Runs the list above | `run_all_summary.txt` |

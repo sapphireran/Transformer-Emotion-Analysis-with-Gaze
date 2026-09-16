@@ -50,7 +50,7 @@ The checked-in averages are under `ZuCo_et_csv_data/`. The script still says `fo
 
 Word-level analogue: `ZuCo_et_csv_data/word/get_average.py` concatenates the twelve word CSVs, `groupby(level=0).mean()` on the numeric columns, and stitches `id, Sent_ID, Word_ID, Word, WordLen` from subject 1. Empty words become `unknown`; empty numerics become 0. Output: `word_averages_v2.csv`.
 
-Because subject 3 has fewer rows, averaging **by row index** is not the same as averaging **by sentence id**. Treat `word_averages_v2.csv` as a convenience table, not a gold alignment. `examples/aggregate_subjects.py` re-aggregates sentence-level files **by `id`**, which is the safer key.
+Because subject 3 has fewer rows, averaging **by row index** is not the same as averaging **by sentence id**. Treat `word_averages_v2.csv` as a convenience table, not a gold alignment. `examples/aggregate_subjects.py` re-aggregates sentence-level files **by `id`**. That matches the checked-in `average_data.csv`, but subject 3's `id` is compacted after the skipped sentences (see [known-issues.md](known-issues.md)). `examples/realign_subject3.py` maps those ids back to the original sentence index before averaging.
 
 ## Stage 3 — Attach sentiment labels (ZuCo)
 
@@ -113,6 +113,8 @@ SST_data/spilt.py
 ```
 
 `gaze_prediction/data/convert_zuco_data.py` shows one scaling convention used on the **training** side of the predictor: min–max `nFixations` independently, min–max `{FFD,GPT,TRT,GD}` together, then multiply by 100. That is why predicted word-level nFix clusters around 20 and durations around 4–8 instead of millisecond-scale numbers.
+
+`examples/reduce_predicted_gaze.py` mean-pools `prediction_test_v2.csv` by `sentence_id` and correlates with `combined_full_sst_et.csv`. On this checkout every SST sentence id is present and the token skeleton matches (`token equality = 1.0`), but Pearson r is only 0.58 / 0.41 / 0.46 / 0.64 / **0.06** for nFix / FFD / GPT / TRT / GD. The checked-in sentence vectors are **not** a plain mean of that word file — GD especially looks like a different reducer or a different source.
 
 `result/*.png` are pairwise scatter/histograms of those predicted features (train, test, Provo). They are a distribution check, not a model score.
 

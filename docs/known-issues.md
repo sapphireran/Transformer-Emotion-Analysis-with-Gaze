@@ -59,11 +59,22 @@ Both split helpers are named `spilt.py` (missing "s"). Harmless but easy to miss
 
 ## Data
 
-### Subject 3 is incomplete
+### Subject 3 is incomplete *and* its `id` column is compacted
 
-`ZuCo_et_csv_data/3_SR.csv` has 299 sentence rows; word-level `word/3_SR.csv` has 5,293 rows. This matches `DataTransformer` skipping task-1 subject 2 sentences 150–249 and 399. Any average that groups by **row number** rather than `id` / `Sent_ID` will mis-align after those skips.
+`ZuCo_et_csv_data/3_SR.csv` has 299 sentence rows; word-level `word/3_SR.csv` has 5,293 rows. `DataTransformer` skips task-1 subject 2 (file `3_SR.csv`) original indices 150–249 and 399, then the export does `reset_index` → `id`. The file therefore contains `id` 0–298, which looks like “the last 101 sentences are missing.” They are not.
 
-`word/get_average.py` groups by row index. `examples/aggregate_subjects.py` groups sentence-level files by `id` and reports how many subjects contributed to each sentence.
+Compact `id` → original sentence index:
+
+```
+0–149   → 0–149
+150–298 → 250–398
+```
+
+Original 150–249 and 399 have **no** subject-3 row. Averaging the twelve CSVs on the raw `id` column mixes, for example, everyone else's sentence 150 with subject 3's sentence 250. The checked-in `average_data.csv` matches that (incorrect) `id` grouping — `examples/aggregate_subjects.py` reports a 0.0 max abs diff and a coverage of “299 sentences with 12 subjects, 101 with 11,” which is the compact-id story, not the original skip list.
+
+`examples/realign_subject3.py` remaps subject 3 and writes `zuco_average_realigned.csv`. Use that file if you re-join sentiment labels for a cleaner CV run.
+
+`word/get_average.py` still groups by row index and copies tokens from subject 1.
 
 ### `stts_all_sentence_level.csv` has no header and 11,852 rows
 

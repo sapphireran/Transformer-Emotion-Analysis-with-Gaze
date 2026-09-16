@@ -1,14 +1,13 @@
-"""Re-average ZuCo sentence-level subject files **by sentence id**.
+"""Re-average ZuCo sentence-level subject files **by the `id` column**.
 
 The original `get_average_sentence_level.py` concatenates frames and
-`groupby(level=0)`, which is row-position alignment. Subject 3 is missing
-101 sentences, so position alignment is the wrong key. This script:
+`groupby(level=0)`. This script groups by `id` instead, treats zeros as
+missing, and diffs against `average_data.csv`.
 
-- reads `ZuCo_et_csv_data/{1-12}_SR.csv`
-- treats zeros on duration/count columns as missing (same as the original)
-- groups by `id`
-- writes coverage (how many subjects contributed) and a comparison against
-  the checked-in `average_data.csv`
+On this checkout the two averages match, because subject 3's `id` was
+reset to 0–298 after the skips. That match is **not** proof the stimuli
+are aligned. Compact id 150 is original sentence 250 for subject 3.
+Use `realign_subject3.py` for the original-index remap.
 """
 
 from __future__ import annotations

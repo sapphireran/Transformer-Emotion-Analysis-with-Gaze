@@ -129,6 +129,7 @@ Text-only variants skip the gaze branch and use `*ForSequenceClassification`. A 
 - [docs/data-pipeline.md](docs/data-pipeline.md) — from ZuCo `.mat` to training tables
 - [docs/eye-tracking-features.md](docs/eye-tracking-features.md) — feature glossary
 - [docs/models-and-training.md](docs/models-and-training.md) — hyperparameters and metrics
+- [docs/baselines.md](docs/baselines.md) — majority and gaze-only floors
 - [docs/reproduction.md](docs/reproduction.md) — how to re-run or approximate a run
 - [docs/known-issues.md](docs/known-issues.md) — path mismatches and evaluation bugs
 - [docs/experiment-notes.md](docs/experiment-notes.md) — personal notes on setup choices
@@ -142,6 +143,7 @@ See [examples/README.md](examples/README.md). The scripts only read the CSVs alr
 python3 examples/schema_check.py
 python3 examples/label_distribution.py
 python3 examples/gaze_feature_profiles.py
+python3 examples/realign_subject3.py
 python3 examples/dummy_baseline.py
 ```
 

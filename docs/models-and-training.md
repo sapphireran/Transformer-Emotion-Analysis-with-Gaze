@@ -82,11 +82,12 @@ A fair comparison is four runs that differ only in `model_type`:
 
 Keep tokenizer, max length, epochs, batch size, and seed matched. If fusion wins on ZuCo and loses on SST, that is still a useful result: it suggests the transferred gaze is the weak link, not the concat head.
 
-`examples/dummy_baseline.py` gives the floor:
+`examples/dummy_baseline.py` gives the floor (recorded in [baselines.md](baselines.md)):
 
 - Majority class on ZuCo (always 2 / positive): 140/400 = **0.350** accuracy
-- Majority class on SST train prior applied to SST test: always 2, **0.442** accuracy (524/1186)
-- Gaze-only multinomial logistic regression (5 features) — see the script output; it should beat majority only modestly if at all
+- Gaze-only logreg on ZuCo, same 5 folds: **0.3675** mean accuracy
+- Majority class on SST test (always 2): **0.4418** accuracy (524/1186)
+- Gaze-only logreg on SST test: **0.4368** accuracy, **0.387** weighted F1, **never predicts neutral**
 
 ## Memory and runtime (order of magnitude)
 

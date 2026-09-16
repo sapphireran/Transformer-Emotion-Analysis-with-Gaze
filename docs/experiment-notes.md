@@ -64,7 +64,9 @@ SST + 128-token padding + 256 is a throughput choice for a single GPU. ZuCo with
 - Seed torch and the DataLoader generator; log `transformers.__version__`.
 - Add macro F1 and a 3×3 confusion matrix to both scripts.
 - Extract `EyeTrackingModel` so examples can import it without starting a run.
-- Join word-level predicted gaze to SST sentences with an explicit reducer (mean, max TRT, etc.) checked into `examples/`.
+- Join word-level predicted gaze to SST sentences with an explicit reducer. `examples/reduce_predicted_gaze.py` already shows that a plain mean of `prediction_test_v2.csv` is only moderately aligned with the SST sentence table (GD r ≈ 0.06). Find the actual reducer before treating those five columns as “the same features.”
 - A gaze-shuffled control: same numbers, randomly reassigned to sentences. If fusion still "wins", the head is fitting noise.
 
-`examples/dummy_baseline.py` already fits the gaze-only control. A shuffle control is the next honest check before another long SST train.
+`examples/dummy_baseline.py` already fits the gaze-only control. On this checkout that control is +1.75 accuracy points on ZuCo and *below* majority accuracy on SST (it never predicts neutral). A shuffle control is the next honest check before another long SST train.
+
+Subject 3's compacted `id` column is the other data issue I would fix before a "real" ZuCo re-run: see [known-issues.md](known-issues.md) and `examples/realign_subject3.py`.

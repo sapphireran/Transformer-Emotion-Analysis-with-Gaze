@@ -60,7 +60,6 @@ def _gaze_pipeline() -> Pipeline:
                 "clf",
                 LogisticRegression(
                     max_iter=2000,
-                    multi_class="auto",
                     solver="lbfgs",
                 ),
             ),

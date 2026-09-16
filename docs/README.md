@@ -11,6 +11,7 @@ Personal notes for this repository. Read the root [README](../README.md) first, 
 | [data-pipeline.md](data-pipeline.md) | Order of conversion scripts from ZuCo MATLAB to joined training tables |
 | [eye-tracking-features.md](eye-tracking-features.md) | What nFix / FFD / GPT / TRT / GD / SFD mean in this repo |
 | [models-and-training.md](models-and-training.md) | Hyperparameters, metrics, checkpoints |
+| [baselines.md](baselines.md) | Majority and gaze-only numbers from `examples/dummy_baseline.py` |
 | [reproduction.md](reproduction.md) | Practical steps to re-run training or the example suite |
 | [known-issues.md](known-issues.md) | Path mismatches, evaluation bugs, missing folders |
 | [experiment-notes.md](experiment-notes.md) | Why certain defaults were chosen |

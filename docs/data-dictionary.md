@@ -90,7 +90,7 @@ Sentence-level features, one file per subject, from `read_ZuCo_mat.py` + `DataTr
 | `meanPupilSize` | Mean pupil size over those words |
 | `GD`, `TRT`, `FFD`, `SFD`, `GPT` | Mean durations (ms) over fixated words |
 
-Subject 3 has 299 rows; everyone else has 400. The skip ranges are hard-coded in `utils_ZuCo.DataTransformer.__call__` for task 1 / subject 2 (0-based subject index 2 → file `3_SR.csv`).
+Subject 3 has 299 rows with `id` 0–298; everyone else has 400 rows with `id` 0–399. The skip ranges are hard-coded in `utils_ZuCo.DataTransformer.__call__` for task 1 / subject 2 (0-based subject index 2 → file `3_SR.csv`): original sentences 150–249 and 399. The export then resets the index, so those 299 rows are **not** original sentences 0–298. Compact `id` 150–298 are original 250–398. `examples/realign_subject3.py` undoes that.
 
 ### `ZuCo_et_csv_data/average_data.csv`
 

@@ -25,6 +25,8 @@ SCRIPTS = [
     "feature_correlations.py",
     "split_sanity_check.py",
     "word_level_preview.py",
+    "realign_subject3.py",
+    "reduce_predicted_gaze.py",
     "fusion_architecture_demo.py",
     "dummy_baseline.py",
 ]
