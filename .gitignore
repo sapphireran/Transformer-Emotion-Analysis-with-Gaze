@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.env
+
+# Training artifacts
+models/
+*.pth
+*.pt
+runs/
+wandb/
+.cache/
+
+# Example reports: keep the markdown/text snapshots, ignore generated CSVs
+examples/output/*.csv
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
