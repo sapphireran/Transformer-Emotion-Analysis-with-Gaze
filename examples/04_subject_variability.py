@@ -12,7 +12,12 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from examples.lib.gaze import ZUCO_ALL_GAZE, inter_subject_cv, subject_feature_panel
-from examples.lib.loading import load_subject_sentence_tables, load_zuco_combined
+from examples.lib.loading import (
+    SUBJECT_SENTENCE_ROWS,
+    load_subject_sentence_tables,
+    load_zuco_combined,
+    remap_subject3_original_ids,
+)
 from examples.lib.paths import resolve_root
 from examples.lib.reporting import banner, print_frame
 
@@ -30,6 +35,15 @@ def main() -> int:
     root = resolve_root(args.root)
 
     tables = load_subject_sentence_tables(root=root)
+    banner("Per-subject row counts")
+    for subject, df in tables.items():
+        print(f"  subject {subject:2d}: {len(df):3d} rows (expected {SUBJECT_SENTENCE_ROWS[subject]})")
+    print(
+        "Subject 3 is DataTransformer subject 2: 101 sentences dropped, "
+        "then reindexed. Remapping to original ids before the CV panel "
+        "(see examples/10_zuco_index_alignment.py)."
+    )
+    tables[3] = remap_subject3_original_ids(tables[3])
     panel = subject_feature_panel(tables)
     cv = inter_subject_cv(panel, ZUCO_ALL_GAZE)
     zuco = load_zuco_combined(root=root)[["sentence_id", "sentence", "sentiment_label"]]

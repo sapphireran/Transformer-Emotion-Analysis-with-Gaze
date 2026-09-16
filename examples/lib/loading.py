@@ -13,6 +13,11 @@ LABEL_NAMES = {0: "negative", 1: "neutral", 2: "positive"}
 
 FULL_SST_GAZE = ("nFix", "FFD", "GPT", "TRT", "GD")
 ZUCO_GAZE = ("nFixations", "FFD", "GPT", "TRT", "GD")
+# 1-indexed filenames. Subject 3 is DataTransformer subject 2 (task 1),
+# which drops original sentences 150-249 and 399, then reindexes 0..298.
+SUBJECT_SENTENCE_ROWS = {subject: 400 for subject in range(1, 13)}
+SUBJECT_SENTENCE_ROWS[3] = 299
+SUBJECT_3_DROPPED_ORIGINAL_IDS = tuple(range(150, 250)) + (399,)
 ZUCO_SENTENCE_NUMERIC = (
     "SentLen",
     "omissionRate",
@@ -163,7 +168,12 @@ def load_zuco_word_average(root: str | Path | None = None) -> pd.DataFrame:
 def load_subject_sentence_tables(
     root: str | Path | None = None,
 ) -> dict[int, pd.DataFrame]:
-    """Load the 12 raw sentence-level subject files (1-indexed keys)."""
+    """Load the 12 raw sentence-level subject files (1-indexed keys).
+
+    Subject 3 has 299 rows whose ``id`` is a *new* index, not the original
+    ZuCo sentence id. Use :func:`remap_subject3_original_ids` before
+    comparing that table to anyone else.
+    """
     base = resolve_root(root) / "ZuCo_et_csv_data"
     tables: dict[int, pd.DataFrame] = {}
     for subject in range(1, 13):
@@ -174,8 +184,29 @@ def load_subject_sentence_tables(
         for col in ("id",) + ZUCO_SENTENCE_NUMERIC:
             if col not in df.columns:
                 raise ValueError(f"{path} missing column {col}")
+        expected = SUBJECT_SENTENCE_ROWS[subject]
+        if len(df) != expected:
+            raise ValueError(f"{path}: expected {expected} rows, found {len(df)}")
         tables[subject] = df
     return tables
+
+
+def remap_subject3_original_ids(df: pd.DataFrame) -> pd.DataFrame:
+    """Map subject 3's reindexed ``id`` back to the original sentence id.
+
+    ``DataTransformer`` skipped original sentences 150-249 and 399, then
+    wrote a fresh 0..298 index. Rows 0-149 are still original ids; rows
+    150-298 are original 250-398.
+    """
+    if len(df) != SUBJECT_SENTENCE_ROWS[3]:
+        raise ValueError(
+            f"subject 3 remap expects {SUBJECT_SENTENCE_ROWS[3]} rows, got {len(df)}"
+        )
+    original = list(range(150)) + list(range(250, 399))
+    out = df.copy()
+    out["reindexed_id"] = out["id"]
+    out["id"] = original
+    return out
 
 
 def label_name_series(labels: pd.Series) -> pd.Series:

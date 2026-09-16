@@ -26,7 +26,8 @@ there if you cannot.
 | `07_split_leakage_check.py` | Asserts disjoint `sentence_id`s on the full-SST holdout. |
 | `08_gaze_prediction_compare.py` | Schema and distribution notes: PROVO vs predicted SST tokens. |
 | `09_export_analysis_tables.py` | Writes the tables above as CSV/JSON under `--output-dir`. |
-| `run_all.py` | Runs 01–09 in order and writes `summary.json`. |
+| `10_zuco_index_alignment.py` | Proves subject 3 is reindexed; row-wise averages drift after id 149. |
+| `run_all.py` | Runs 01–10 in order and writes `summary.json`. |
 
 ```bash
 python3 examples/01_inspect_datasets.py

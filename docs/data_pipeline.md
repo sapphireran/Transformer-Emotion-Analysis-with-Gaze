@@ -60,8 +60,9 @@ path calls it.
 1. Read `et_csv_data/{1-12}_SR.csv`.
 2. Replace `0` with NaN in every column except the first.
 3. `concat` + `groupby(level=0).mean()` — this averages **on the
-   default RangeIndex**, i.e. row position, which matches because each
-   file has the same 400 aligned sentences.
+   default RangeIndex** (row position). That is correct only while
+   every file has the same sentence in the same row. Subject 3 does
+   not: it has 299 reindexed rows. See [known_issues.md](known_issues.md).
 4. Fit `MinMaxScaler` and `StandardScaler` on the numeric columns
    (including `id` handling that is a bit awkward: `id` is split off,
    scaled data is written with `id` as the index).

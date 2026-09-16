@@ -6,12 +6,14 @@ import unittest
 
 from examples.lib.loading import (
     LABEL_NAMES,
+    SUBJECT_SENTENCE_ROWS,
     documented_datasets,
     load_dataset,
     load_sst_raw,
     load_subject_sentence_tables,
     load_zuco_combined,
     load_zuco_word_average,
+    remap_subject3_original_ids,
 )
 from examples.lib.paths import repo_root
 
@@ -35,14 +37,24 @@ class DocumentedDatasetsTest(unittest.TestCase):
         self.assertEqual(set(df["sentiment_label"].unique()), {0, 1, 2})
         self.assertEqual(set(LABEL_NAMES), {0, 1, 2})
 
-    def test_twelve_subject_tables_align_on_id(self) -> None:
+    def test_twelve_subject_tables_have_known_row_counts(self) -> None:
         tables = load_subject_sentence_tables(root=repo_root())
         self.assertEqual(len(tables), 12)
-        reference = tables[1]["id"].tolist()
         for subject, df in tables.items():
             with self.subTest(subject=subject):
-                self.assertEqual(len(df), 400)
-                self.assertEqual(df["id"].tolist(), reference)
+                self.assertEqual(len(df), SUBJECT_SENTENCE_ROWS[subject])
+
+    def test_subject3_remap_restores_sentlen_alignment(self) -> None:
+        tables = load_subject_sentence_tables(root=repo_root())
+        ref = tables[1]
+        remapped = remap_subject3_original_ids(tables[3])
+        self.assertEqual(remapped["id"].tolist(), list(range(150)) + list(range(250, 399)))
+        merged = ref.merge(remapped, on="id", suffixes=("_s1", "_s3"))
+        self.assertEqual(len(merged), 299)
+        self.assertTrue((merged["SentLen_s1"] == merged["SentLen_s3"]).all())
+        naive = ref.merge(tables[3], on="id", suffixes=("_s1", "_s3"))
+        late = naive.loc[naive["id"] >= 150]
+        self.assertLess((late["SentLen_s1"] == late["SentLen_s3"]).mean(), 0.05)
 
     def test_word_average_sent_id_prefix_covers_zuco_sentences(self) -> None:
         words = load_zuco_word_average(root=repo_root())

@@ -105,7 +105,7 @@ Counts were taken from the CSVs in this checkout:
 | `SST_data/valid_full_sst.csv` | 1,185 | 10% split. |
 | `SST_data/test_full_sst.csv` | 1,186 | 10% split. |
 | `ZuCo_SST_data/combined_sst_et_standard.csv` | 400 | ZuCo SST + standardized gaze. Labels: 123 / 137 / 140. |
-| `ZuCo_et_csv_data/{1–12}_SR.csv` | 400 × 12 | Per-subject sentence-level raw gaze. |
+| `ZuCo_et_csv_data/{1–12}_SR.csv` | 400 (subject 3: 299) | Per-subject sentence-level raw gaze. Subject 3 is reindexed; see `examples/10_zuco_index_alignment.py`. |
 | `ZuCo_et_csv_data/word/{1–12}_SR.csv` | 7,129 × 12 | Per-subject word-level gaze. |
 | `gaze_prediction/data/prediction_test_v2.csv` | 191,971 | Word-level predicted gaze for the full SST. |
 | `gaze_prediction/data/provo.csv` | 2,659 | PROVO reference words (`fixProp` instead of `GD`). |

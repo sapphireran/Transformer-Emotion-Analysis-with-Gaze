@@ -27,6 +27,7 @@ SCRIPTS = (
     "07_split_leakage_check.py",
     "08_gaze_prediction_compare.py",
     "09_export_analysis_tables.py",
+    "10_zuco_index_alignment.py",
 )
 
 
@@ -52,7 +53,7 @@ def main() -> int:
     for name in SCRIPTS:
         script = Path(__file__).resolve().parent / name
         cmd = [python, str(script), "--root", str(root)]
-        if name == "09_export_analysis_tables.py":
+        if name in {"09_export_analysis_tables.py", "10_zuco_index_alignment.py"}:
             cmd.extend(["--output-dir", str(out)])
         banner(f"RUN {name}")
         started = time.time()

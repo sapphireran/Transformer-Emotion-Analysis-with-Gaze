@@ -22,4 +22,5 @@
 | **Weighted F1** | `sklearn` F1 with `average='weighted'` — class F1s weighted by support. |
 | **Predicted gaze** | Model-generated reading-time features. Not human measurements. |
 | **Skip** | Word-level row with `nFixations == 0`. |
+| **Subject 3 reindex** | `3_SR.csv` dropped original sentences 150–249 and 399, then renumbered 0..298. Row-wise averages after id 149 mix sentences. |
 | **`spilt.py`** | The split scripts. Typo, not a third pipeline. |

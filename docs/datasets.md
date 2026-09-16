@@ -130,13 +130,19 @@ Directory: `ZuCo_et_csv_data/`
 
 ### Sentence level: `{1–12}_SR.csv`
 
-- **Rows:** 400 per subject (subjects are 1-indexed filenames,
-  0-indexed in `DataTransformer`)
+- **Rows:** 400 per subject **except subject 3 (299 rows)**
 - **Columns:** `id`, `SentLen`, `omissionRate`, `nFixations`,
   `meanPupilSize`, `GD`, `TRT`, `FFD`, `SFD`, `GPT`
 - **Units:** raw milliseconds / counts / rates, **not** standardized
 - **Producer:** `read_ZuCo_mat.py` → `DataTransformer('task1',
   level='sentence', scaling='raw', fillna='zeros')`
+- **Subject 3 caveat:** filename `3_SR.csv` is `DataTransformer`
+  subject index 2. That path drops original sentences 150–249 and 399
+  (101 rows), then writes a **new** `id` 0..298. Rows 0–149 are still
+  the original sentences; rows 150–298 are original 250–398. Averaging
+  the twelve files on row index therefore mixes sentences from id 150
+  onward. Details and a remap: `examples/10_zuco_index_alignment.py`
+  and [known_issues.md](known_issues.md).
 
 `average_data.csv` is the 12-subject mean of those tables.
 `standard_scaled_average_data.csv` and `min_max_scaled_average_data.csv`

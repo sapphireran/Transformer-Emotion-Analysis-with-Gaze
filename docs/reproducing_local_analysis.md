@@ -36,6 +36,7 @@ python3 examples/06_feature_fusion_walkthrough.py
 python3 examples/07_split_leakage_check.py
 python3 examples/08_gaze_prediction_compare.py
 python3 examples/09_export_analysis_tables.py --output-dir examples/output
+python3 examples/10_zuco_index_alignment.py --output-dir examples/output
 ```
 
 Each script accepts `-h`. Most accept `--root` if you are not sitting
@@ -64,6 +65,7 @@ They do **not** download models and they do not call
 - `01` prints a table of every documented CSV with row counts matching
   [datasets.md](datasets.md).
 - `07` exits 0 and says the full-SST splits are disjoint.
+- `10` shows subject 3 `SentLen` matching subject 1 only after remap.
 - `06` prints logits of shape `(batch, 3)` and probabilities that sum
   to 1 per row.
 - `run_all.py` writes `examples/output/summary.json` with

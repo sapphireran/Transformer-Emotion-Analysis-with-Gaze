@@ -15,6 +15,8 @@ from .loading import (
     load_subject_sentence_tables,
     load_zuco_combined,
     load_zuco_word_average,
+    remap_subject3_original_ids,
+    SUBJECT_SENTENCE_ROWS,
 )
 
 __all__ = [
@@ -27,6 +29,8 @@ __all__ = [
     "load_subject_sentence_tables",
     "load_zuco_combined",
     "load_zuco_word_average",
+    "remap_subject3_original_ids",
+    "SUBJECT_SENTENCE_ROWS",
     "repo_root",
     "resolve_root",
 ]
