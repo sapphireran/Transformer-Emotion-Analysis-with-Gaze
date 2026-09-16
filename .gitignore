@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+models/
+*.pth
+*.pt
+.DS_Store
+.ipynb_checkpoints/
+.pytest_cache/
+*.egg-info/
+.mypy_cache/

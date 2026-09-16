@@ -1,0 +1,53 @@
+# Toy late-fusion baseline (no transformer)
+
+rows: 400  labels: 0 negative=123, 1 neutral=137, 2 positive=140
+gaze columns (EyeTrackingModel order): nFixations, FFD, GPT, TRT, GD
+text-stat dim: 7  fused dim: 12
+folds: Stratified 5-fold, seed 42 (same idea as model_ZuCo_SST.py)
+
+text-stats = [token count, chars/10, punct count, #neg lexicon,
+              #pos lexicon, (pos-neg)/n, mean word length]
+lexicon is a tiny hand list in this file — not a published resource.
+
+## mean over folds
+method       accuracy (mean ± std)  weighted F1 (mean ± std)
+-----------  ---------------------  ------------------------
+majority     0.3500 ± 0.0039        0.1815 ± 0.0035         
+gaze         0.3896 ± 0.0647        0.3671 ± 0.0644         
+text-stats   0.4478 ± 0.0473        0.4293 ± 0.0594         
+late-fusion  0.4702 ± 0.0368        0.4581 ± 0.0476         
+
+## per-fold scores
+fold  majority                                   gaze                                       text-stats                                 late-fusion                              
+----  -----------------------------------------  -----------------------------------------  -----------------------------------------  -----------------------------------------
+0     acc=0.3457  P=0.1195  R=0.3457  F1=0.1776  acc=0.5062  P=0.4777  R=0.5062  F1=0.4746  acc=0.4691  P=0.5488  R=0.4691  F1=0.4753  acc=0.4938  P=0.4936  R=0.4938  F1=0.4936
+1     acc=0.3457  P=0.1195  R=0.3457  F1=0.1776  acc=0.3457  P=0.5368  R=0.3457  F1=0.2906  acc=0.3827  P=0.3241  R=0.3827  F1=0.3381  acc=0.4074  P=0.3668  R=0.4074  F1=0.3714
+2     acc=0.3500  P=0.1225  R=0.3500  F1=0.1815  acc=0.4125  P=0.4032  R=0.4125  F1=0.3978  acc=0.4000  P=0.5680  R=0.4000  F1=0.3786  acc=0.4500  P=0.4531  R=0.4500  F1=0.4419
+3     acc=0.3544  P=0.1256  R=0.3544  F1=0.1855  acc=0.3544  P=0.3492  R=0.3544  F1=0.3513  acc=0.4937  P=0.5526  R=0.4937  F1=0.4786  acc=0.4937  P=0.4909  R=0.4937  F1=0.4907
+4     acc=0.3544  P=0.1256  R=0.3544  F1=0.1855  acc=0.3291  P=0.3329  R=0.3291  F1=0.3213  acc=0.4937  P=0.4998  R=0.4937  F1=0.4761  acc=0.5063  P=0.4921  R=0.5063  F1=0.4930
+
+## pooled-fold confusion (late-fusion)
+                 pred 0  pred 1  pred 2
+---------------  ------  ------  ------
+true 0 negative  42      46      35    
+true 1 neutral   27      65      45    
+true 2 positive  22      37      81    
+
+## pooled-fold confusion (gaze only)
+                 pred 0  pred 1  pred 2
+---------------  ------  ------  ------
+true 0 negative  20      50      53    
+true 1 neutral   14      76      47    
+true 2 positive  30      50      60    
+
+## how to read this
+- majority is the number a useless model gets for free.
+- gaze-only tells you whether the 5-d vector is linearly related
+  to the label after subject averaging and z-scoring.
+- text-stats is a weak stand-in for BERT; beating it is not the
+  same as beating roberta-base.
+- late-fusion here is concat + softmax. The real model is concat
+  of 768-d pooler_output + Linear(5,16), then CrossEntropy.
+- If fusion ≈ max(gaze, text-stats), the signals overlap. If it
+  is higher, they are at least partly complementary *in this
+  linear toy*. Confirm with model_ZuCo_SST.py before claiming it.

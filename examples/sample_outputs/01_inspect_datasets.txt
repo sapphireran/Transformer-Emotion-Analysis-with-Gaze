@@ -1,0 +1,130 @@
+# Dataset inspection
+repo: /workspace
+
+dataset                         path                                        rows   cols  labels                                          
+------------------------------  ------------------------------------------  -----  ----  ------------------------------------------------
+ZuCo ∩ SST labels only          ZuCo_SST_data/ssts_ZuCo.csv                 400    3     0 negative=123, 1 neutral=137, 2 positive=140   
+ZuCo ∩ SST standard gaze        ZuCo_SST_data/combined_sst_et_standard.csv  400    11    0 negative=123, 1 neutral=137, 2 positive=140   
+ZuCo ∩ SST min-max gaze         ZuCo_SST_data/combined_sst_et_min_max.csv   400    11    0 negative=123, 1 neutral=137, 2 positive=140   
+ZuCo leftover train split       ZuCo_SST_data/train.csv                     320    11    0 negative=103, 1 neutral=107, 2 positive=110   
+ZuCo leftover valid split       ZuCo_SST_data/valid.csv                     40     11    0 negative=7, 1 neutral=14, 2 positive=19       
+ZuCo leftover test split        ZuCo_SST_data/test.csv                      40     11    0 negative=13, 1 neutral=16, 2 positive=11      
+Full SST + transferred gaze     SST_data/combined_full_sst_et.csv           11853  8     0 negative=4649, 1 neutral=2241, 2 positive=4963
+Full SST train                  SST_data/train_full_sst.csv                 9482   8     0 negative=3710, 1 neutral=1833, 2 positive=3939
+Full SST valid                  SST_data/valid_full_sst.csv                 1185   8     0 negative=476, 1 neutral=209, 2 positive=500   
+Full SST test                   SST_data/test_full_sst.csv                  1186   8     0 negative=463, 1 neutral=199, 2 positive=524   
+SST sentences (no header)       SST_data/stts_all_sentence_level.csv        11853  2     0 negative=4649, 1 neutral=2241, 2 positive=4963
+ZuCo subject 1 raw              ZuCo_et_csv_data/1_SR.csv                   400    10    -                                               
+ZuCo subject 3 raw (truncated)  ZuCo_et_csv_data/3_SR.csv                   299    10    -                                               
+ZuCo 12-reader average          ZuCo_et_csv_data/average_data.csv           400    10    -                                               
+Word-level averages v2          ZuCo_et_csv_data/word/word_averages_v2.csv  7129   12    -                                               
+Gaze prediction test            gaze_prediction/data/prediction_test.csv    1751   8     -                                               
+PROVO helper                    gaze_prediction/data/provo.csv              2659   8     -                                               
+
+## ZuCo ∩ SST labels only
+path: ZuCo_SST_data/ssts_ZuCo.csv
+rows: 400
+cols (3): sentence_id, sentence, sentiment_label
+labels: 0 negative=123, 1 neutral=137, 2 positive=140
+tokens (whitespace): min=3  mean=17.82  max=43
+
+## ZuCo ∩ SST standard gaze
+path: ZuCo_SST_data/combined_sst_et_standard.csv
+rows: 400
+cols (11): sentence_id, sentence, sentiment_label, omissionRate, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT
+labels: 0 negative=123, 1 neutral=137, 2 positive=140
+tokens (whitespace): min=3  mean=17.82  max=43
+
+## ZuCo ∩ SST min-max gaze
+path: ZuCo_SST_data/combined_sst_et_min_max.csv
+rows: 400
+cols (11): sentence_id, sentence, sentiment_label, omissionRate, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT
+labels: 0 negative=123, 1 neutral=137, 2 positive=140
+tokens (whitespace): min=3  mean=17.82  max=43
+
+## ZuCo leftover train split
+path: ZuCo_SST_data/train.csv
+rows: 320
+cols (11): sentence_id, sentence, sentiment_label, omissionRate, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT
+labels: 0 negative=103, 1 neutral=107, 2 positive=110
+tokens (whitespace): min=3  mean=17.61  max=43
+
+## ZuCo leftover valid split
+path: ZuCo_SST_data/valid.csv
+rows: 40
+cols (11): sentence_id, sentence, sentiment_label, omissionRate, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT
+labels: 0 negative=7, 1 neutral=14, 2 positive=19
+tokens (whitespace): min=5  mean=19.35  max=40
+
+## ZuCo leftover test split
+path: ZuCo_SST_data/test.csv
+rows: 40
+cols (11): sentence_id, sentence, sentiment_label, omissionRate, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT
+labels: 0 negative=13, 1 neutral=16, 2 positive=11
+tokens (whitespace): min=4  mean=18.02  max=37
+
+## Full SST + transferred gaze
+path: SST_data/combined_full_sst_et.csv
+rows: 11853
+cols (8): sentence_id, sentence, sentiment_label, nFix, GD, TRT, FFD, GPT
+labels: 0 negative=4649, 1 neutral=2241, 2 positive=4963
+tokens (whitespace): min=2  mean=19.17  max=56
+
+## Full SST train
+path: SST_data/train_full_sst.csv
+rows: 9482
+cols (8): sentence_id, sentence, sentiment_label, nFix, GD, TRT, FFD, GPT
+labels: 0 negative=3710, 1 neutral=1833, 2 positive=3939
+tokens (whitespace): min=2  mean=19.17  max=56
+
+## Full SST valid
+path: SST_data/valid_full_sst.csv
+rows: 1185
+cols (8): sentence_id, sentence, sentiment_label, nFix, GD, TRT, FFD, GPT
+labels: 0 negative=476, 1 neutral=209, 2 positive=500
+tokens (whitespace): min=2  mean=19.26  max=52
+
+## Full SST test
+path: SST_data/test_full_sst.csv
+rows: 1186
+cols (8): sentence_id, sentence, sentiment_label, nFix, GD, TRT, FFD, GPT
+labels: 0 negative=463, 1 neutral=199, 2 positive=524
+tokens (whitespace): min=2  mean=19.13  max=48
+
+## SST sentences (no header)
+path: SST_data/stts_all_sentence_level.csv
+rows: 11853
+cols: 2 (file has no header; first row is data)
+labels (mapped): 0 negative=4649, 1 neutral=2241, 2 positive=4963
+tokens (whitespace): min=2  mean=19.17  max=56
+
+## ZuCo subject 1 raw
+path: ZuCo_et_csv_data/1_SR.csv
+rows: 400
+cols (10): id, SentLen, omissionRate, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT
+
+## ZuCo subject 3 raw (truncated)
+path: ZuCo_et_csv_data/3_SR.csv
+rows: 299
+cols (10): id, SentLen, omissionRate, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT
+
+## ZuCo 12-reader average
+path: ZuCo_et_csv_data/average_data.csv
+rows: 400
+cols (10): id, SentLen, omissionRate, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT
+
+## Word-level averages v2
+path: ZuCo_et_csv_data/word/word_averages_v2.csv
+rows: 7129
+cols (12): id, Sent_ID, Word_ID, Word, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT, WordLen
+empty Word cells: 0
+
+## Gaze prediction test
+path: gaze_prediction/data/prediction_test.csv
+rows: 1751
+cols (8): sentence_id, word_id, word, nFix, FFD, GPT, TRT, GD
+
+## PROVO helper
+path: gaze_prediction/data/provo.csv
+rows: 2659
+cols (8): sentence_id, word_id, word, nFix, FFD, GPT, TRT, fixProp

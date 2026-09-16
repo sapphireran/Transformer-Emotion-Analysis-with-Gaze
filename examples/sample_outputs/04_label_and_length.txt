@@ -1,0 +1,75 @@
+# Labels vs sentence length
+
+## ZuCo ∩ SST (standard)
+path: ZuCo_SST_data/combined_sst_et_standard.csv
+labels: 0 negative=123, 1 neutral=137, 2 positive=140
+
+### tokens by class
+class       n    mean   median  min  max
+----------  ---  -----  ------  ---  ---
+0 negative  123  17.33  17.0    3    36 
+1 neutral   137  18.01  17.0    4    40 
+2 positive  140  18.07  18.0    3    43 
+
+### length bucket × sentiment
+bucket        n    neg         neu         pos       
+------------  ---  ----------  ----------  ----------
+1-8 tokens    56   11 (19.6%)  20 (35.7%)  25 (44.6%)
+9-16 tokens   136  50 (36.8%)  46 (33.8%)  40 (29.4%)
+17-24 tokens  122  42 (34.4%)  39 (32.0%)  41 (33.6%)
+25-32 tokens  65   16 (24.6%)  22 (33.8%)  27 (41.5%)
+33+ tokens    21   4 (19.0%)   10 (47.6%)  7 (33.3%) 
+
+### correlation of each fusion feature with token count
+fusion feature  corr with token count
+--------------  ---------------------
+nFixations      -0.468               
+FFD             -0.424               
+GPT             -0.538               
+TRT             -0.550               
+GD              -0.411               
+
+### example sentences (shortest / longest per class)
+- [0 negative / shortest / 3 tokens] under-rehearsed and lifeless
+- [0 negative / longest / 36 tokens] The acting is stiff, the story lacks all trace of wit, the sets look like they were borrowed from Gilligan's Island -- and the CGI Scooby might well be the worst special-effects creation of the year.
+- [1 neutral / shortest / 4 tokens] Creepy, authentic and dark.
+- [1 neutral / longest / 40 tokens] Parker should be commended for taking a fresh approach to familiar material, but his determination to remain true to the original text leads him to adopt a somewhat mannered tone... that ultimately dulls the human tragedy at the story's core.
+- [2 positive / shortest / 3 tokens] Reassuring, retro uplifter.
+- [2 positive / longest / 43 tokens] In addition to scoring high for originality of plot -- putting together familiar themes of family, forgiveness and love in a new way -- Lilo & Stitch has a number of other assets to commend it to movie audiences both innocent and jaded.
+
+## Full SST train (transferred gaze)
+path: SST_data/train_full_sst.csv
+labels: 0 negative=3710, 1 neutral=1833, 2 positive=3939
+
+### tokens by class
+class       n     mean   median  min  max
+----------  ----  -----  ------  ---  ---
+0 negative  3710  19.08  18.0    2    51 
+1 neutral   1833  18.68  18.0    2    51 
+2 positive  3939  19.47  19.0    2    56 
+
+### length bucket × sentiment
+bucket        n     neg           neu          pos         
+------------  ----  ------------  -----------  ------------
+1-8 tokens    1222  468 (38.3%)   270 (22.1%)  484 (39.6%) 
+9-16 tokens   2785  1093 (39.2%)  541 (19.4%)  1151 (41.3%)
+17-24 tokens  2875  1127 (39.2%)  549 (19.1%)  1199 (41.7%)
+25-32 tokens  1766  711 (40.3%)   321 (18.2%)  734 (41.6%) 
+33+ tokens    834   311 (37.3%)   152 (18.2%)  371 (44.5%) 
+
+### correlation of each fusion feature with token count
+fusion feature  corr with token count
+--------------  ---------------------
+nFix            -0.304               
+FFD             -0.345               
+GPT             -0.333               
+TRT             -0.372               
+GD              0.012                
+
+### example sentences (shortest / longest per class)
+- [0 negative / shortest / 2 tokens] No. .
+- [0 negative / longest / 51 tokens] If you are curious to see the darker side of what 's going on with young TV actors -LRB- Dawson Leery did what ?!? -RRB- , or see some interesting storytelling devices , you might want to check it out , but there 's nothing very attractive about this movie .
+- [1 neutral / shortest / 2 tokens] ending .
+- [1 neutral / longest / 51 tokens] It may not be as cutting , as witty or as true as back in the glory days of Weekend and Two or Three Things I Know About Her , but who else engaged in filmmaking today is so cognizant of the cultural and moral issues involved in the process ?
+- [2 positive / shortest / 2 tokens] Surprisingly insightful
+- [2 positive / longest / 56 tokens] The film is faithful to what one presumes are the book 's twin premises -- that we become who we are on the backs of our parents , but we have no idea who they were at our age ; and that time is a fleeting and precious commodity no matter how old you are .
