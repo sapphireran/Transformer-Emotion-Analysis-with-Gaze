@@ -1,0 +1,6 @@
+# CPU-only stack used by examples/ and the data-prep scripts.
+# Transformer training additionally needs torch, transformers, datasets, and tqdm.
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+scipy>=1.11

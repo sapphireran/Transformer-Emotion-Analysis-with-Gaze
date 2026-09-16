@@ -1,0 +1,179 @@
+{
+  "zuco_word_averages": {
+    "path": "/workspace/ZuCo_et_csv_data/word/word_averages_v2.csv",
+    "rows": 7129,
+    "unique_sentences": 400,
+    "unknown_words": 55,
+    "word_id_integrity": {
+      "sentences_checked": 400,
+      "noncontiguous_or_gapped": 0
+    },
+    "ranges": {
+      "nFixations": {
+        "min": 0.0,
+        "max": 7.25,
+        "mean": 1.1109063704799433,
+        "non_finite": 0
+      },
+      "FFD": {
+        "min": 0.0,
+        "max": 205.75,
+        "mean": 78.63273037571678,
+        "non_finite": 0
+      },
+      "GPT": {
+        "min": 0.0,
+        "max": 2424.9166666666665,
+        "mean": 156.63361132718686,
+        "non_finite": 0
+      },
+      "TRT": {
+        "min": 0.0,
+        "max": 919.5,
+        "mean": 131.20719999829973,
+        "non_finite": 0
+      },
+      "GD": {
+        "min": 0.0,
+        "max": 590.0833333333334,
+        "mean": 93.76897393063756,
+        "non_finite": 0
+      },
+      "SFD": {
+        "min": 0.0,
+        "max": 159.75,
+        "mean": 48.2572952133199,
+        "non_finite": 0
+      },
+      "meanPupilSize": {
+        "min": 0.0,
+        "max": 973.4128787878788,
+        "mean": 534.1462155036577,
+        "non_finite": 0
+      },
+      "WordLen": {
+        "min": 0.0,
+        "max": 21.0,
+        "mean": 4.854958619722261,
+        "non_finite": 0
+      }
+    },
+    "length_effect": {
+      "function_n": 1967,
+      "function_mean_nfix": 0.5446110828673106,
+      "long_content_n": 3305,
+      "long_content_mean_nfix": 1.5772337596845918
+    },
+    "words_per_sentence": {
+      "mean": 17.8225,
+      "max": 43
+    }
+  },
+  "predicted_word_v2": {
+    "path": "/workspace/gaze_prediction/data/prediction_test_v2.csv",
+    "rows": 191971,
+    "unique_sentences": 11853,
+    "sst_sentences": 11853,
+    "pred_ids_missing_from_sst": 0,
+    "sst_ids_missing_from_pred": 0,
+    "word_id_integrity": {
+      "sentences_checked": 11853,
+      "noncontiguous_or_gapped": 0
+    },
+    "ranges": {
+      "nFix": {
+        "min": 0.0,
+        "max": 60.617683,
+        "mean": 20.420674453222144,
+        "non_finite": 0
+      },
+      "FFD": {
+        "min": 0.0,
+        "max": 8.960725,
+        "mean": 4.4197143402346954,
+        "non_finite": 0
+      },
+      "GPT": {
+        "min": 0.0,
+        "max": 50.74036,
+        "mean": 7.674152392685066,
+        "non_finite": 0
+      },
+      "TRT": {
+        "min": 0.0,
+        "max": 24.227535,
+        "mean": 6.6290935226206305,
+        "non_finite": 0
+      },
+      "GD": {
+        "min": 0.0,
+        "max": 15.397762,
+        "mean": 5.01928961946243,
+        "non_finite": 0
+      }
+    },
+    "length_effect": {
+      "function_n": 53489,
+      "function_mean_nfix": 16.22724175861089,
+      "long_content_n": 84973,
+      "long_content_mean_nfix": 24.256693561315238
+    },
+    "words_per_sentence": {
+      "mean": 16.19598413903653,
+      "max": 51
+    }
+  },
+  "provo": {
+    "path": "/workspace/gaze_prediction/data/provo.csv",
+    "rows": 2659,
+    "unique_sentences": 134,
+    "columns": [
+      "sentence_id",
+      "word_id",
+      "word",
+      "nFix",
+      "FFD",
+      "GPT",
+      "TRT",
+      "fixProp"
+    ],
+    "ranges": {
+      "nFix": {
+        "min": -1.6525229674692223,
+        "max": 65.76735612406122,
+        "mean": 15.100000000000042,
+        "non_finite": 0
+      },
+      "FFD": {
+        "min": 0.007905171990798,
+        "max": 6.968714159097165,
+        "mean": 3.1900000000000017,
+        "non_finite": 0
+      },
+      "GPT": {
+        "min": -2.928769580065463,
+        "max": 45.0799326878468,
+        "mean": 6.3499999999999925,
+        "non_finite": 0
+      },
+      "TRT": {
+        "min": -0.7606709325920784,
+        "max": 23.784378028677587,
+        "mean": 5.3100000000000005,
+        "non_finite": 0
+      },
+      "fixProp": {
+        "min": 3.404076040357829,
+        "max": 106.11884615865436,
+        "mean": 67.05999999999976,
+        "non_finite": 0
+      }
+    },
+    "length_effect": {
+      "function_n": 782,
+      "function_mean_nfix": 6.081440897024828,
+      "long_content_n": 930,
+      "long_content_mean_nfix": 22.78345186897874
+    }
+  }
+}

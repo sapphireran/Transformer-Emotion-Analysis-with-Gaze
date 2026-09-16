@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "reports": [
+    {
+      "name": "standard",
+      "rebuilt_rows": 400,
+      "committed_rows": 400,
+      "id_match": true,
+      "columns_only_in_rebuilt": [
+        "SentLen",
+        "id"
+      ],
+      "columns_only_in_committed": [],
+      "fusion_max_abs_diff": {
+        "nFixations": 0.0,
+        "FFD": 0.0,
+        "GPT": 0.0,
+        "TRT": 4.440892098500626e-16,
+        "GD": 0.0
+      },
+      "label_mismatch": 0,
+      "sentence_mismatch": 0,
+      "aligned": true
+    },
+    {
+      "name": "min-max",
+      "rebuilt_rows": 400,
+      "committed_rows": 400,
+      "id_match": true,
+      "columns_only_in_rebuilt": [
+        "SentLen",
+        "id"
+      ],
+      "columns_only_in_committed": [],
+      "fusion_max_abs_diff": {
+        "nFixations": 0.0,
+        "FFD": 0.0,
+        "GPT": 0.0,
+        "TRT": 0.0,
+        "GD": 0.0
+      },
+      "label_mismatch": 0,
+      "sentence_mismatch": 0,
+      "aligned": true
+    }
+  ]
+}
