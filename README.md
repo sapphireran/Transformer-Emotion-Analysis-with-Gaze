@@ -78,7 +78,11 @@ python3 -m unittest discover -s tests -v
 ```
 
 See [examples/README.md](examples/README.md) for the full script list and
-[docs/README.md](docs/README.md) for the written notes.
+[docs/README.md](docs/README.md) for the written notes. After a local
+run, [docs/findings_from_examples.md](docs/findings_from_examples.md)
+is the numeric log (gaze-only logreg, permutation ANOVA, subject-3
+shift). [docs/ablation_plan.md](docs/ablation_plan.md) is the GPU
+todo list those numbers imply.
 
 ## Train (optional, heavy)
 

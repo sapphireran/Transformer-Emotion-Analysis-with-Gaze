@@ -37,6 +37,10 @@ python3 examples/07_split_leakage_check.py
 python3 examples/08_gaze_prediction_compare.py
 python3 examples/09_export_analysis_tables.py --output-dir examples/output
 python3 examples/10_zuco_index_alignment.py --output-dir examples/output
+python3 examples/11_gaze_only_baseline.py --output-dir examples/output
+python3 examples/12_length_confound.py
+python3 examples/13_shuffle_gaze_control.py --output-dir examples/output
+python3 examples/14_sentence_walkthrough.py
 ```
 
 Each script accepts `-h`. Most accept `--root` if you are not sitting
@@ -55,7 +59,9 @@ The tests load the real CSVs (they are small enough) and check:
 - no `sentence_id` overlap across the full-SST splits
 - fusion walkthrough output shapes
 - skip rates in `[0, 1]`
-- PROVO vs prediction schema differences
+- gaze-only logreg scores in `[0, 1]` and not a perfect classifier
+- permutation ANOVA p-values in `[0, 1]`
+- `emp11111ty` still present on ZuCo sentence 4 (known token bug)
 
 They do **not** download models and they do not call
 `model_full_SST.py` / `model_ZuCo_SST.py`.
@@ -66,6 +72,7 @@ They do **not** download models and they do not call
   [datasets.md](datasets.md).
 - `07` exits 0 and says the full-SST splits are disjoint.
 - `10` shows subject 3 `SentLen` matching subject 1 only after remap.
+- `11` prints gaze-only logreg vs majority (ZuCo ~+0.03, full SST ≤ majority).
 - `06` prints logits of shape `(batch, 3)` and probabilities that sum
   to 1 per row.
 - `run_all.py` writes `examples/output/summary.json` with

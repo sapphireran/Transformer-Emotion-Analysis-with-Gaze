@@ -138,3 +138,12 @@ sentences. Keep that sentence in any note you write.
 SST's `-LRB-` tokens disappear. Predicted gaze therefore does not
 align 1:1 with a BERT WordPiece sequence. The sentence-level fusion
 sidesteps this; a future token-level fusion would have to realign.
+
+## 16. Word-average token `emp11111ty`
+
+`ZuCo_et_csv_data/word/word_averages_v2.csv` sentence 4, word 2 is
+stored as `emp11111ty` (ten characters) instead of `empty`. Example 14
+prints it. The sentence-level tables still know the sentence as
+"…empty and unsatisfying…". This is a token-cleaning bug in the
+word-level export, not a new movie-review word. Do not train a
+word-level language model on these strings without a cleanup pass.

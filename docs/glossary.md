@@ -23,4 +23,6 @@
 | **Predicted gaze** | Model-generated reading-time features. Not human measurements. |
 | **Skip** | Word-level row with `nFixations == 0`. |
 | **Subject 3 reindex** | `3_SR.csv` dropped original sentences 150–249 and 399, then renumbered 0..298. Row-wise averages after id 149 mix sentences. |
+| **Gaze-only logreg** | sklearn logistic regression on the five ET features, no transformer. Example 11. |
+| **perm_p** | Fraction of shuffled-label ANOVA F values ≥ the observed F (example 13). |
 | **`spilt.py`** | The split scripts. Typo, not a third pipeline. |
