@@ -114,7 +114,6 @@ def logistic_pipeline(seed: int = 42) -> Pipeline:
                 "clf",
                 LogisticRegression(
                     max_iter=500,
-                    multi_class="auto",
                     solver="lbfgs",
                     random_state=seed,
                 ),

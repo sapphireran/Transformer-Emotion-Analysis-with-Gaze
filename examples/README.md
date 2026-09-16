@@ -72,3 +72,5 @@ X = df[list(CANONICAL_GAZE)]
 - Writing new combined CSVs back into `ZuCo_SST_data/`
 
 Those steps are documented in `docs/reproduction.md`.
+
+Measured numbers from a run against this checkout are recorded in [`docs/example-results.md`](../docs/example-results.md).

@@ -60,7 +60,8 @@ Best model is selected by accuracy. The log line says F1.
 
 ## Data limits
 
-- 400 labeled ZuCo sentences is the entire observed-gaze universe for this project. Gains under 2–3 accuracy points are probably noise.
+- **Glued tokens** in `word_averages_v2.csv` (`murderoncampus`, `allwiseguysallthetime`, `emp11111ty`) come from stripping punctuation without inserting spaces. They inflate TRT/GPT and leak into sentence means.
+- 400 labeled ZuCo sentences is the entire observed-gaze universe for this project. On this checkout, 5-fold gaze-only logistic is 36.8% vs a 35.0% majority — inside fold noise. Gains under 2–3 accuracy points are probably noise.
 - Full SST labels are 3-way here; many SST papers use binary (fine/coarse) or 5-way fine-grained. Do not compare published SST-2 numbers to these scripts.
 - The original `.txt` dump and `.mat` files are not in git, so a clean-room rebuild of `ssts_ZuCo.csv` is not possible from this checkout alone.
 

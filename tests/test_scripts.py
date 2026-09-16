@@ -26,7 +26,9 @@ def _load(name: str):
     [
         "01_explore_zuco_sst.py",
         "02_gaze_feature_report.py",
+        "03_gaze_only_baseline.py",
         "04_split_sanity_check.py",
+        "05_word_level_scanpath.py",
         "06_fusion_shape_check.py",
     ],
 )

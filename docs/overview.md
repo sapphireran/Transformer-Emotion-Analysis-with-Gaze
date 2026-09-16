@@ -85,5 +85,6 @@ A dependency-free copy of the tensor math is in `examples/gazekit/fusion.py`.
 | [training-and-evaluation.md](training-and-evaluation.md) | Epochs, batch sizes, metrics, CV vs holdout |
 | [reproduction.md](reproduction.md) | Commands to regenerate tables and run training |
 | [limitations.md](limitations.md) | Known bugs, confounds, and next personal experiments |
+| [example-results.md](example-results.md) | Actual numbers from the example scripts on this checkout |
 
 The example walkthrough is [../examples/README.md](../examples/README.md).

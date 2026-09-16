@@ -95,3 +95,5 @@ print(fit_gaze_only(df).as_dict())
 ```
 
 No need to spawn the scripts if you already have a REPL.
+
+The numbers I got on this checkout are snapshotted in [example-results.md](example-results.md).

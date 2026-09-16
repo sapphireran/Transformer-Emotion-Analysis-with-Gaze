@@ -29,17 +29,19 @@ def build_report(root: Path | None = None) -> dict:
         "majority": majority_fraction(combined),
         "length": summarize_numeric(combined, ["n_tokens"]),
         "ids_match_text": set(combined["sentence_id"]) == set(text["sentence_id"]),
-        "label_match": combined.merge(
-            text[["sentence_id", "sentiment_label"]],
-            on="sentence_id",
-            suffixes=("", "_text"),
-        )["sentiment_label"].eq(
+        "label_match": bool(
             combined.merge(
                 text[["sentence_id", "sentiment_label"]],
                 on="sentence_id",
                 suffixes=("", "_text"),
-            )["sentiment_label_text"]
-        ).all()
+            )["sentiment_label"].eq(
+                combined.merge(
+                    text[["sentence_id", "sentiment_label"]],
+                    on="sentence_id",
+                    suffixes=("", "_text"),
+                )["sentiment_label_text"]
+            ).all()
+        )
         if "sentiment_label" in text.columns
         else False,
         "token_min": int(combined["n_tokens"].min()),

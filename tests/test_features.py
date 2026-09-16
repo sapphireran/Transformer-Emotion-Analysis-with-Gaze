@@ -27,7 +27,7 @@ def test_missingness_flags_absent_column():
     report = missingness_report(df, ["nFixations", "FFD"])
     by = report.set_index("column")
     assert by.loc["nFixations", "n_missing"] == 1
-    assert by.loc["FFD", "present"] is False
+    assert bool(by.loc["FFD", "present"]) is False
 
 
 def test_summarize_numeric_skips_text():
