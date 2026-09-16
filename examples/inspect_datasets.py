@@ -141,10 +141,36 @@ def main() -> int:
     print(f"per-subject files: {len(subject_files)}")
     if len(subject_files) != 12:
         errors.append(f"expected 12 subject CSVs, found {len(subject_files)}")
+    expected_ids = set(average["id"].astype(int))
+    short_subjects = []
     for path in subject_files:
         sub = _load_csv(path)
-        if len(sub) != len(average):
-            errors.append(f"{path.name} has {len(sub)} rows; average has {len(average)}")
+        sub_ids = set(sub["id"].astype(int))
+        extra = sub_ids - expected_ids
+        missing = expected_ids - sub_ids
+        print(
+            f"  {path.name}: rows={len(sub)} "
+            f"id[{min(sub_ids) if sub_ids else '—'}–{max(sub_ids) if sub_ids else '—'}] "
+            f"missing={len(missing)}"
+        )
+        if extra:
+            errors.append(f"{path.name} has ids not in the average table: {sorted(extra)[:8]}")
+        if missing:
+            short_subjects.append((path.name, sorted(missing)))
+    if short_subjects:
+        print("known shorter subject recordings (average still has 400 rows):")
+        for name, missing in short_subjects:
+            preview = missing[:8]
+            suffix = "…" if len(missing) > 8 else ""
+            print(f"  {name}: {len(missing)} ids absent {preview}{suffix}")
+        # Subject 3 is the committed short file (ids 0–298). Other gaps are unexpected.
+        unexpected = [
+            name for name, missing in short_subjects if name != "3_SR.csv"
+        ]
+        if unexpected:
+            errors.append(f"unexpected short subject CSVs: {unexpected}")
+        elif short_subjects[0][1] != list(range(299, 400)):
+            errors.append("3_SR.csv is short but missing ids are not 299–399")
 
     words = _load_csv(ZUCO_WORD_AVERAGES)
     describe_table("ZuCo word averages v2", words)

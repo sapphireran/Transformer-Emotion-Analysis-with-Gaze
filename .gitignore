@@ -12,6 +12,6 @@ models/
 *.pth
 *.pt
 
-# Local experiment dumps
-examples/sample_outputs/*.json
-!examples/sample_outputs/.gitkeep
+# Local experiment dumps (keep committed JSON baselines)
+result/*.log
+*.log

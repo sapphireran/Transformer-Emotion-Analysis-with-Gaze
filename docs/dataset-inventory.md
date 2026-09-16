@@ -6,7 +6,7 @@ Every committed table, its schema, and who reads it. Row counts are from this ch
 
 | File | Rows (approx.) | Key columns | Produced by | Read by |
 | --- | --- | --- | --- | --- |
-| `ZuCo_et_csv_data/{1-12}_SR.csv` | ~400 each | `id`, `SentLen`, `omissionRate`, `nFixations`, `meanPupilSize`, `GD`, `TRT`, `FFD`, `SFD`, `GPT` | `read_ZuCo_mat.py` | averaging script |
+| `ZuCo_et_csv_data/{1-12}_SR.csv` | 400 each except `3_SR.csv` (299) | `id`, `SentLen`, `omissionRate`, `nFixations`, `meanPupilSize`, `GD`, `TRT`, `FFD`, `SFD`, `GPT` | `read_ZuCo_mat.py` | averaging script |
 | `ZuCo_et_csv_data/average_data.csv` | ~400 | same, subject-mean raw ms | `get_average_sentence_level.py` | analysis |
 | `ZuCo_et_csv_data/min_max_scaled_average_data.csv` | ~400 | same, min-max | averaging script | optional join |
 | `ZuCo_et_csv_data/standard_scaled_average_data.csv` | ~400 | same, z-score | averaging script | ZuCo SST join |

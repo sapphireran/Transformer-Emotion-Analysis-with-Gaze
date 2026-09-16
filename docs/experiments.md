@@ -104,6 +104,15 @@ These do not replace the transformers. They tell you whether the CSVs contain an
 
 If TF-IDF already saturates the ZuCo set, a 20-epoch RoBERTa run will overfit; treat CV means cautiously.
 
+Linear floors from `examples/fusion_toy.py` on this checkout (balanced logistic regression):
+
+| Track | text TF-IDF weighted F1 | concat TF-IDF+gaze16 | Δ |
+| --- | --- | --- | --- |
+| ZuCo (n_test=40) | 0.520 | 0.500 | −0.020 |
+| Full SST (n_test=1186) | 0.624 | 0.628 | +0.004 |
+
+Gaze-only sits near chance (~0.33–0.35). Refresh `examples/sample_outputs/fusion_toy.json` if you change a split.
+
 ## Seeds and comparability
 
 - ZuCo folds are comparable across `model_type` values as long as you do not change `random_state=42` or the CSV.

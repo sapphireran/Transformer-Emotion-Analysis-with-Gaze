@@ -136,6 +136,7 @@ Training the transformer models needs PyTorch, Hugging Face `transformers` / `da
 - [Dataset inventory](docs/dataset-inventory.md) — every CSV and its schema
 - [Examples](examples/README.md) — CPU walkthroughs
 - [Examples walkthrough](docs/examples-walkthrough.md) — how to read the printed tables
+- [Baseline notes](docs/baseline-notes.md) — numbers from this checkout
 
 ## Status of this personal repo
 

@@ -78,7 +78,6 @@ def _fit_eval(
 ) -> dict:
     clf = LogisticRegression(
         max_iter=2000,
-        multi_class="auto",
         class_weight="balanced",
         solver="lbfgs",
     )

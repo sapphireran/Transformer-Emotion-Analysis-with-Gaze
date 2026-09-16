@@ -68,6 +68,10 @@ Zeros in numeric columns are treated as missing (`NaN`) before the sentence-leve
 
 `id` is preserved and used as the join key onto SST sentence ids.
 
+**Subject 3 is short.** `ZuCo_et_csv_data/3_SR.csv` has 299 rows with `id` 0–298. `DataTransformer` skips a block of Task-1 sentences for that reader, and `read_ZuCo_mat.py` then `reset_index`, so those 299 rows are reindexed rather than keeping the original ZuCo sentence numbers. The committed average table still has 400 rows: `get_average_sentence_level.py` means by DataFrame index after `read_csv`, so subject 3 only contributes to sentences 0–298. `examples/inspect_datasets.py` treats this file as expected and fails if any *other* subject file is short.
+
+That reindex-then-mean behavior is a reason to regenerate averages by `id` if you re-export from MATLAB.
+
 ## Stage 3 — join text and gaze (ZuCo SST)
 
 `ZuCo_SST_data/ssts_ZuCo.csv` has `sentence_id`, `sentence`, `sentiment_label`. Joining on `sentence_id == id` produces:

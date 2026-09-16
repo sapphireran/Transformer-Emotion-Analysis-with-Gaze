@@ -22,6 +22,12 @@ python3 examples/word_level_gaze.py
 `--write path.json` dumps the numeric payload on the stats / baseline /
 fusion / word-level scripts.
 
+```bash
+python3 examples/run_all.py
+```
+
+runs the suite and refreshes `examples/sample_outputs/`.
+
 ## What each script is for
 
 | Script | Reads | Asks |

@@ -81,6 +81,7 @@ Typical patterns on this personal dump (re-check after any regenerate):
 - `FFD` and `GD` are moderately correlated first-pass pair.
 - Extreme `nFixations` often sit on very short or very long sentences; inspect before you treat them as sentiment signal.
 - Neutral reviews in the ZuCo slice are few. A feature that "separates neutral" may be a sample-size artifact.
+- On the committed **full SST** table the five projected features are almost collinear (`|r|` often `> 0.98`). Class-conditional `f_classif` can still look significant because one latent direction moves slightly with the label. Treat that as a property of the projector, not as five independent reading-time measures.
 
 ## Leakage and interpretation
 

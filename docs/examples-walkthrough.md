@@ -12,6 +12,12 @@ python3 -m pip install -r requirements.txt
 
 `pandas`, `numpy`, and `scikit-learn` (which pulls in `scipy`) are enough.
 
+To refresh every JSON dump in one pass:
+
+```bash
+python3 examples/run_all.py
+```
+
 ## 1. Inventory check
 
 ```bash
