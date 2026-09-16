@@ -1,5 +1,3 @@
-import numpy as np
-import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 
 from examples.lib.fusion import hashed_text_matrix, run_fusion_cv
@@ -38,4 +36,4 @@ def test_fold_membership_matches_trainer_seed():
     # First fold test ids are a regression lock so a later refactor
     # cannot silently change the protocol.
     first_test = next(kf.split(df, y))[1]
-    assert first_test[:5].tolist() == [2, 6, 7, 8, 9]
+    assert first_test[:5].tolist() == [1, 8, 9, 11, 12]

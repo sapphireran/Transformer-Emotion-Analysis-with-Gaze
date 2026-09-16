@@ -44,7 +44,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     all_rows = load_subjects()
-    print(f"loaded {len(all_rows)} rows (12 × 400)")
+    print(f"loaded {len(all_rows)} rows (11 × 400 + 299 for subject 3)")
 
     print("\nBetween-subject std of the 400-sentence means, then mean of")
     print("within-sentence (across-subject) std — fusion columns, raw units.\n")

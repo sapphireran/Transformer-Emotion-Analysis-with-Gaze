@@ -34,26 +34,21 @@ def main() -> int:
     for item in problems:
         print(f"  - {item}")
 
-    print("\nPer-column check (z-score should be ~mean 0 std 1; min-max in [0, 1])")
-    print(f"{'column':16} {'z_mean':>9} {'z_std':>9} {'mm_min':>9} {'mm_max':>9} {'rank_eq':>8}")
-    rank_ok = True
+    print("\nPer-column check (z-score ~mean 0 std 1; min-max in [0, 1]; Spearman ≈ 1)")
+    print(f"{'column':16} {'z_mean':>9} {'z_std':>9} {'mm_min':>9} {'mm_max':>9} {'spearman':>9}")
     for col in ZUCO_GAZE_COLUMNS:
         z = std[col].to_numpy(dtype=float)
         m = mm[col].to_numpy(dtype=float)
-        # Same order statistics? Spearman via rank of finite values.
-        z_rank = pd_rank(z)
-        m_rank = pd_rank(m)
-        eq = bool(np.array_equal(z_rank, m_rank))
-        rank_ok = rank_ok and eq
+        rho = spearman(z, m)
         print(
             f"{col:16} {z.mean():9.4f} {z.std(ddof=0):9.4f} "
-            f"{m.min():9.4f} {m.max():9.4f} {'yes' if eq else 'NO':>8}"
+            f"{m.min():9.4f} {m.max():9.4f} {rho:9.6f}"
         )
         if m.min() < -1e-9 or m.max() > 1 + 1e-9:
             problems.append(f"{col} min-max outside [0, 1]")
-
-    if not rank_ok:
-        problems.append("at least one column does not share rank order across scales")
+        # Tiny float ties can break exact rank equality (omissionRate has one).
+        if rho < 0.999:
+            problems.append(f"{col} Spearman {rho:.6f} is below 0.999")
 
     print()
     if problems:
@@ -68,12 +63,22 @@ def main() -> int:
     return 0
 
 
-def pd_rank(values: np.ndarray) -> np.ndarray:
-    """Average ranks, matching pandas default, for a 1-d array."""
+def spearman(a: np.ndarray, b: np.ndarray) -> float:
+    """Pearson correlation of ranks. Average ties, ignore a constant column."""
+    ra = _rank_average(a)
+    rb = _rank_average(b)
+    ra = ra - ra.mean()
+    rb = rb - rb.mean()
+    denom = np.sqrt((ra**2).sum() * (rb**2).sum())
+    if denom == 0:
+        return 1.0 if np.allclose(ra, rb) else 0.0
+    return float((ra * rb).sum() / denom)
+
+
+def _rank_average(values: np.ndarray) -> np.ndarray:
     order = np.argsort(values, kind="mergesort")
     ranks = np.empty_like(order, dtype=float)
-    ranks[order] = np.arange(values.size, dtype=float)
-    # Average ties.
+    ranks[order] = np.arange(1, values.size + 1, dtype=float)
     sorted_vals = values[order]
     i = 0
     while i < values.size:
@@ -81,8 +86,7 @@ def pd_rank(values: np.ndarray) -> np.ndarray:
         while j < values.size and sorted_vals[j] == sorted_vals[i]:
             j += 1
         if j - i > 1:
-            avg = ranks[order[i:j]].mean()
-            ranks[order[i:j]] = avg
+            ranks[order[i:j]] = ranks[order[i:j]].mean()
         i = j
     return ranks
 

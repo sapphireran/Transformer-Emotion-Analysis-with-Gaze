@@ -34,7 +34,7 @@ Directory: `ZuCo_et_csv_data/`
 
 | File | Rows | Role |
 | --- | ---: | --- |
-| `1_SR.csv` … `12_SR.csv` | 400 each | One subject, sentiment reading (SR) |
+| `1_SR.csv` … `12_SR.csv` | 400 each (subject 3: **299**) | One subject, sentiment reading (SR) |
 | `average_data.csv` | 400 | Mean across subjects (raw units) |
 | `min_max_scaled_average_data.csv` | 400 | Min-max of the subject mean |
 | `standard_scaled_average_data.csv` | 400 | Z-score of the subject mean |
@@ -63,9 +63,16 @@ averages. The copy in the repo still points at a folder named
 ZuCo Task 1 (normal / sentiment reading of movie reviews). The transformer
 in `utils_ZuCo.py` already skips known bad sentence ranges for a few
 subject–task pairs. For Task 1 the special case is subject index 2
-(file `3_SR.csv`), which drops a 100-sentence block plus one extra row in
-the MATLAB dump. The checked-in CSVs are already aligned to 400 rows, so
-the join to SST does not re-apply those filters.
+(file `3_SR.csv`): MATLAB sentences `150–249` and `399` are dropped
+(**101** rows). The extract then **reindexes** the remaining 299
+sentences to `id = 0 … 298`.
+
+That reindex is not harmless. Other subjects keep `id = 0 … 399` as the
+SST sentence index. After the hole, subject 3’s `id` 150 is original
+MATLAB sentence 250. `get_average_sentence_level.py` averages by
+**positional index**, so from row 150 onward subject 3 votes on the
+wrong review. Rows 299–399 of the 400-row mean are 11-subject means.
+See [known-issues.md](known-issues.md).
 
 ---
 
@@ -75,7 +82,7 @@ Directory: `ZuCo_et_csv_data/word/`
 
 | File | Rows | Role |
 | --- | ---: | --- |
-| `1_SR.csv` … `12_SR.csv` | 7,129 each | Per-word gaze for one subject |
+| `1_SR.csv` … `12_SR.csv` | 7,129 each (subject 3: **5,293**) | Per-word gaze for one subject |
 | `word_averages.csv` | 7,129 | Older subject mean |
 | `word_averages_v2.csv` | 7,129 | Current subject mean (zeros kept) |
 
@@ -99,7 +106,10 @@ id, Sent_ID, Word_ID, Word, nFixations, meanPupilSize, GD, TRT, FFD, SFD, GPT, W
 `word/get_average.py` concatenates the 12 subject files and takes the
 mean of the numeric gaze columns **by row position**, then glues back
 `id, Sent_ID, Word_ID, Word, WordLen` from subject 1. That only works
-because every subject file has the same 7,129-row alignment.
+for subjects with the same 7,129-row alignment. Subject 3 has 5,293
+rows, so it only enters the mean for the first 5,293 positions — and
+those positions are the *reindexed* Task-1 extract, not necessarily the
+same tokens as subject 1.
 
 ---
 
@@ -142,7 +152,7 @@ Directory: `SST_data/`
 
 | File | Rows | Labels (0 / 1 / 2) | Role |
 | --- | ---: | --- | --- |
-| `stts_all_sentence_level.csv` | 11,852 | 4649 / 2241 / 4962 * | Raw SST phrases, no header |
+| `stts_all_sentence_level.csv` | 11,853 | 4649 / 2241 / 4963 * | Raw SST phrases, no header |
 | `combined_full_sst_et.csv` | 11,853 | 4649 / 2241 / 4963 | Text + 5 projected gaze features |
 | `train_full_sst.csv` | 9,482 | 3710 / 1833 / 3939 | 80% |
 | `valid_full_sst.csv` | 1,185 | 476 / 209 / 500 | 10% |
@@ -151,9 +161,10 @@ Directory: `SST_data/`
 | `convert_sst_to_et.py` | — | — | Builds the word skeleton |
 | `spilt.py` | — | — | 80/10/10 split (filename is historical) |
 
-\* String labels in `stts_all_sentence_level.csv`. Neutral/negative match
-the combined table; positive is off by one (4962 vs 4963) because the
-headerless file has no extra row.
+\* String labels in `stts_all_sentence_level.csv`. Counts match
+`combined_full_sst_et.csv` when the file is read with `header=None`
+(the first review is data, not a header). A naive `csv.reader` that
+treats line 1 as names will under-count by one.
 
 `combined_full_sst_et.csv` columns:
 

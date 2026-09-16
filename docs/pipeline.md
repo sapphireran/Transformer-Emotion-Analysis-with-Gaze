@@ -38,6 +38,10 @@ call:
 4. Writes `et_csv_data/{k}_SR.csv`. The checked-in copies were moved to
    `ZuCo_et_csv_data/`.
 
+Subject 3 on disk is the Task-1 special case: **299** sentence rows,
+reindexed `0 … 298`. Averaging that file by position contaminates
+sentences 150+ — [known-issues.md](known-issues.md) #7.
+
 `get_matfiles` concatenates `os.getcwd()` with a **backslash** subdir
 `\\ZuCo_mat_data\\`. That is a Windows-era path. On Linux you need to
 point it at `ZuCo_mat_data/task1` or change the separator. The subject

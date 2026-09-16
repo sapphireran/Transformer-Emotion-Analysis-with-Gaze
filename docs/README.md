@@ -32,7 +32,8 @@ as a substitute for the ZuCo or SST papers.
 
 Runnable counterparts live under [`../examples/`](../examples/README.md).
 Each doc that cites a number (400 sentences, 12 subjects, 191,971 predicted
-tokens) can be re-checked with `examples/inspect_datasets.py`.
+tokens) can be re-checked with `examples/inspect_datasets.py`. Checked-in
+stdout from one run is in [sample-reports/](sample-reports/README.md).
 
 ## What this write-up is not
 

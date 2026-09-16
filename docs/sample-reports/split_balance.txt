@@ -1,0 +1,21 @@
+ZuCo ∩ SST (measured gaze)
+==========================
+split                   n      neg      neu      pos   majority
+zuco_standard         400  123 31%  137 34%  140 35% positive 35%
+zuco_train            320  103 32%  107 33%  110 34% positive 34%
+zuco_valid             40    7 18%   14 35%   19 48% positive 48%
+zuco_test              40   13 32%   16 40%   11 28% neutral 40%
+
+Full SST (projected gaze)
+=========================
+split                   n      neg      neu      pos   majority
+sst_combined        11853 4649 39% 2241 19% 4963 42% positive 42%
+sst_train            9482 3710 39% 1833 19% 3939 42% positive 42%
+sst_valid            1185  476 40%  209 18%  500 42% positive 42%
+sst_test             1186  463 39%  199 17%  524 44% positive 44%
+
+Notes
+-----
+* Chance if you always guess the majority class is the last column.
+* model_ZuCo_SST.py ignores zuco_train/valid/test and uses 5-fold CV.
+* SST_data/spilt.py did not pass stratify=, so full-SST priors drift.

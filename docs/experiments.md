@@ -157,13 +157,21 @@ Fill this in when you re-run; the clone does not ship metrics.
 
 | Setting | Acc | Weighted F1 | Macro F1 | Notes |
 | --- | --- | --- | --- | --- |
-| ZuCo RoBERTa | | | | |
-| ZuCo RoBERTa + gaze | | | | |
-| ZuCo gaze-only (toy) | | | | |
-| ZuCo text hashed (toy) | | | | |
-| ZuCo fusion hashed (toy) | | | | |
+| ZuCo RoBERTa | | | | Hub trainer, not re-run here |
+| ZuCo RoBERTa + gaze | | | | Hub trainer, not re-run here |
+| ZuCo majority (toy) | 0.350 ± 0.000 | 0.181 ± 0.000 | 0.173 ± 0.000 | always guess positive |
+| ZuCo length-only (toy) | 0.335 ± 0.024 | 0.257 ± 0.015 | 0.248 ± 0.011 | word count |
+| ZuCo gaze-only (toy) | 0.368 ± 0.030 | 0.354 ± 0.028 | 0.349 ± 0.026 | five z-scores |
+| ZuCo text hashed (toy) | 0.455 ± 0.043 | 0.438 ± 0.056 | 0.433 ± 0.058 | 4096-d 1–2 grams |
+| ZuCo fusion hashed (toy) | 0.450 ± 0.051 | 0.441 ± 0.052 | 0.436 ± 0.051 | text + gaze; ≈ text |
 | Full SST RoBERTa | | | | after test-loop fix |
 | Full SST RoBERTa + gaze | | | | after test-loop fix |
+
+Toy numbers are 5-fold mean ± std from
+`examples/toy_text_gaze_fusion.py` (seed 42), also saved in
+`docs/sample-reports/toy_text_gaze_fusion.txt`. Gaze-only is barely
+above majority; hashed fusion does not beat hashed text. That is a
+linear-probe result, not a RoBERTa result.
 
 Until those cells are filled, treat any claim about “gaze helps” as a
 hypothesis, not a result.

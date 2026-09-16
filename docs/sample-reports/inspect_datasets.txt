@@ -1,0 +1,94 @@
+Canonical tables
+
+[ok          ] zuco_text                    400 rows  ZuCo_SST_data/ssts_ZuCo.csv
+               labels: negative=123, neutral=137, positive=140
+               note: 400 ZuCo Task-1 sentences with ternary SST labels.
+[ok          ] zuco_standard                400 rows  ZuCo_SST_data/combined_sst_et_standard.csv
+               labels: negative=123, neutral=137, positive=140
+               note: Experiment A table (z-scored measured gaze).
+               gaze: measured / sentence
+[ok          ] zuco_minmax                  400 rows  ZuCo_SST_data/combined_sst_et_min_max.csv
+               labels: negative=123, neutral=137, positive=140
+               note: Same 400 rows as zuco_standard, min-max gaze.
+               gaze: measured / sentence
+[ok          ] zuco_train                   320 rows  ZuCo_SST_data/train.csv
+               labels: negative=103, neutral=107, positive=110
+               note: 80% hold-out; the CV trainer does not use this file.
+               gaze: measured / sentence
+[ok          ] zuco_valid                    40 rows  ZuCo_SST_data/valid.csv
+               labels: negative=7, neutral=14, positive=19
+               gaze: measured / sentence
+[ok          ] zuco_test                     40 rows  ZuCo_SST_data/test.csv
+               labels: negative=13, neutral=16, positive=11
+               gaze: measured / sentence
+[ok          ] zuco_sentence_average        400 rows  ZuCo_et_csv_data/average_data.csv
+               note: Subject-mean gaze in raw tracker units.
+               gaze: measured / sentence
+[ok          ] zuco_sentence_standard       400 rows  ZuCo_et_csv_data/standard_scaled_average_data.csv
+               gaze: measured / sentence
+[ok          ] zuco_sentence_minmax         400 rows  ZuCo_et_csv_data/min_max_scaled_average_data.csv
+               gaze: measured / sentence
+[ok          ] zuco_word_average           7129 rows  ZuCo_et_csv_data/word/word_averages_v2.csv
+               gaze: measured / word
+[ok          ] sst_combined               11853 rows  SST_data/combined_full_sst_et.csv
+               labels: negative=4649, neutral=2241, positive=4963
+               note: Experiment B table. Gaze is projected, not measured.
+               gaze: projected / sentence
+[ok          ] sst_train                   9482 rows  SST_data/train_full_sst.csv
+               labels: negative=3710, neutral=1833, positive=3939
+               gaze: projected / sentence
+[ok          ] sst_valid                   1185 rows  SST_data/valid_full_sst.csv
+               labels: negative=476, neutral=209, positive=500
+               gaze: projected / sentence
+[ok          ] sst_test                    1186 rows  SST_data/test_full_sst.csv
+               labels: negative=463, neutral=199, positive=524
+               gaze: projected / sentence
+[ok          ] sst_raw                    11853 rows  SST_data/stts_all_sentence_level.csv
+               labels: negative=4649, neutral=2241, positive=4963
+               note: Headerless SST dump with string polarities. Same 11853 rows as combined_full_sst_et.csv.
+[ok          ] sst_word_skeleton         191971 rows  SST_data/sst_et_test.csv
+               note: Word rows with zeroed gaze, used as a prediction request.
+[ok          ] pred_word_v2              191971 rows  gaze_prediction/data/prediction_test_v2.csv
+               gaze: projected / word
+[ok          ] pred_word_small             1751 rows  gaze_prediction/data/prediction_test.csv
+               gaze: projected / word
+[ok          ] provo                       2659 rows  gaze_prediction/data/provo.csv
+               note: PROVO extract. fixProp is not gaze duration.
+               gaze: auxiliary / word
+
+Subject files (sentence-level; subject 3 is 299 rows, others 400)
+[ok          ] subject  1     400 rows  ZuCo_et_csv_data/1_SR.csv
+[ok          ] subject  2     400 rows  ZuCo_et_csv_data/2_SR.csv
+[ok          ] subject  3     299 rows  ZuCo_et_csv_data/3_SR.csv
+[ok          ] subject  4     400 rows  ZuCo_et_csv_data/4_SR.csv
+[ok          ] subject  5     400 rows  ZuCo_et_csv_data/5_SR.csv
+[ok          ] subject  6     400 rows  ZuCo_et_csv_data/6_SR.csv
+[ok          ] subject  7     400 rows  ZuCo_et_csv_data/7_SR.csv
+[ok          ] subject  8     400 rows  ZuCo_et_csv_data/8_SR.csv
+[ok          ] subject  9     400 rows  ZuCo_et_csv_data/9_SR.csv
+[ok          ] subject 10     400 rows  ZuCo_et_csv_data/10_SR.csv
+[ok          ] subject 11     400 rows  ZuCo_et_csv_data/11_SR.csv
+[ok          ] subject 12     400 rows  ZuCo_et_csv_data/12_SR.csv
+
+Subject files (word-level; subject 3 is 5293 rows, others 7129)
+[ok          ] subject  1    7129 rows  1_SR.csv
+[ok          ] subject  2    7129 rows  2_SR.csv
+[ok          ] subject  3    5293 rows  3_SR.csv
+[ok          ] subject  4    7129 rows  4_SR.csv
+[ok          ] subject  5    7129 rows  5_SR.csv
+[ok          ] subject  6    7129 rows  6_SR.csv
+[ok          ] subject  7    7129 rows  7_SR.csv
+[ok          ] subject  8    7129 rows  8_SR.csv
+[ok          ] subject  9    7129 rows  9_SR.csv
+[ok          ] subject 10    7129 rows  10_SR.csv
+[ok          ] subject 11    7129 rows  11_SR.csv
+[ok          ] subject 12    7129 rows  12_SR.csv
+
+Joins
+[ok          ] zuco_text ⋈ zuco_standard on sentence_id (400)
+[ok          ] average_data ⋈ zuco_standard on id/sentence_id (400)
+[ok          ] full-SST train/valid/test partition combined_full_sst_et.csv
+[ok          ] full-SST splits have no shared sentence_id
+[ok          ] ZuCo train/valid/test partition the 400-row table
+
+All inventory checks passed.

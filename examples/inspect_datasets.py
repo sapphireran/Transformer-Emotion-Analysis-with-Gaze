@@ -18,7 +18,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from examples.lib.loaders import LABEL_NAMES, load_csv
 from examples.lib.paths import (
+    REPO_ROOT,
     DatasetSpec,
+    expected_subject_sentence_rows,
+    expected_subject_word_rows,
     iter_dataset_specs,
     spec_by_key,
     subject_sentence_csv,
@@ -73,7 +76,7 @@ def inspect_spec(spec: DatasetSpec) -> list[str]:
 
 def inspect_subjects() -> list[str]:
     problems: list[str] = []
-    print("\nSubject files (sentence-level, expect 400 rows each)")
+    print("\nSubject files (sentence-level; subject 3 is 299 rows, others 400)")
     for subject in range(1, 13):
         path = subject_sentence_csv(subject)
         if not path.is_file():
@@ -83,12 +86,13 @@ def inspect_subjects() -> list[str]:
         import pandas as pd
 
         n = len(pd.read_csv(path))
-        status = "ok" if n == 400 else "ROW MISMATCH"
-        if n != 400:
-            problems.append(f"{path.name}: expected 400 rows, found {n}")
-        print(f"[{status:12}] subject {subject:2d} {n:7d} rows  {path.relative_to(path.parents[2])}")
+        expected = expected_subject_sentence_rows(subject)
+        status = "ok" if n == expected else "ROW MISMATCH"
+        if n != expected:
+            problems.append(f"{path.name}: expected {expected} rows, found {n}")
+        print(f"[{status:12}] subject {subject:2d} {n:7d} rows  {path.relative_to(REPO_ROOT)}")
 
-    print("\nSubject files (word-level, expect 7129 rows each)")
+    print("\nSubject files (word-level; subject 3 is 5293 rows, others 7129)")
     for subject in range(1, 13):
         path = subject_word_csv(subject)
         if not path.is_file():
@@ -97,9 +101,10 @@ def inspect_subjects() -> list[str]:
         import pandas as pd
 
         n = len(pd.read_csv(path))
-        status = "ok" if n == 7129 else "ROW MISMATCH"
-        if n != 7129:
-            problems.append(f"{path.name}: expected 7129 rows, found {n}")
+        expected = expected_subject_word_rows(subject)
+        status = "ok" if n == expected else "ROW MISMATCH"
+        if n != expected:
+            problems.append(f"{path.name}: expected {expected} rows, found {n}")
         print(f"[{status:12}] subject {subject:2d} {n:7d} rows  {path.name}")
     return problems
 

@@ -67,7 +67,6 @@ def _length_column(X):
 def _build_pipeline(kind: str, random_state: int) -> Pipeline:
     clf = LogisticRegression(
         max_iter=400,
-        multi_class="auto",
         solver="lbfgs",
         random_state=random_state,
     )

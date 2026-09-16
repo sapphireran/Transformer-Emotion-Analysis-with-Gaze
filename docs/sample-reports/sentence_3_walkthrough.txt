@@ -1,0 +1,53 @@
+sentence_id: 3
+label:       1 (neutral)
+text:        Slow, silly and unintentionally hilarious.
+gaze source: measured (ZuCo Task 1, 12-subject mean)
+
+Word-level subject mean (ZuCo_et_csv_data/word/word_averages_v2.csv)
+ Word_ID            Word nFixations     GD    TRT    FFD   SFD     GPT  WordLen
+       0            slow       1.92 138.25 246.75 130.83 44.08  138.25        4
+       1           silly       2.67 160.67 333.83 113.25 13.67  242.17        5
+       2             and       1.67  86.92 174.33  86.92 39.42  215.75        3
+       3 unintentionally       5.42 291.67 802.50 173.00  0.00  440.67       15
+       4       hilarious       2.33 181.67 314.00 137.58 22.83 1033.08        9
+
+Subject 1 (0 skipped word(s))
+ Word_ID            Word nFixations     GD    TRT    FFD    SFD    GPT  WordLen
+       0            slow       3.00 162.00 329.00 162.00   0.00 162.00        4
+       1           silly       2.00  97.00 150.00  97.00   0.00 317.00        5
+       2             and       1.00 103.00 103.00 103.00 103.00 103.00        3
+       3 unintentionally       3.00 121.00 288.00 121.00   0.00 121.00       15
+       4       hilarious       2.00 139.00 306.00 139.00   0.00 473.00        9
+
+Subject 2 (1 skipped word(s))
+ Word_ID            Word nFixations     GD    TRT    FFD   SFD    GPT  WordLen
+       0            slow       0.00   0.00   0.00   0.00  0.00   0.00        4
+       1           silly       3.00 193.00 367.00  78.00  0.00 193.00        5
+       2             and       2.00 125.00 280.00 125.00  0.00 125.00        3
+       3 unintentionally       6.00 227.00 707.00  89.00  0.00 227.00       15
+       4       hilarious       1.00  91.00  91.00  91.00 91.00 900.00        9
+
+Sentence-level subject mean (raw units)
+  SentLen          5.0000
+  omissionRate     0.2667
+  nFixations       2.9667
+  meanPupilSize    876.7642
+  GD               181.9236
+  TRT              395.9444
+  FFD              135.4403
+  SFD              39.3021
+  GPT              439.7333
+
+Fusion vector read by model_ZuCo_SST.py (z-scores)
+  nFixations       +4.1272
+  FFD              +2.3246
+  GPT              +3.4953
+  TRT              +4.0365
+  GD               +1.8866
+Dropped by the trainer:
+  omissionRate     -0.7883
+  meanPupilSize    +1.3103
+  SFD              -2.9769
+
+These five numbers are concatenated with a 768-d pooler vector.
+They describe reading effort, not polarity. See docs/worked-example.md.

@@ -1,0 +1,28 @@
+rows=400 folds=5 seed=42
+
+Mean ± std over folds
+---------------------
+majority   acc=0.3500±0.0000  F1_w=0.1815±0.0000  F1_macro=0.1728±0.0000  folds=5
+length     acc=0.3350±0.0242  F1_w=0.2568±0.0145  F1_macro=0.2475±0.0114  folds=5
+gaze       acc=0.3675±0.0302  F1_w=0.3535±0.0281  F1_macro=0.3489±0.0259  folds=5
+text       acc=0.4550±0.0430  F1_w=0.4380±0.0558  F1_macro=0.4327±0.0579  folds=5
+fusion     acc=0.4500±0.0506  F1_w=0.4410±0.0525  F1_macro=0.4358±0.0514  folds=5
+
+Per-fold accuracy
+-----------------
+  fold    majority      length        gaze        text      fusion
+     1      0.3500      0.3500      0.3875      0.4500      0.4250
+     2      0.3500      0.3750      0.4125      0.4875      0.5375
+     3      0.3500      0.3250      0.3625      0.3875      0.4000
+     4      0.3500      0.3125      0.3250      0.5125      0.4125
+     5      0.3500      0.3125      0.3500      0.4375      0.4750
+
+How to read this
+----------------
+* majority / length: is the label just the most common class or review length?
+* gaze: five reading-time z-scores, no words.
+* text: hashed n-grams, no gaze.
+* fusion: concat of text block and gaze block (late fusion).
+* If fusion ≈ text and gaze ≈ majority, RoBERTa+gaze is unlikely to be magic.
+* If gaze is strong, look for length leakage before celebrating.
+* This is not a substitute for model_ZuCo_SST.py.

@@ -1,5 +1,7 @@
 from examples.lib.paths import (
     REPO_ROOT,
+    expected_subject_sentence_rows,
+    expected_subject_word_rows,
     iter_dataset_specs,
     spec_by_key,
     subject_sentence_csv,
@@ -30,6 +32,13 @@ def test_spec_by_key_unknown():
         assert "not-a-dataset" in str(exc)
     else:
         raise AssertionError("expected KeyError")
+
+
+def test_subject_expected_lengths():
+    assert expected_subject_sentence_rows(1) == 400
+    assert expected_subject_sentence_rows(3) == 299
+    assert expected_subject_word_rows(3) == 5293
+    assert expected_subject_word_rows(12) == 7129
 
 
 def test_subject_paths():

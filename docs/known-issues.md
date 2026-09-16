@@ -103,7 +103,26 @@ combined table is the safer source for modelling.
 
 ---
 
-## 7. Two skip policies when averaging
+## 7. Subject 3 is shorter and is averaged on the wrong index
+
+`ZuCo_et_csv_data/3_SR.csv` has **299** sentence rows (`id` 0–298) and
+the word sibling has **5,293** rows. `utils_ZuCo.py` dropped MATLAB
+sentences 150–249 and 399 for Task 1 subject index 2, then wrote a
+dense index.
+
+`get_average_sentence_level.py` and `word/get_average.py` then
+`concat` + `groupby(level=0).mean()`. From positional row 150 onward,
+subject 3 is a different sentence than subjects 1, 2, 4–12. The
+400-row `average_data.csv` still looks well-formed.
+
+`examples/inspect_datasets.py` treats 299 / 5,293 as the expected
+lengths so the inspector stays green. It does not repair the mean.
+If you re-average, join on the **original MATLAB sentence index** (or
+skip subject 3 after row 149), do not join on the dense `id`.
+
+---
+
+## 8. Two skip policies when averaging
 
 Sentence-level `get_average_sentence_level.py` converts zeros to NaN
 before the mean. Word-level `word/get_average.py` keeps zeros. A skip
@@ -112,7 +131,7 @@ wrong; they are inconsistent. See [gaze-features.md](gaze-features.md).
 
 ---
 
-## 8. `fillna` on a MultiIndex-like `columns=[fields]`
+## 9. `fillna` on a MultiIndex-like `columns=[fields]`
 
 `DataTransformer` builds `pd.DataFrame(..., columns=[fields])` — a
 **list containing a list** — which gives pandas a MultiIndex-looking
@@ -123,7 +142,7 @@ flat headers.
 
 ---
 
-## 9. In-place `fillna` / `replace` deprecation
+## 10. In-place `fillna` / `replace` deprecation
 
 Several scripts use `df.fillna(0, inplace=True)` and chained
 `replace(...).dropna(axis=0, inplace=True)` (the chained `inplace`
@@ -132,7 +151,7 @@ upgrade starts warning loudly.
 
 ---
 
-## 10. Hard-coded `view(-1, 3)`
+## 11. Hard-coded `view(-1, 3)`
 
 ```python
 loss = CrossEntropyLoss()(logits.view(-1, 3), labels.view(-1))
@@ -143,7 +162,7 @@ silently reshape wrong. Use `logits.view(-1, num_labels)`.
 
 ---
 
-## 11. Batch size constant ignored on ZuCo
+## 12. Batch size constant ignored on ZuCo
 
 `model_ZuCo_SST.py` sets `batch_size = 16` and then constructs loaders
 with `batch_size=16` as a literal. Changing the constant does nothing.
@@ -151,7 +170,7 @@ Full SST uses the constant correctly.
 
 ---
 
-## 12. No `models/` directory creation
+## 13. No `models/` directory creation
 
 `torch.save(..., 'models/best_{model_type}_model.pth')` fails if
 `models/` does not exist. The directory is gitignored and not created

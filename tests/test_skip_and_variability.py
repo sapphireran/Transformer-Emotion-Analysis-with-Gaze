@@ -19,7 +19,8 @@ def test_skip_analysis_cli():
 
 def test_subject_stack_shape():
     stacked = load_subjects()
-    assert len(stacked) == 12 * 400
+    # Subject 3 is the Task-1 extract that dropped 101 MATLAB sentences.
+    assert len(stacked) == 11 * 400 + 299
     assert set(stacked["subject"]) == set(range(1, 13))
 
 

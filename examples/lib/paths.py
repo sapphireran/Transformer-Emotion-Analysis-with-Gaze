@@ -215,10 +215,10 @@ def _specs() -> tuple[DatasetSpec, ...]:
             relative="SST_data/stts_all_sentence_level.csv",
             gaze_kind="none",
             level="sentence",
-            expected_rows=11852,
+            expected_rows=11853,
             expected_cols=None,
             has_header=False,
-            notes="Headerless SST dump with string polarities.",
+            notes="Headerless SST dump with string polarities. Same 11853 rows as combined_full_sst_et.csv.",
         ),
         DatasetSpec(
             key="sst_word_skeleton",
@@ -311,3 +311,12 @@ def subject_word_csv(subject: int) -> Path:
     if subject < 1 or subject > 12:
         raise ValueError(f"subject must be 1-12, got {subject}")
     return REPO_ROOT / "ZuCo_et_csv_data" / "word" / f"{subject}_SR.csv"
+
+
+def expected_subject_sentence_rows(subject: int) -> int:
+    """Task 1 subject index 2 (file 3_SR.csv) dropped 101 MATLAB sentences."""
+    return 299 if subject == 3 else 400
+
+
+def expected_subject_word_rows(subject: int) -> int:
+    return 5293 if subject == 3 else 7129

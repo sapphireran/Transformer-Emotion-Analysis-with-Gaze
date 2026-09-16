@@ -34,7 +34,7 @@ def test_headerless_sst():
     df = load_headerless_sst()
     assert "sentence" in df.columns
     assert "sentiment_label" in df.columns
-    assert len(df) == 11852
+    assert len(df) == 11853
     assert set(df["polarity"].unique()) <= {"NEGATIVE", "NEUTRAL", "POSITIVE"}
 
 
