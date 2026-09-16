@@ -26,9 +26,9 @@ def main() -> int:
     root = here.parent
     failed = []
     for name in SCRIPTS:
-        print("=" * 72)
-        print(name)
-        print("=" * 72)
+        print("=" * 72, flush=True)
+        print(name, flush=True)
+        print("=" * 72, flush=True)
         proc = subprocess.run([sys.executable, str(here / name)], cwd=root)
         if proc.returncode != 0:
             failed.append(name)

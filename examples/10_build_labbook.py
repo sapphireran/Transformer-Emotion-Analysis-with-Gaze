@@ -142,7 +142,7 @@ def main() -> int:
             ],
         )
     )
-    body.append("<p>Not a RoBERTa score. Linear gaze is a weak standalone signal on these 400 rows.</p>")
+    body.append("<p>Not a RoBERTa score. On 400 rows a 128-d hash loses to the five recorded gaze channels; both beat majority. That is a teaching floor, not a transformer result.</p>")
     body.append("</section>")
 
     body.append("<section><h2>Word-token artifacts</h2>")

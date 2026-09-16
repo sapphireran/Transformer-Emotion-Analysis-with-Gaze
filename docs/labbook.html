@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Gaze-sentiment lab book</title>
+  <style>
+    :root {
+      --bg: #f6f1e7;
+      --ink: #1f1a14;
+      --card: #fffaf0;
+      --accent: #8b3a2a;
+      --muted: #5c5346;
+      --line: #d9cbb3;
+    }
+    html, body {
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+      margin: 0;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2.2rem 1.4rem 4rem;
+    }
+    h1, h2, h3 { font-weight: 650; letter-spacing: -0.02em; }
+    h1 { font-size: 2.1rem; margin-bottom: 0.2rem; }
+    .lede { color: var(--muted); margin-top: 0; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem 1.2rem 1.2rem;
+      margin: 1.1rem 0;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.35rem 0.45rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--accent); }
+    code, pre {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.86rem;
+    }
+    pre {
+      background: #efe6d4;
+      padding: 0.8rem;
+      overflow-x: auto;
+      border-radius: 8px;
+    }
+    .ok { color: #215c2a; }
+    .warn { color: var(--accent); }
+    footer { color: var(--muted); font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+<main>
+<h1>Gaze-sentiment lab book</h1>
+<p class="lede">Personal forensic notes for the ZuCo ∩ SST and full-SST gaze-fusion tracks. Numbers are read from this checkout.</p>
+<section><h2>Two tracks</h2>
+<table><thead><tr><th>track</th><th>n</th><th>gaze</th><th>labels 0/1/2</th><th>eval</th></tr></thead><tbody><tr><td>ZuCo ∩ SST</td><td>400</td><td>recorded, 12 readers, then averaged</td><td>123/137/140</td><td>Stratified 5-fold in model_ZuCo_SST.py</td></tr><tr><td>Full SST</td><td>11853</td><td>projected (nFix, not nFixations)</td><td>4649/2241/4963</td><td>80/10/10 hold-out in model_full_SST.py</td></tr></tbody></table>
+</section>
+<section><h2>Reader 3 compaction</h2>
+<p>MATLAB task-1 subject 2 drops sentences 150–249 and 399, then writes <code>3_SR.csv</code> with compact ids 0–298. Compact 150 is original <strong>250</strong>. The published sentence mean is a positional 0→NaN average, so nFixations moves on <strong>246</strong> sentences (target 246) and SentLen — which is not even a gaze feature — moves on <strong>147</strong> (target 147). Worst nFixations shift is id 239, |Δ|=0.211.</p>
+<p>Word streams stay aligned for the first <strong>2594</strong> tokens (sentences 0–149), then <code>word_averages_v2.csv</code> averages different words at the same row index.</p>
+<p>On the clean overlap, nFixations mean pairwise r = 0.362 (range 0.101–0.602), ICC(1) = 0.237.</p>
+</section>
+<section><h2>Projected-gaze rank</h2>
+<p>Correlation-matrix condition number: recorded ZuCo <strong>304</strong> vs projected full SST <strong>13733</strong>. The five full-SST channels are almost one number repeated (except GD). A Linear(5→16) gaze stem cannot invent four extra degrees of freedom that are not in the table.</p>
+</section>
+<section><h2>CPU teaching floor (ZuCo, 5-fold ridge)</h2>
+<table><thead><tr><th>model</th><th>mean acc</th><th>mean weighted F1</th></tr></thead><tbody><tr><td>majority</td><td>0.3500</td><td>0.1815</td></tr><tr><td>gaze only</td><td>0.4104</td><td>0.3895</td></tr><tr><td>hashed text</td><td>0.3575</td><td>0.3541</td></tr><tr><td>text + gaze</td><td>0.3548</td><td>0.3536</td></tr></tbody></table>
+<p>Not a RoBERTa score. On 400 rows a 128-d hash loses to the five recorded gaze channels; both beat majority. That is a teaching floor, not a transformer result.</p>
+</section>
+<section><h2>Word-token artifacts</h2>
+<table><thead><tr><th>Sent_ID</th><th>token in CSV</th><th>intended reading</th></tr></thead><tbody><tr><td>4_NR</td><td>emp11111ty</td><td>empty</td></tr><tr><td>69_NR</td><td>massmurdering</td><td>mass-murdering</td></tr><tr><td>80_NR</td><td>murderoncampus</td><td>murder-on-campus</td></tr><tr><td>199_NR</td><td>allwiseguysallthetime</td><td>all-wise-guys-all-the-time</td></tr><tr><td>22_NR</td><td>20thcentury</td><td>20th-century</td></tr><tr><td>358_NR</td><td>under10</td><td>under-10</td></tr></tbody></table>
+<p>Recovered 6 / 6 of those tokens in word_averages_v2.csv.</p>
+</section>
+<section><h2>Trainer errata (left in place)</h2>
+<ul>
+<li><code>model_full_SST.py</code> overwrites <code>all_preds</code> each test batch. Printed test metrics use the last 162 of 1186 rows.</li>
+<li><code>model_ZuCo_SST.py</code> ignores the stored 80/10/10 CSVs and runs 5-fold CV.</li>
+<li>The stored ZuCo valid split is 7 / 14 / 19 (neg / neu / pos) on 40 rows.</li>
+<li>Export scripts still point at <code>et_csv_data/</code> and a Windows MATLAB path.</li>
+</ul></section>
+<section><h2>Catalogued tables</h2>
+<table><thead><tr><th>path</th><th>expected</th><th>seen</th><th>notes</th></tr></thead><tbody><tr><td>ZuCo_SST_data/combined_sst_et_standard.csv</td><td>400</td><td>400</td><td>z-scored sentence gaze joined to ZuCo ∩ SST text</td></tr><tr><td>ZuCo_SST_data/combined_sst_et_min_max.csv</td><td>400</td><td>400</td><td>same join, min-max gaze</td></tr><tr><td>ZuCo_SST_data/ssts_ZuCo.csv</td><td>400</td><td>400</td><td>text + labels only</td></tr><tr><td>ZuCo_SST_data/train.csv</td><td>320</td><td>320</td><td></td></tr><tr><td>ZuCo_SST_data/valid.csv</td><td>40</td><td>40</td><td></td></tr><tr><td>ZuCo_SST_data/test.csv</td><td>40</td><td>40</td><td></td></tr><tr><td>SST_data/combined_full_sst_et.csv</td><td>11853</td><td>11853</td><td>projected sentence gaze; nFix not nFixations</td></tr><tr><td>SST_data/train_full_sst.csv</td><td>9482</td><td>9482</td><td></td></tr><tr><td>SST_data/valid_full_sst.csv</td><td>1185</td><td>1185</td><td></td></tr><tr><td>SST_data/test_full_sst.csv</td><td>1186</td><td>1186</td><td></td></tr><tr><td>SST_data/stts_all_sentence_level.csv</td><td>11853</td><td>11853</td><td>headerless SST dump; first column is text, second is POSITIVE/NEUTRAL/NEGATIVE</td></tr><tr><td>ZuCo_et_csv_data/average_data.csv</td><td>400</td><td>400</td><td></td></tr><tr><td>ZuCo_et_csv_data/min_max_scaled_average_data.csv</td><td>400</td><td>400</td><td></td></tr><tr><td>ZuCo_et_csv_data/standard_scaled_average_data.csv</td><td>400</td><td>400</td><td></td></tr><tr><td>ZuCo_et_csv_data/3_SR.csv</td><td>299</td><td>299</td><td></td></tr><tr><td>ZuCo_et_csv_data/1_SR.csv</td><td>400</td><td>400</td><td></td></tr><tr><td>ZuCo_et_csv_data/word/word_averages_v2.csv</td><td>7129</td><td>7129</td><td></td></tr><tr><td>gaze_prediction/data/prediction_test.csv</td><td>1751</td><td>1751</td><td>predicted word gaze for sentence_ids 300-399</td></tr><tr><td>gaze_prediction/data/prediction_test_v2.csv</td><td>191971</td><td>191971</td><td>predicted word gaze for all 11853 SST sentences</td></tr><tr><td>gaze_prediction/data/provo.csv</td><td>2659</td><td>2659</td><td>PROVO-format table (fixProp instead of GD)</td></tr></tbody></table>
+</section>
+<footer>Personal lab book for sapphireran/Transformer-Emotion-Analysis-with-Gaze. Generated by examples/10_build_labbook.py.</footer>
+</main>
+</body>
+</html>

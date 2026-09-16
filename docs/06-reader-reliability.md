@@ -12,11 +12,11 @@ From `examples/05_reader_reliability.py` on this clone:
 | feature | mean pairwise r | min r | max r | ICC(1) |
 | --- | ---: | ---: | ---: | ---: |
 | nFixations | 0.362 | 0.101 | 0.602 | 0.237 |
-| TRT | 0.437 | 0.223 | 0.704 | (see script) |
-| GPT | 0.332 | 0.075 | 0.560 | |
-| GD | 0.355 | −0.069 | 0.649 | |
-| FFD | 0.102 | −0.202 | 0.440 | |
-| omissionRate | 0.284 | −0.003 | 0.506 | |
+| TRT | 0.437 | 0.223 | 0.704 | 0.271 |
+| GPT | 0.332 | 0.075 | 0.560 | 0.211 |
+| GD | 0.355 | −0.069 | 0.649 | 0.237 |
+| FFD | 0.102 | −0.202 | 0.440 | 0.052 |
+| omissionRate | 0.284 | −0.003 | 0.506 | 0.167 |
 
 TRT is the most agreed-upon duration. FFD is barely above noise between
 some reader pairs (negative mins). nFixations ICC(1) ≈ 0.24 is *fair /
