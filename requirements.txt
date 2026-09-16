@@ -1,0 +1,13 @@
+# Optional dependencies for the original training scripts.
+# The examples/ directory is written against the Python standard library
+# and can be run without installing these packages.
+
+torch
+transformers
+datasets
+scikit-learn
+pandas
+numpy
+tqdm
+scipy
+nltk
