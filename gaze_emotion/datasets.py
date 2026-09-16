@@ -61,10 +61,10 @@ class DatasetSummary:
 def resolve_data_path(path: str | Path) -> Path:
     candidate = Path(path)
     if candidate.is_file():
-        return candidate
+        return candidate.resolve()
     anchored = REPO_ROOT / candidate
     if anchored.is_file():
-        return anchored
+        return anchored.resolve()
     raise FileNotFoundError(f"Could not find data file: {path}")
 
 
