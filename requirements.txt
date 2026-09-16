@@ -1,0 +1,16 @@
+# Core training stack used by model_ZuCo_SST.py and model_full_SST.py
+torch>=2.0
+transformers>=4.30
+datasets>=2.14
+scikit-learn>=1.3
+pandas>=2.0
+numpy>=1.24
+tqdm>=4.65
+
+# Data prep (MATLAB ZuCo dumps, SST tokenization)
+scipy>=1.10
+nltk>=3.8
+
+# Optional: the toy examples under examples/ only need Python 3.10+ and numpy.
+# Install the full file when you want to train transformers:
+#   pip install -r requirements.txt

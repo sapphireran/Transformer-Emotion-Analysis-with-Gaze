@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Training artifacts
+models/
+*.pth
+*.pt
+*.bin
+*.ckpt
+runs/
+wandb/
+lightning_logs/
+
+# Notebooks / OS
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
