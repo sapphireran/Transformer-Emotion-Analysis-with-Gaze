@@ -1,0 +1,6 @@
+# CPU-only personal atlas / examples. The original training scripts
+# (model_full_SST.py, model_ZuCo_SST.py) additionally need torch,
+# transformers, datasets, scikit-learn, tqdm — see requirements-train.txt.
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3

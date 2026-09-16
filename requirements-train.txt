@@ -1,0 +1,11 @@
+# Optional extras for the original 2024 training scripts.
+# Not required to run examples/ or tests/.
+torch
+transformers
+datasets
+scikit-learn
+tqdm
+pandas
+numpy
+nltk
+scipy
