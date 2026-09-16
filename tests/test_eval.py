@@ -27,4 +27,4 @@ def test_mean_metrics_averages_folds():
 
 
 def test_pearson_identical_series():
-    assert pearson([1.0, 2.0, 3.0, 4.0], [1.0, 2.0, 3.0, 4.0]) == 1.0
+    assert abs(pearson([1.0, 2.0, 3.0, 4.0], [1.0, 2.0, 3.0, 4.0]) - 1.0) < 1e-12

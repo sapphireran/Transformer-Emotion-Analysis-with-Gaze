@@ -24,7 +24,7 @@ Everything below refers to files that are already in this personal checkout. MAT
 
 The unscaled mean table in the repo is `ZuCo_et_csv_data/average_data.csv`.
 
-Word-level counterpart: `ZuCo_et_csv_data/word/get_average.py` → `word_averages_v2.csv` (7130 rows, 400 `*_NR` sentences).
+Word-level counterpart: `ZuCo_et_csv_data/word/get_average.py` → `word_averages_v2.csv` (7129 data rows, 400 `*_NR` sentences).
 
 ## 3. Join Stanford sentiment labels
 

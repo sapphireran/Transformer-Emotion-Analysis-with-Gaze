@@ -22,7 +22,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 PYTHONPATH=. pytest
-PYTHONPATH=. python examples/run_all.py
+PYTHONPATH=. python3 examples/run_all.py
 ```
 
 Seeds that matter for the examples:

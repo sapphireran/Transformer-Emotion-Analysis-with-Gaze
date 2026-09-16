@@ -14,7 +14,8 @@ From the repo root:
 
 ```bash
 pip install -r requirements.txt
-PYTHONPATH=. python examples/01_inspect_datasets.py
+PYTHONPATH=. python3 examples/01_inspect_datasets.py
+PYTHONPATH=. python3 examples/run_all.py
 ```
 
 `tea_gaze` is the importable layer (paths, schemas, metrics, logistic baselines). The original `model_*.py` scripts stay standalone.

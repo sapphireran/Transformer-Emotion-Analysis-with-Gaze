@@ -3,11 +3,13 @@
 All scripts assume the repo root is on `PYTHONPATH` and that `requirements.txt` is installed. They only read committed CSVs.
 
 ```bash
-PYTHONPATH=. python examples/01_inspect_datasets.py
-PYTHONPATH=. python examples/02_gaze_feature_report.py
-PYTHONPATH=. python examples/03_text_vs_gaze_baselines.py
-PYTHONPATH=. python examples/04_sentence_walkthrough.py
-PYTHONPATH=. python examples/05_full_sst_sample.py
+PYTHONPATH=. python3 examples/01_inspect_datasets.py
+PYTHONPATH=. python3 examples/02_gaze_feature_report.py
+PYTHONPATH=. python3 examples/03_text_vs_gaze_baselines.py
+PYTHONPATH=. python3 examples/04_sentence_walkthrough.py
+PYTHONPATH=. python3 examples/05_full_sst_sample.py
+# or:
+PYTHONPATH=. python3 examples/run_all.py
 ```
 
 Output directory: `examples/output/` (created on the first run, gitignored).

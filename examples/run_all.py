@@ -24,7 +24,11 @@ def main() -> int:
     here = Path(__file__).resolve().parent
     for name in SCRIPTS:
         print(f"\n=== {name} ===")
-        runpy.run_path(str(here / name), run_name="__main__")
+        try:
+            runpy.run_path(str(here / name), run_name="__main__")
+        except SystemExit as exc:
+            if exc.code not in (0, None):
+                raise
     return 0
 
 

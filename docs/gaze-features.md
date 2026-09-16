@@ -24,7 +24,7 @@ Length of the first fixation. Classic early measure. Short function words that g
 
 ### GD — Gaze Duration
 
-First-pass dwell: all fixations on the word *before the eyes leave it*. Includes refixations in the first pass, excludes later rereading. In the raw sentence averages in this repo, GD sits between FFD and TRT (means about 143 / 116 / 262 ms for GD / FFD / TRT on `average_data.csv`).
+First-pass dwell: all fixations on the word *before the eyes leave it*. Includes refixations in the first pass, excludes later rereading. In the raw sentence averages in this repo, GD sits between FFD and TRT (means about 141 / 117 / 203 ms for GD / FFD / TRT on `average_data.csv`).
 
 ### TRT — Total Reading Time
 
@@ -32,7 +32,7 @@ Every fixation on the word, including look-backs. Late, cumulative. Highly corre
 
 ### GPT — Go-Past Time
 
-Time from first entering a region until the eyes move *to the right of it*. Left-hand regressions count. This is the integration / “I have to go back” measure. On the raw sentence means it is the longest of the four durations (mean ≈ 332 ms) and the heaviest-tailed.
+Time from first entering a region until the eyes move *to the right of it*. Left-hand regressions count. This is the integration / “I have to go back” measure. On the raw sentence means it is the longest of the four durations (mean ≈ 242 ms) and the heaviest-tailed.
 
 ### Present in ZuCo extracts, unused by the fusion head
 
@@ -60,7 +60,7 @@ Do not mix a raw table with a z-scored table in one `DataLoader`. The linear gaz
 
 ## Reader disagreement is part of the data
 
-Subject 3 is missing 101 sentences. Pairwise Pearson correlations on raw `nFixations` (aligned by sentence id) are computed in `examples/02_gaze_feature_report.py`. Expect agreement well below 1.0 — twelve people do not read a review the same way, and the fusion model only ever sees the *average* reader.
+Subject 3 is missing 101 sentences. Pairwise Pearson correlations on raw `nFixations` (aligned by sentence id) are computed in `examples/02_gaze_feature_report.py`. Mean pairwise r on this checkout is **0.274** (best pair 0.453, worst 0.023). Twelve people do not read a review the same way, and the fusion model only ever sees the *average* reader.
 
 ## Feature glossary (generated from `tea_gaze`)
 

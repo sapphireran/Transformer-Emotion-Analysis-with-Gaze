@@ -42,12 +42,10 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 PYTHONPATH=. pytest -q
-PYTHONPATH=. python examples/01_inspect_datasets.py
-PYTHONPATH=. python examples/02_gaze_feature_report.py
-PYTHONPATH=. python examples/03_text_vs_gaze_baselines.py
-PYTHONPATH=. python examples/04_sentence_walkthrough.py
-PYTHONPATH=. python examples/05_full_sst_sample.py
+PYTHONPATH=. python3 examples/run_all.py
 ```
+
+On the 400-sentence ZuCo+SST table the CPU baselines (5-fold, seed 42) scored **text F1 0.462**, **gaze-only F1 0.337**, **fusion F1 0.468**. Details: [docs/sample-results.md](docs/sample-results.md).
 
 Reports land in `examples/output/` (gitignored). Start with [docs/overview.md](docs/overview.md) and [examples/README.md](examples/README.md).
 
