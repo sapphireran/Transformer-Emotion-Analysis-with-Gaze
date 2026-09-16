@@ -93,10 +93,20 @@ same 5-fold stratification the ZuCo script uses:
 3. `text_plus_gaze` — FeatureUnion of (2) and (1)
 
 These numbers will not match RoBERTa. They answer a cheaper question: does
-sentence-level gaze move a linear text model at all? Given the tiny
-label-conditional gaze shifts in [gaze-features.md](gaze-features.md),
-expect `gaze_only` near chance and `text_plus_gaze` within a point or two
-of `text_only`.
+sentence-level gaze move a linear text model at all?
+
+A run on this clone (seed 42, five gaze channels) landed at:
+
+| model | mean acc | mean macro F1 |
+| --- | ---: | ---: |
+| `gaze_only` | 0.348 | 0.336 |
+| `text_only` | 0.497 | 0.491 |
+| `text_plus_gaze` | 0.472 | 0.465 |
+
+Gaze-only matches the 0.350 majority baseline. Fusion **lost** 2.5
+accuracy points to text-only. Full fold table:
+[notes/linear-baselines.md](notes/linear-baselines.md).
+
 
 ## Device
 

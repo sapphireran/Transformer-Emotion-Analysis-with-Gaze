@@ -66,7 +66,8 @@ stratified logistic regression:
 | `text_plus_gaze` | concatenation of the two |
 
 Writes `examples/output/text_vs_gaze_baselines.csv`. This is a linear probe,
-not RoBERTa.
+not RoBERTa. On this clone the means were gaze-only 0.348, text-only
+0.497, text-plus-gaze 0.472 — see `docs/notes/linear-baselines.md`.
 
 ```bash
 python examples/06_text_vs_gaze_baselines.py --gaze-columns nFixations TRT FFD

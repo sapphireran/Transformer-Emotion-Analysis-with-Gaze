@@ -104,3 +104,24 @@ than to milliseconds).
 When you plot predicted and human gaze on the same axis, rescale first.
 `examples/04_compare_scalers.py` only compares the three ZuCo sentence
 tables, where the transform is a column-wise monotone map.
+
+## Predicted SST channels collapse
+
+On `SST_data/combined_full_sst_et.csv` the five predicted sentence
+channels are almost the same direction:
+
+| pair | Pearson r |
+| --- | ---: |
+| FFD–GPT | 0.999 |
+| nFix–GPT | 0.998 |
+| nFix–FFD | 0.995 |
+| TRT–FFD | 0.995 |
+| TRT–GPT | 0.995 |
+| nFix–TRT | 0.986 |
+
+Human ZuCo sentence averages are collinear but not like this (`FFD` vs
+`nFixations` is only 0.42 there). The predictor has effectively produced
+**one** reading-difficulty score copied into five columns. Concatenating
+all five on Track B adds almost no extra information beyond a single
+z-scored scalar.
+

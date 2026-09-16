@@ -15,6 +15,7 @@ code and CSVs that are actually in this repository, including the messy parts.
 | [glossary.md](glossary.md) | Short glossary |
 | [notes/known-limitations.md](notes/known-limitations.md) | Bugs and alignment issues left in the original scripts |
 | [notes/worked-example-sentence-0.md](notes/worked-example-sentence-0.md) | One sentence, word-level gaze |
+| [notes/linear-baselines.md](notes/linear-baselines.md) | TF-IDF ± gaze 5-fold numbers |
 | [generated/dataset-report.md](generated/dataset-report.md) | Auto-generated tables from the CSVs |
 
 Runnable companions live in [`../examples`](../examples).

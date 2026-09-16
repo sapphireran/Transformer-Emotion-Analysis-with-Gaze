@@ -20,7 +20,7 @@ def _heading(title: str, level: int = 2) -> str:
 
 
 def catalog_section() -> str:
-    lines = [_heading("Checked-in tables"), ""]
+    lines = [_heading("Checked-in tables")]
     lines.append("| key | file | kind | rows | gaze columns |")
     lines.append("| --- | --- | --- | ---: | --- |")
     for spec in DATASETS:
