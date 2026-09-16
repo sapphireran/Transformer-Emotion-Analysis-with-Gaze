@@ -23,7 +23,7 @@ from teag_examples.io import (
 from teag_examples.paths import docs_assets, examples_output
 from teag_examples.reports import write_json, write_markdown
 from teag_examples.stats import frame_profile, profiles_to_markdown
-from teag_examples.viz import save_label_bars
+from teag_examples.viz import save_label_bars_panels
 from teag_examples.schema import LABEL_NAMES
 
 
@@ -108,9 +108,21 @@ def main(argv: list[str] | None = None) -> int:
     label_tables = {
         name: {int(k): int(v) for k, v in counts.items()} for name, counts in label_tables.items()
     }
-    save_label_bars(
-        label_tables,
-        "Sentiment label counts (0 negative / 1 neutral / 2 positive)",
+    save_label_bars_panels(
+        {
+            "ZuCo-SST (400 sentences)": {
+                "all": label_tables["ZuCo-400"],
+                "train": label_tables["ZuCo-train"],
+                "valid": label_tables["ZuCo-valid"],
+                "test": label_tables["ZuCo-test"],
+            },
+            "Full SST (11,853 sentences)": {
+                "all": label_tables["SST-all"],
+                "train": label_tables["SST-train"],
+                "valid": label_tables["SST-valid"],
+                "test": label_tables["SST-test"],
+            },
+        },
         docs_assets() / "label_counts.png",
         dict(LABEL_NAMES),
     )

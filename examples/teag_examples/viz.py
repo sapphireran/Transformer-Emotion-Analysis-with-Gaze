@@ -58,6 +58,39 @@ def save_label_bars(
     return dest
 
 
+def save_label_bars_panels(
+    panels: dict[str, dict[str, dict[int, int]]],
+    dest: Path,
+    label_names: dict[int, str],
+) -> Path:
+    """One subplot per experiment track so 400-row ZuCo is not dwarfed by SST."""
+    n = len(panels)
+    fig, axes = plt.subplots(1, n, figsize=(5.2 * n, 4.4), squeeze=False)
+    keys = sorted({k for panel in panels.values() for counts in panel.values() for k in counts})
+    for ax, (panel_title, counts_by_table) in zip(axes[0], panels.items()):
+        tables = list(counts_by_table)
+        x = np.arange(len(tables))
+        width = 0.8 / max(len(keys), 1)
+        for i, k in enumerate(keys):
+            vals = [counts_by_table[t].get(k, 0) for t in tables]
+            ax.bar(
+                x + (i - (len(keys) - 1) / 2) * width,
+                vals,
+                width,
+                label=label_names.get(k, str(k)),
+            )
+        ax.set_xticks(x)
+        ax.set_xticklabels(tables, rotation=20, ha="right")
+        ax.set_ylabel("sentences")
+        ax.set_title(panel_title)
+        ax.legend()
+    fig.tight_layout()
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(dest, dpi=140)
+    plt.close(fig)
+    return dest
+
+
 def save_fusion_shapes(dest: Path) -> Path:
     """Schematic of concat fusion (not a trained net)."""
     fig, ax = plt.subplots(figsize=(9.2, 3.6))
