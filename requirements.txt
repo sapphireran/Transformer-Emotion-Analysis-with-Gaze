@@ -1,0 +1,11 @@
+# Heavy training stack used by model_ZuCo_SST.py and model_full_SST.py.
+# The scripts under examples/ only need numpy (and the stdlib).
+torch
+transformers
+datasets
+scikit-learn
+pandas
+numpy
+tqdm
+nltk
+scipy
