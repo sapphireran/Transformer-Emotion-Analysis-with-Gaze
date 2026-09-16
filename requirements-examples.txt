@@ -1,0 +1,4 @@
+# CPU examples and tests. NumPy is the only third-party dependency.
+# The original trainers (model_ZuCo_SST.py, model_full_SST.py) need
+# torch, transformers, datasets, pandas, scikit-learn, and tqdm instead.
+numpy>=1.24

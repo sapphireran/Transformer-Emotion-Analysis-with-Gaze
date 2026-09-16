@@ -1,0 +1,21 @@
+# Local environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Trainer checkpoints (model_full_SST.py writes models/best_*.pth)
+models/
+*.pth
+*.pt
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Optional local scratch (committed snapshots live in examples/output/)
+examples/output/tmp/
