@@ -1,0 +1,13 @@
+# Full training stack used by the original experiment scripts.
+# Prefer a GPU-enabled torch build that matches your machine.
+# The docs and examples do not require this entire stack.
+
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+scipy>=1.10
+tqdm>=4.65
+nltk>=3.8
+datasets>=2.14
+transformers>=4.30
+torch>=2.0

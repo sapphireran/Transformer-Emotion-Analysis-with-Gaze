@@ -1,0 +1,16 @@
+rows: standard=400 minmax=400
+identity columns match
+
+Per-column check (z-score ~mean 0 std 1; min-max in [0, 1]; Spearman ≈ 1)
+column              z_mean     z_std    mm_min    mm_max  spearman
+omissionRate       -0.0000    1.0000    0.0000    1.0000  1.000000
+nFixations         -0.0000    1.0000    0.0000    1.0000  1.000000
+meanPupilSize       0.0000    1.0000    0.0000    1.0000  1.000000
+GD                 -0.0000    1.0000    0.0000    1.0000  1.000000
+TRT                 0.0000    1.0000    0.0000    1.0000  1.000000
+FFD                -0.0000    1.0000    0.0000    1.0000  1.000000
+SFD                 0.0000    1.0000    0.0000    1.0000  1.000000
+GPT                 0.0000    1.0000    0.0000    1.0000  1.000000
+
+These files are the same 400 reviews under two column-wise transforms.
+Do not use them as a train/test pair.

@@ -1,0 +1,73 @@
+ZuCo subject-mean gaze (raw units, 400 sentences)
+=================================================
+column                    min         mean          std          max    zeros
+-----------------------------------------------------------------------------
+SentLen                3.0000      17.8065       8.0599      42.0000        0
+omissionRate           0.1562       0.3191       0.0666       0.6014        0
+nFixations             1.2046       1.6870       0.3104       3.5833        0
+meanPupilSize        679.6528     797.0088      60.9423     969.6745        0
+GD                   107.6462     141.4474      21.4813     272.7083        0
+TRT                  131.0896     202.6473      47.9472     427.0069        0
+FFD                  101.5307     116.8778       7.9951     165.8788        0
+SFD                   39.3021      71.5714      10.8536     121.7593        0
+GPT                  153.1613     241.7689      56.7079     586.8564        0
+
+Pearson correlation — measured raw sentence means
+=================================================
+                omissionRatenFixationsmeanPupilSize        GD       TRT       FFD       SFD       GPT
+omissionRate         1.000    -0.257     0.171    -0.026    -0.201    -0.095     0.438    -0.229
+nFixations          -0.257     1.000     0.055     0.697     0.958     0.421    -0.585     0.912
+meanPupilSize        0.171     0.055     1.000     0.012     0.047    -0.057     0.017     0.041
+GD                  -0.026     0.697     0.012     1.000     0.789     0.679    -0.146     0.675
+TRT                 -0.201     0.958     0.047     0.789     1.000     0.617    -0.420     0.942
+FFD                 -0.095     0.421    -0.057     0.679     0.617     1.000     0.172     0.547
+SFD                  0.438    -0.585     0.017    -0.146    -0.420     0.172     1.000    -0.444
+GPT                 -0.229     0.912     0.041     0.675     0.942     0.547    -0.444     1.000
+
+ZuCo experiment table (z-scored, what model_ZuCo_SST.py reads)
+==============================================================
+column                    min         mean          std          max    zeros
+-----------------------------------------------------------------------------
+omissionRate          -2.4484      -0.0000       1.0013       4.2446        0
+nFixations            -1.5560      -0.0000       1.0013       6.1161        0
+FFD                   -1.9220      -0.0000       1.0013       6.1366        0
+GPT                   -1.5645       0.0000       1.0013       6.0930        0
+TRT                   -1.4943       0.0000       1.0013       4.6852        0
+GD                    -1.5755      -0.0000       1.0013       6.1181        0
+SFD                   -2.9769       0.0000       1.0013       4.6299        0
+meanPupilSize         -1.9281       0.0000       1.0013       2.8368        0
+
+Pearson correlation — five fusion features on measured z-scores
+===============================================================
+                nFixations       FFD       GPT       TRT        GD
+nFixations           1.000     0.421     0.912     0.958     0.697
+FFD                  0.421     1.000     0.547     0.617     0.679
+GPT                  0.912     0.547     1.000     0.942     0.675
+TRT                  0.958     0.617     0.942     1.000     0.789
+GD                   0.697     0.679     0.675     0.789     1.000
+
+Full SST projected gaze (NOT milliseconds, 11853 sentences)
+===========================================================
+column                    min         mean          std          max    zeros
+-----------------------------------------------------------------------------
+nFix                  -8.5504       0.0000       1.0000       3.4548        0
+GD                   -12.6478      -0.0000       1.0000       1.5258        0
+TRT                   -7.2254       0.0000       1.0000       4.0093        0
+FFD                   -8.3359      -0.0000       1.0000       3.8601        0
+GPT                   -8.8464       0.0000       1.0000       3.7902        0
+
+Pearson correlation — five fusion features on projected full SST
+================================================================
+                nFixations       FFD       GPT       TRT        GD
+nFixations           1.000     0.995     0.998     0.986     0.783
+FFD                  0.995     1.000     0.999     0.995     0.741
+GPT                  0.998     0.999     1.000     0.995     0.744
+TRT                  0.986     0.995     0.995     1.000     0.680
+GD                   0.783     0.741     0.744     0.680     1.000
+
+Geometry check
+==============
+RMS off-diagonal difference between measured-ZuCo and projected-SST
+correlation matrices: 0.2675
+A small number means the predictor roughly kept the duration cluster.
+A large number means Experiment B is looking at a different shape.

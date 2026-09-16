@@ -1,0 +1,32 @@
+loaded 4699 rows (11 × 400 + 299 for subject 3)
+
+Between-subject std of the 400-sentence means, then mean of
+within-sentence (across-subject) std — fusion columns, raw units.
+
+column                 mean  std_of_subj_means  mean_within_std
+nFixations            1.687              0.193            0.431
+FFD                 116.782             10.277           17.841
+GPT                 241.917             42.295           80.546
+TRT                 202.681             32.323           59.639
+GD                  141.287             18.019           30.977
+
+Median across sentences of (subject-std / subject-mean) for nFixations
+  0.231  (values near 0.3+ mean the 12-subject mean is a blur)
+
+Sentence 3 raw fusion columns by subject
+ subject  nFixations      FFD      GPT      TRT       GD  omissionRate
+       1        2.20   124.40   235.20   235.20   124.40          0.00
+       2        3.00    95.75   361.25   361.25   159.00          0.20
+       3        2.00   109.33   419.00   296.33   109.33          0.40
+       4        4.00   117.00   506.20   478.40   117.00          0.00
+       5        4.20   219.00   626.40   626.40   314.20          0.00
+       6        3.20   192.40   674.80   498.60   218.60          0.00
+       7        1.80   136.80   295.40   244.00   170.20          0.00
+       8        3.20    94.40   453.00   415.20    94.40          0.00
+       9        3.00   113.00   345.75   345.75   227.75          0.20
+      10        3.40   155.60   436.40   424.60   260.20          0.00
+      11        2.80   118.20   342.00   321.80   159.00          0.00
+      12        2.80   149.40   581.40   503.80   229.00          0.00
+
+The experiment table stores only the column-wise mean (after a
+second scale). Leave-one-subject-out is a different experiment.

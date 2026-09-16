@@ -1,0 +1,37 @@
+ subject     rows    skips     rate   unique skipped types
+       1     7129     2019    0.283                    406
+       2     7129     2770    0.389                    841
+       3     5293     2779    0.525                   1024
+       4     7129     2389    0.335                    704
+       5     7129     1653    0.232                    354
+       6     7129     1470    0.206                    373
+       7     7129     2332    0.327                    599
+       8     7129     2300    0.323                    569
+       9     7129     2111    0.296                    399
+      10     7129     1887    0.265                    321
+      11     7129     2800    0.393                    697
+      12     7129     2411    0.338                    602
+
+mean skip rate across 12 subjects: 0.326
+min / max subject skip rate:       0.206 / 0.525
+rows still all-zero after averaging: 91 / 7129 (0.013)
+A much smaller averaged skip rate is expected: a word only stays
+all-zero if *every* subject skipped it.
+
+Most-skipped surface forms (subject 1, top 15)
+Word
+the        204
+a          183
+of         139
+and        125
+to         107
+is          67
+it          57
+unknown     51
+in          48
+that        44
+as          43
+its         40
+for         26
+be          25
+but         23
