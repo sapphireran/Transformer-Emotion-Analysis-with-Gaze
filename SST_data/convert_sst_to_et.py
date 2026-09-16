@@ -1,3 +1,18 @@
+"""Tokenize full-SST sentences into a word-level gaze *template*.
+
+Every nFix/FFD/GPT/TRT/GD cell is written as 0. This is a scaffold for
+a predictor, not a dataset of real eye tracking. Tokens that are not
+purely `[A-Za-z]+` are dropped, so punctuation and SST's -LRB- / -RRB-
+markers disappear.
+
+Input default:  `stts_all_sentence_level.csv` (no header: text, label)
+Output default: `sst_et_test.csv`
+
+The training table `combined_full_sst_et.csv` is sentence-level and
+already filled with *predicted* standardized gaze; this script does
+not produce that file by itself.
+"""
+
 import csv
 import nltk
 import re

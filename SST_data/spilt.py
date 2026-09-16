@@ -1,3 +1,15 @@
+"""80/10/10 split for Track B. Filename is a typo for split.py.
+
+`random_state=42`, *not* stratified. Realized counts in this clone:
+
+    train 9482   valid 1185   test 1186
+
+`model_full_SST.py` hard-codes the three output names. Re-running
+this file is how you rebuild them if `combined_full_sst_et.csv`
+changes. Neutral is already ~19% so the unstratified draw is close,
+but a stratified rewrite would still be the cleaner default.
+"""
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 

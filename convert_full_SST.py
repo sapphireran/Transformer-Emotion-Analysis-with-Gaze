@@ -1,3 +1,18 @@
+"""Build `ZuCo_SST_data/ssts_ZuCo.csv` from per-class .txt folders.
+
+Expects `ZuCo_SST_data/all/{NEGATIVE,POSITIVE,NEUTRAL}/*.txt` — those
+folders are not in this clone; the output CSV is. Filename stem is
+treated as an integer sentence_id so the later join with the gaze
+tables can sort 0..399.
+
+Label integers (shared with every other script in this repo):
+
+    NEGATIVE=0  NEUTRAL=1  POSITIVE=2
+
+`ZuCo_SST_data/save_SST_data.py` is the same idea with different
+relative paths. Prefer this file's output name (`ssts_ZuCo.csv`).
+"""
+
 import os
 import pandas as pd
 

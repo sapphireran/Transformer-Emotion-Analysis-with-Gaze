@@ -1,3 +1,25 @@
+"""ZuCo MATLAB → pandas helper used by read_ZuCo_mat.py.
+
+Personal notes (docs/03):
+
+- `get_matfiles` concatenates `os.getcwd()` with a *Windows* subdir
+  string (`\\ZuCo_mat_data\\`). On Linux that is the wrong separator.
+  The `.mat` files themselves are not in this clone.
+- `DataTransformer` can emit sentence- or word-level tables, with
+  min-max / mean-norm / standard / raw scaling and three NaN policies.
+  `read_ZuCo_mat.py` asks for task1 / sentence / raw / zeros.
+- Sentence-level nFixations and reading times are summed over words
+  and then divided by `nwords_fixated` (words that were not all-zero),
+  not by `SentLen`. Skipped words do not enter the denominator.
+- Several subject × task blocks are skipped because the original dump
+  has empty records (task1 subject 2 drops 150–249 and 399, etc.).
+  Do not "repair" those rows with zeros.
+- `split_data` exists to control order effects on task 1 and is not
+  used by the training scripts in this repo.
+
+`gzip`, `math`, and the top-level `scipy` import are leftovers.
+"""
+
 import numpy as np
 import pandas as pd
 import scipy.io as io
@@ -12,6 +34,9 @@ def get_matfiles(task: str, subdir='\\ZuCo_mat_data\\'):
     """
         Args: Task number ("task1", "task2", "task3") plus sub-directory
         Return: 12 matlab files (one per subject) for given task
+
+        `subdir` is a Windows-style fragment. Prefer os.path.join if
+        this is ever re-run on Linux.
     """
     path = os.getcwd() + subdir + task
     files = [os.path.join(path, file) for file in os.listdir(path)[0:]]
@@ -120,6 +145,9 @@ class DataTransformer:
                     # lowercase words at the beginning of the sentence only
                     token = token.lower() if j == 0 else token
                     if self.level == 'sentence':
+                        # Empty MATLAB arrays count as "no fixation" and
+                        # become 0. All-zero words are excluded from
+                        # nwords_fixated so they do not shrink the mean.
                         word_features = [getattr(word, field) if hasattr(word, field) \
                                                                  and not isinstance(getattr(word, field),
                                                                                     np.ndarray) else \
@@ -142,7 +170,8 @@ class DataTransformer:
                 if self.level == 'sentence':
                     features[idx, 0] = len(sent.word)
                     features[idx, 1] = sent.omissionRate
-                    # normalize by number of words for which fixations were reported
+                    # Per-fixated-word mean, not per-word-including-skips.
+                    # A 22-word sentence with 5 skips is divided by 17.
                     features[idx, 2:] /= nwords_fixated
 
                 idx += 1

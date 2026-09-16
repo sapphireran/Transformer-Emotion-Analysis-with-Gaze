@@ -1,3 +1,14 @@
+"""80/10/10 split of the 400 ZuCo rows. Not used by model_ZuCo_SST.py.
+
+The training script runs StratifiedKFold on the combined table instead.
+These files (`train.csv` 320, `valid.csv` 40, `test.csv` 40) are a
+convenience split (`random_state=42`, not stratified). The 40-row
+valid slice is *not* balanced (7/14/19 in this clone) — do not quote
+it as the official test.
+
+Same typo as `SST_data/spilt.py`.
+"""
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 

@@ -1,6 +1,22 @@
+"""Dump per-subject ZuCo task-1 sentence tables from the MATLAB files.
+
+Needs `ZuCo_mat_data/task1/*.mat` (not shipped in this clone) and
+`utils_ZuCo.DataTransformer`. Writes `et_csv_data/{1-12}_SR.csv`.
+
+Path trap: the checked-in derivatives live in `ZuCo_et_csv_data/`,
+not `et_csv_data/`. Re-running this script on a machine that has the
+`.mat` files will create a second folder unless you change `path`.
+
+Scaling is *raw* here. `get_average_sentence_level.py` is the script
+that builds the 12-reader mean and the min-max / z-score tables the
+training run actually consumes.
+"""
+
 from utils_ZuCo import *
 import os
 
+# task1 = sentiment / normal reading (NR). raw + zeros matches the
+# per-subject CSVs already in ZuCo_et_csv_data/.
 datatransform_t1 = DataTransformer('task1', level='sentence', scaling='raw', fillna='zeros')
 
 # 处理并保存每个受试者的数据

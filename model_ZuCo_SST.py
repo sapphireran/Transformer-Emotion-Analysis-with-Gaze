@@ -1,3 +1,28 @@
+"""Track A: ZuCo 400-sentence sentiment + *real* averaged gaze, 5-fold CV.
+
+Personal experiment script (see docs/01, docs/04, docs/05). This is the
+small-n track: 400 movie-review sentences that were actually read in the
+ZuCo lab by 12 people. Gaze columns are z-scored 12-reader means from
+`ZuCo_SST_data/combined_sst_et_standard.csv`.
+
+The 80/10/10 files `ZuCo_SST_data/{train,valid,test}.csv` are *not*
+used here. Evaluation is `StratifiedKFold(n_splits=5, random_state=42)`.
+Each fold builds a fresh model, trains 20 epochs, then scores the 80
+held-out rows once. There is no inner validation / early stopping, and
+no checkpoint is written.
+
+`model_type` is the same four-way switch as Track B. Default is
+`roberta_eye_tracking`. The fusion graph is identical: pooler 768 +
+Linear(5, 16) → 784 → 3. Feature order must stay
+
+    nFixations, FFD, GPT, TRT, GD
+
+which is *not* the column order in the CSV (the CSV has omissionRate,
+pupil, SFD in between). The explicit `df[[...]]` below is load-bearing.
+
+For the full-SST / predicted-gaze track, use `model_full_SST.py`.
+"""
+
 import numpy as np
 import torch
 import pandas as pd
@@ -12,7 +37,10 @@ from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_sc
 from transformers import BertTokenizer, BertModel, BertForSequenceClassification, RobertaTokenizer, RobertaModel, RobertaForSequenceClassification
 from torch.utils.data import Dataset as TorchDataset
 
-# 配置参数
+# --- run configuration -------------------------------------------------
+# 20 epochs × 5 folds on ~320 sentences is long enough to overfit;
+# report the mean of the five fold scores, not the best fold. batch_size
+# is also hard-coded again when the DataLoaders are built (16).
 num_eye_tracking_features = 5  # 例如：5
 hidden_layer_size = 16         # 隐藏层大小
 num_labels = 3                 # 标签数
@@ -27,7 +55,9 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print("Using device:", device)
 print("Model type:", model_type)
 
-# 加载数据集
+# Column pick is deliberate: eight numeric gaze-ish columns exist in
+# the CSV; only these five enter the concat. See docs/01 for why SFD,
+# omissionRate, and meanPupilSize stay out of the tower.
 df = pd.read_csv(dataset_path)
 eye_tracking_features = df[['nFixations', 'FFD', 'GPT', 'TRT', 'GD']]
 
@@ -48,7 +78,9 @@ tokenized_dataset = hf_dataset.map(tokenize_function, batched=True)
 df_tokenized = tokenized_dataset.to_pandas()
 df_tokenized = pd.concat([df_tokenized, eye_tracking_features], axis=1)
 
-# 定义自定义模型
+# Same late-fusion module as model_full_SST.py. Duplicated on purpose
+# so each track can be run as a single file. pooler_output is used for
+# both BERT and RoBERTa (docs/04).
 class EyeTrackingModel(nn.Module):
     def __init__(self, base_model, num_eye_tracking_features, num_labels):
         super().__init__()
@@ -100,7 +132,9 @@ def get_model(model_type, num_eye_tracking_features, num_labels):
     elif model_type == 'roberta_eye_tracking':
         return EyeTrackingModel(RobertaModel, num_eye_tracking_features, num_labels)
 
-# 训练和评估
+# Five independent fine-tunes. fold scores are appended and averaged
+# at the end; nothing is checkpointed. Stratify on sentiment_label so
+# each 80-row test slice keeps the ~123/137/140 class mix.
 val_accs = []
 val_ps = []
 val_rs = []
