@@ -1,0 +1,12 @@
+# Original training scripts (model_full_SST.py, model_ZuCo_SST.py)
+torch
+transformers
+datasets
+scikit-learn
+pandas
+numpy
+tqdm
+nltk
+
+# MATLAB I/O for read_ZuCo_mat.py / utils_ZuCo.py
+scipy
