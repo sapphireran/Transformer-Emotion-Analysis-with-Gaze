@@ -26,7 +26,9 @@ python examples/run_all.py
 ```
 
 `run_all.py` stops with a non-zero exit code if any child fails and
-writes a transcript to `examples/output/run_all.txt`.
+writes a transcript to `examples/output/run_all.txt`. A snapshot of the
+numbers from the first green run is in
+[`docs/example-results.md`](../docs/example-results.md).
 
 ## What each script is for
 

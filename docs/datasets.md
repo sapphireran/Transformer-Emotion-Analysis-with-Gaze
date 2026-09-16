@@ -31,12 +31,19 @@ standardization (or a similarly centered transform). Treat them as
 
 ### `stts_all_sentence_level.csv`
 
+**No header row.** Every line is `sentence,polarity`. If you `pd.read_csv` this
+file with the default `header=0`, the first review becomes the column
+names and you silently drop one row. `examples/inspect_datasets.py`
+passes `header=None`.
+
 | Column | Type | Notes |
 |---|---|---|
-| *(unnamed)* sentence | string | first column, often quoted |
+| sentence | string | often quoted; first line is a real review |
 | polarity | string | `POSITIVE` / `NEGATIVE` / `NEUTRAL` |
 
-11,853 sentences. This is the text source for `convert_sst_to_et.py`.
+11,853 sentences: 4,649 negative / 2,241 neutral / 4,963 positive.
+This is the text source for `convert_sst_to_et.py`. The integer-label
+join `combined_full_sst_et.csv` has the same 11,853-row cardinality.
 
 ### `combined_full_sst_et.csv`
 

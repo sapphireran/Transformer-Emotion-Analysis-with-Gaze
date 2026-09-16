@@ -58,22 +58,39 @@ def _label_hist(series: pd.Series) -> str:
     return ", ".join(parts) if parts else "(no integer labels)"
 
 
-def describe(path: Path, label_col: str | None = None) -> None:
+def describe(
+    path: Path,
+    label_col: str | None = None,
+    *,
+    header: str | int | None = "infer",
+    names: list[str] | None = None,
+) -> None:
     if not path.is_file():
         print(f"MISSING  {_rel(path)}")
         return
-    df = pd.read_csv(path)
-    cols = ", ".join(df.columns.tolist())
+    df = pd.read_csv(path, header=header, names=names)
+    cols = ", ".join(str(c) for c in df.columns.tolist())
     print(f"{_rel(path)}")
     print(f"  rows={len(df):,}  cols={len(df.columns)}  [{cols}]")
     if label_col and label_col in df.columns:
-        print(f"  labels: {_label_hist(df[label_col])}")
+        if label_col == "polarity":
+            counts = Counter(str(v) for v in df[label_col])
+            hist = ", ".join(f"{k}={v}" for k, v in sorted(counts.items()))
+            print(f"  polarity: {hist}")
+        else:
+            print(f"  labels: {_label_hist(df[label_col])}")
     print()
 
 
 def main() -> int:
     print("=== Full SST ===\n")
-    describe(FULL_SST_RAW)
+    # stts_all_sentence_level.csv has no header; the first line is a sentence.
+    describe(
+        FULL_SST_RAW,
+        "polarity",
+        header=None,
+        names=["sentence", "polarity"],
+    )
     describe(FULL_SST_COMBINED, "sentiment_label")
     describe(FULL_SST_TRAIN, "sentiment_label")
     describe(FULL_SST_VALID, "sentiment_label")

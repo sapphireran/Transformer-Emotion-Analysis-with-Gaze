@@ -12,6 +12,7 @@ scripts and CSVs, not from a paper.
 | [model-architecture.md](model-architecture.md) | Late-fusion `EyeTrackingModel`, baselines, loss, metrics |
 | [reproduction.md](reproduction.md) | Commands, expected artifacts, hardware notes |
 | [known-quirks.md](known-quirks.md) | Bugs and path mismatches to be aware of before you re-run |
+| [example-results.md](example-results.md) | Snapshot of integrity / baseline / toy-fusion numbers |
 
 Runnable companions live under [`../examples/`](../examples/README.md):
 

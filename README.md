@@ -190,6 +190,8 @@ ZuCo sentence tables also keep `omissionRate`, `meanPupilSize`, and `SFD`
 | [docs/model-architecture.md](docs/model-architecture.md) | late-fusion diagram and shapes |
 | [docs/reproduction.md](docs/reproduction.md) | how to re-run each script |
 | [docs/known-quirks.md](docs/known-quirks.md) | path mismatches, eval bug, naming |
+| [docs/example-results.md](docs/example-results.md) | snapshot of the example-script numbers |
+| [docs/example-results.md](docs/example-results.md) | snapshot of the example-script numbers |
 
 ---
 
