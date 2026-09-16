@@ -47,7 +47,7 @@ partition drifts.
 | `07_subject_variance.py` | 12 `*_SR.csv` | `07_subject_variance.txt` | How much do readers disagree before averaging? |
 | `08_split_integrity.py` | combined + splits | `08_split_integrity.txt` | Are the committed splits a clean partition? |
 
-Shared parsing / metrics live in `common.py` so the six scripts stay
+Shared parsing / metrics live in `common.py` so the eight scripts stay
 short and the KFold + weighted F1 match the story in
 `docs/06-training-loops.md`.
 
