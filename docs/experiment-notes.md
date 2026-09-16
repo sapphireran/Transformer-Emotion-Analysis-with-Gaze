@@ -25,7 +25,31 @@ Takeaway I keep repeating to myself:
 - A model that only sees gaze should land near the majority floor unless
   there is a nonlinear pattern the correlations hide.
 
-That is exactly what `examples/05_gaze_only_baseline.py` is for.
+That is exactly what `examples/05_gaze_only_baseline.py` is for. Numbers
+from a CPU run of that script (`StratifiedKFold`, `random_state=42`):
+
+| Setup | Acc | P | R | F1 |
+| --- | ---: | ---: | ---: | ---: |
+| ZuCo majority | 0.3500 | 0.1225 | 0.3500 | 0.1815 |
+| ZuCo gaze-only logistic | 0.3675 | 0.3597 | 0.3675 | 0.3535 |
+| Full SST majority | 0.4187 | 0.1753 | 0.4187 | 0.2472 |
+| Full SST gaze-only logistic | 0.4245 | 0.3396 | 0.4245 | 0.3638 |
+
+Accuracy barely moves. Weighted F1 does, mostly because a constant
+"positive" predictor has awful precision on the other two classes. Gaze
+alone is not a sentiment model. It is a weak extra cue.
+
+`examples/04_toy_fusion_forward.py` on an 80-row ZuCo holdout (hashed
+bag-of-words, not RoBERTa):
+
+| Setup | Acc | F1 |
+| --- | ---: | ---: |
+| majority on that holdout | 0.4125 | 0.2409 |
+| hashed BoW + zero ET | 0.2625 | 0.2595 |
+| hashed BoW + projected ET | 0.3000 | 0.3140 |
+
+The concat wiring runs. The hashed encoder is a toy, so I do not read
+those F1s as evidence for or against fusion.
 
 ## Collinearity
 

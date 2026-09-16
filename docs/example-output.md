@@ -23,6 +23,7 @@ live in the script output; the notes below are the invariants.
 - Rebuilt min-max columns sit in [0, 1].
 - `max |rebuilt - committed|` should be tiny (1e-6 or better) if
   `average_data.csv` is still the parent of the two scaled files.
+  Last run on this laptop: standard `2.2e-15`, min-max `5.6e-16`.
 
 ## `04_toy_fusion_forward.py`
 
