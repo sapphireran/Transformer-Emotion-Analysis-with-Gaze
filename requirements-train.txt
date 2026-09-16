@@ -1,0 +1,14 @@
+# Extra dependencies for the original training scripts:
+#   model_full_SST.py
+#   model_ZuCo_SST.py
+#
+# Install on top of requirements.txt when you actually want to train.
+# A CUDA-enabled PyTorch build is strongly recommended.
+
+torch>=2.0
+transformers>=4.30
+datasets>=2.14
+tqdm>=4.65
+scikit-learn>=1.3
+pandas>=2.0
+numpy>=1.24

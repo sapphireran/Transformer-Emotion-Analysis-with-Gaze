@@ -1,0 +1,25 @@
+# Local environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# Training artifacts produced by the original scripts
+models/
+*.pth
+*.pt
+
+# Example analysis output (regenerate with examples/run_all.py)
+examples/output/
+
+# Editor / OS
+.idea/
+.vscode/
+*.swp
