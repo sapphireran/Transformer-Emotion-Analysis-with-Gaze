@@ -1,0 +1,14 @@
+# Full training stack used by the original experiment scripts.
+# Installing this will download large model weights the first time you
+# call BertModel / RobertaModel.from_pretrained.
+#
+#   pip install -r requirements-train.txt
+
+-r requirements.txt
+
+torch>=2.0
+transformers>=4.30
+datasets>=2.12
+tqdm>=4.65
+scipy>=1.10
+nltk>=3.8
