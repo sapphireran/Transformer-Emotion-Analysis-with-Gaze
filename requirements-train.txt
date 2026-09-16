@@ -1,0 +1,9 @@
+# Extra dependencies used by the original ZuCo / SST training scripts.
+# Not required to run the examples/ library or its tests.
+-r requirements.txt
+torch>=2.0
+transformers>=4.30
+datasets>=2.14
+tqdm>=4.65
+scipy>=1.10
+nltk>=3.8
