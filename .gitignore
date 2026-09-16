@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.env
+
+# Training artifacts
+models/
+*.pth
+*.pt
+runs/
+wandb/
+.cache/
+
+# Example reports
+examples/output/*
+!examples/output/.gitkeep
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp

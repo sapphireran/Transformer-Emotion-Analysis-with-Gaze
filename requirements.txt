@@ -1,0 +1,10 @@
+# Training stack used by model_full_SST.py and model_ZuCo_SST.py
+torch>=2.0
+transformers>=4.30
+datasets>=2.14
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+tqdm>=4.65
+scipy>=1.10
+nltk>=3.8
