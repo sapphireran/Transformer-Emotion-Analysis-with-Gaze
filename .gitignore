@@ -1,0 +1,25 @@
+# Local environments and caches
+.venv/
+venv/
+.env
+.env.*
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Training artifacts from the original scripts
+models/
+*.pth
+*.pt
+
+# Editor / OS noise
+.DS_Store
+.idea/
+.vscode/
+*.swp
