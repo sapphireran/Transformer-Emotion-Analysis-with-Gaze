@@ -1,0 +1,8 @@
+# CPU extras for docs/examples and pytest.
+# The original transformer scripts also want torch, transformers, datasets, tqdm.
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+scipy>=1.10
+matplotlib>=3.7
+pytest>=7.4
