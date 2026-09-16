@@ -1,0 +1,8 @@
+# Lightweight stack for the personal docs/examples suite.
+# Enough to inspect CSVs, compute gaze statistics, and run the
+# bag-of-words + gaze fusion walkthrough on the 400-sentence ZuCo set.
+
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+pytest>=7.4

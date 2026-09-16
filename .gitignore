@@ -1,0 +1,38 @@
+# Local environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Editor and OS noise
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Training artifacts that should stay local
+models/
+*.pth
+*.pt
+*.bin
+*.ckpt
+wandb/
+runs/
+lightning_logs/
+
+# Generated example reports (checked-in samples live under docs/)
+examples/output/
+tmp/
+*.log
+
+# Raw ZuCo MATLAB dumps if they are added later
+ZuCo_mat_data/
+*.mat
